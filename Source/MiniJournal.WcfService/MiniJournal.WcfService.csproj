@@ -98,6 +98,7 @@
     <Compile Include="DataTransferObjects\Article.cs" />
     <Compile Include="DataTransferObjects\Comment.cs" />
     <Compile Include="DataTransferObjects\User.cs" />
+    <Compile Include="ErrorHandling\ErrorHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

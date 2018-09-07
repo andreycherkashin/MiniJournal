@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using Autofac;
+using Autofac.Integration.Wcf;
 using AutofacSerilogIntegration;
 using Infotecs.MiniJournal.Domain;
 using MiniJournal.Application;
@@ -17,9 +18,15 @@ namespace Infotecs.MiniJournal.WcfService
     {
         protected override void Load(ContainerBuilder builder)
         {
+            this.RegisterWcfComponents(builder);
             this.RegisterLogger(builder);    
             this.RegisterTypesAndModules(builder);
             this.RegisterSettings(builder);
+        }
+
+        private void RegisterWcfComponents(ContainerBuilder builder)
+        {
+            builder.RegisterType<ErrorHandling.ErrorHandler>().AsImplementedInterfaces();
         }
 
         private void RegisterSettings(ContainerBuilder builder)

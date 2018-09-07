@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Description;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
@@ -14,10 +15,24 @@ namespace Infotecs.MiniJournal.WcfService
         protected void Application_Start(object sender, EventArgs e)
         {
             var builder = new ContainerBuilder();
-
             builder.RegisterModule<WcfServiceModule>();
-            
-            AutofacHostFactory.Container = builder.Build();
+
+            var container = builder.Build();
+
+            ResolveAndApplyServiceBehaviors(container);
+
+            AutofacHostFactory.Container = container;
+        }
+
+        private static void ResolveAndApplyServiceBehaviors(IContainer container)
+        {
+            AutofacHostFactory.HostConfigurationAction += host =>
+            {
+                foreach (var serviceBehavior in container.Resolve<IEnumerable<IServiceBehavior>>())
+                {
+                    host.Description.Behaviors.Add(serviceBehavior);
+                }
+            };
         }
 
         protected void Session_Start(object sender, EventArgs e)
