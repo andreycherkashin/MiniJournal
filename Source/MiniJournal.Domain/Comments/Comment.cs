@@ -53,12 +53,12 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// Для ORM.
         /// Идентификатор пользователя, который написал комментарий.
         /// </summary>
-        internal long UserId { get; private set; }
+        public long UserId { get; private set; }
 
         /// <summary>
         /// Для ORM.
         /// Идентификатор статьи, к которой был написан комментарий.
         /// </summary>
-        internal long ArticleId { get; private set; }
+        public long ArticleId { get; private set; }
     }
 }

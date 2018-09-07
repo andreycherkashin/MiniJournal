@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.WpfClient", "Source\MiniJournal.WpfClient\MiniJournal.WpfClient.csproj", "{F3CC43F4-6DC4-4B2E-8935-54AAE3587047}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.WcfServiceClient", "Source\MiniJournal.WcfServiceClient\MiniJournal.WcfServiceClient.csproj", "{7F37DD18-2738-40D6-AC70-D03E142C81F3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1DB4CD40-00B8-4BFB-A8C8-743551977029} = {1DB4CD40-00B8-4BFB-A8C8-743551977029}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.PostgreSql", "Source\MiniJournal.PostgreSql\MiniJournal.PostgreSql.csproj", "{E162E9C3-7D52-467D-B7AC-8070987CF71B}"
 EndProject

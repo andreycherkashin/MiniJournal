@@ -65,6 +65,6 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// Для ORM.
         /// Идентификатор пользователя статьи.
         /// </summary>
-        internal long UserId { get; private set; }
+        public long UserId { get; private set; }
     }
 }

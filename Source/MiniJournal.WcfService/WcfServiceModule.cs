@@ -26,6 +26,8 @@ namespace Infotecs.MiniJournal.WcfService
 
         private void RegisterWcfComponents(ContainerBuilder builder)
         {
+            builder.RegisterType<ArticlesWebService>().AsSelf().AsImplementedInterfaces();
+
             builder.RegisterType<ErrorHandling.ErrorHandler>().AsImplementedInterfaces();
         }
 

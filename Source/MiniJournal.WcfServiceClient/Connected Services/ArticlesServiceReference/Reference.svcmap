@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3f754aa6-e76c-4e80-8359-d964acfb5257" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:61060/ArticlesWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ArticlesWebService.disco" MetadataType="Disco" ID="709175e0-d09f-473a-83e0-2917864e53d7" SourceId="1" SourceUrl="http://localhost:61060/ArticlesWebService.svc?disco" />
+    <MetadataFile FileName="ArticlesWebService.wsdl" MetadataType="Wsdl" ID="5e093cc6-c877-4efc-a2d0-74dc42594156" SourceId="1" SourceUrl="http://localhost:61060/ArticlesWebService.svc?wsdl" />
+    <MetadataFile FileName="ArticlesWebService.xsd" MetadataType="Schema" ID="2864b988-7fe8-4720-8a7d-b966377950ea" SourceId="1" SourceUrl="http://localhost:61060/ArticlesWebService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ArticlesWebService1.xsd" MetadataType="Schema" ID="52829bd8-173f-45b5-8d69-5c8b01bd8b8c" SourceId="1" SourceUrl="http://localhost:61060/ArticlesWebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ArticlesWebService2.xsd" MetadataType="Schema" ID="aae2b2e2-63b6-45ef-80a4-edc3e10ca3ff" SourceId="1" SourceUrl="http://localhost:61060/ArticlesWebService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
