@@ -11,7 +11,7 @@ namespace Infotecs.MiniJournal.Domain.Users
         /// Создает пользователя на основе имени.
         /// </summary>
         /// <param name="name">Имя пользователя.</param>
-        public User(string name)
+        internal User(string name)
         {
             this.Name = name;
         }
@@ -19,11 +19,11 @@ namespace Infotecs.MiniJournal.Domain.Users
         /// <summary>
         /// Идентификатор пользователя. 
         /// </summary>
-        public long Id { get; set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
     }
 }

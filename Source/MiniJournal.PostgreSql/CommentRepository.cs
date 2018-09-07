@@ -18,7 +18,7 @@ namespace MiniJournal.PostgreSql
 
         public async Task AddCommentAsync(long articleId, Comment comment)
         {
-            using (var connection = this.connectionFactory.Create())
+            using (var connection = this.connectionFactory.GetConnection())
             {
                 await connection.ExecuteAsync(
                     "INSERT INTO comments (article_id, user_id, text) VALUES (@ArticleId, @UserId, @Text)",
@@ -28,7 +28,7 @@ namespace MiniJournal.PostgreSql
 
         public async Task RemoveAsync(long articleId, Comment comment)
         {
-            using (var connection = this.connectionFactory.Create())
+            using (var connection = this.connectionFactory.GetConnection())
             {
                 await connection.ExecuteAsync(
                     "DELETE FROM comments WHERE id = @CommentId AND article_id = @ArticleId",

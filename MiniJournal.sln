@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.Application", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{697BABA6-4903-4F54-B07C-E238BCB25796}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.DiskStorage", "MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj", "{57291744-BA41-4C85-A0F9-9986A4AD635B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{D436A986-8A68-4328-B4C4-E50E354609EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D436A986-8A68-4328-B4C4-E50E354609EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D436A986-8A68-4328-B4C4-E50E354609EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57291744-BA41-4C85-A0F9-9986A4AD635B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57291744-BA41-4C85-A0F9-9986A4AD635B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57291744-BA41-4C85-A0F9-9986A4AD635B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57291744-BA41-4C85-A0F9-9986A4AD635B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

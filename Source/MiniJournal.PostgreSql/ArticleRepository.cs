@@ -33,7 +33,7 @@ namespace MiniJournal.PostgreSql
 
         public async Task DeleteAsync(Article article)
         {
-            using (var connection = this.connectionFactory.Create())
+            using (var connection = this.connectionFactory.GetConnection())
             {
                 await connection.ExecuteAsync("DELETE FROM articles WHERE id = @id", article);
             }
@@ -41,7 +41,7 @@ namespace MiniJournal.PostgreSql
 
         public async Task AddAsync(Article article)
         {
-            using (var connection = this.connectionFactory.Create())
+            using (var connection = this.connectionFactory.GetConnection())
             {
                 await connection.ExecuteAsync("INSERT INTO articles (text, image_id, user_id) VALUES (@Text, @ImageId, @UserId)", article);
             }
@@ -51,7 +51,7 @@ namespace MiniJournal.PostgreSql
         {
             var articles = new List<Article>();
 
-            using (var connection = this.connectionFactory.Create())
+            using (var connection = this.connectionFactory.GetConnection())
             {
                 IEnumerable<Article> dbArticles = await connection.QueryAsync<Article>($"SELECT a.* FROM articles a {where}", param: param);
 
@@ -78,7 +78,10 @@ namespace MiniJournal.PostgreSql
                     foreach (var dbComment in dbArticleComments)
                     {
                         var commentUser = users[dbComment.UserId].First();
-                        var comment = new Comment(commentUser, dbArticle.Id, dbComment.Text);
+                        var comment = new Comment(commentUser, dbArticle.Id, dbComment.Text)
+                        {
+                            Id = dbComment.Id
+                        };
 
                         articleComments.Add(comment);
                     }
@@ -87,6 +90,7 @@ namespace MiniJournal.PostgreSql
 
                     var article = new Article(articleUser, dbArticle.Text, articleComments)
                     {
+                        Id = dbArticle.Id,
                         ImageId = dbArticle.ImageId
                     };
 

@@ -24,7 +24,16 @@ namespace MiniJournal.PostgreSql
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.Register(context => new DbConnectionFactory(context.ResolveNamed<string>("ConnectionString"))).AsImplementedInterfaces().SingleInstance();
+            builder
+                .Register(context => new DbConnectionFactory(context.ResolveNamed<string>("ConnectionString")))
+                .AsSelf()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<UnitOfWork>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
         }
     }
 }

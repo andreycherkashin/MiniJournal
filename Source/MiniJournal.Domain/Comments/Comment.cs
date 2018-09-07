@@ -15,7 +15,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// <param name="user">Пользователь создавший комментарий.</param>
         /// <param name="articleId"> Идентификатор статьи, к который был написан комментарий.</param>
         /// <param name="text">Содержимое комментария.</param>
-        public Comment(User user, long articleId, string text)
+        internal Comment(User user, long articleId, string text)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));            
@@ -30,7 +30,12 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// <summary>
         /// Уникальный идентификатор комментария.
         /// </summary>
-        public long Id { get; private set; }
+        public long Id
+        {
+            get;
+            // internal для ORM.
+            internal set;
+        }
 
         /// <summary>
         /// Содержимое комментария.

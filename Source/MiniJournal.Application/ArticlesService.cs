@@ -20,6 +20,7 @@ namespace MiniJournal.Application
         private readonly ICommentFactory commentFactory;
         private readonly ICommentDomainService commentService;
         private readonly IUserDomainService userService;
+        private readonly IImagesService imagesService;
 
         public ArticlesService(
             IUnitOfWork unitOfWork,
@@ -28,7 +29,8 @@ namespace MiniJournal.Application
             IArticleDomainService articleService,
             ICommentFactory commentFactory,
             ICommentDomainService commentService,
-            IUserDomainService userService)
+            IUserDomainService userService,
+            IImagesService imagesService)
         {
             this.unitOfWork = unitOfWork;
             this.articleFactory = articleFactory;
@@ -37,6 +39,7 @@ namespace MiniJournal.Application
             this.commentFactory = commentFactory;
             this.commentService = commentService;
             this.userService = userService;
+            this.imagesService = imagesService;
         }
 
         /// <summary>
@@ -57,10 +60,12 @@ namespace MiniJournal.Application
         public async Task CreateArticleAsync(string text, byte[] image, long userId)
         {
             var user = await this.userService.GetUserByIdAsync(userId);
-            var imageId = await this.imageService.UploadImage(image);
+            var imageId = await this.imagesService.UploadImageAsync(image);
             var article = await this.articleFactory.CreateArticleAsync(text, imageId, user);
 
-            await this.articleRepository.AddAsync(article);
+            await this.articleService.CreateArticleAsync(article);
+
+            await this.unitOfWork.SaveChangesAsync();
         }
 
         /// <summary>

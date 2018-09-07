@@ -5,8 +5,15 @@ using System.Text;
 
 namespace MiniJournal.PostgreSql
 {
-    public interface IDbConnectionFactory
+    /// <summary>
+    /// Фабрика, предоставляющая подключения к базе данных.
+    /// </summary>
+    internal interface IDbConnectionFactory
     {
-        IDbConnection Create();
+        /// <summary>
+        /// Возвращает соединение к базе данных.
+        /// </summary>
+        /// <returns>Соединение к базе данных</returns>
+        IDbConnection GetConnection();
     }
 }
