@@ -38,7 +38,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
             if (comment == null)
                 throw new ArgumentNullException(nameof(comment));
 
-            await this.commentRepository.AddCommentAsync(article.Id, comment);
+            await this.commentRepository.AddAsync(article.Id, comment);
             article.Comments.Add(comment);
         }
 
@@ -79,7 +79,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
             if (comment == null)
                 throw new ArgumentNullException(nameof(comment));            
 
-            await this.commentRepository.RemoveAsync(article.Id, comment);
+            await this.commentRepository.DeleteAsync(article.Id, comment);
             article.Comments.Remove(comment);
         }
     }

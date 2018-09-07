@@ -16,7 +16,7 @@ namespace MiniJournal.PostgreSql
             this.connectionFactory = connectionFactory;
         }
 
-        public async Task AddCommentAsync(long articleId, Comment comment)
+        public async Task AddAsync(long articleId, Comment comment)
         {
             using (var connection = this.connectionFactory.GetConnection())
             {
@@ -26,7 +26,7 @@ namespace MiniJournal.PostgreSql
             }
         }
 
-        public async Task RemoveAsync(long articleId, Comment comment)
+        public async Task DeleteAsync(long articleId, Comment comment)
         {
             using (var connection = this.connectionFactory.GetConnection())
             {

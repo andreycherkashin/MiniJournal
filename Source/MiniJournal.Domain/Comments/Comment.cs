@@ -15,7 +15,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// <param name="user">Пользователь создавший комментарий.</param>
         /// <param name="articleId"> Идентификатор статьи, к который был написан комментарий.</param>
         /// <param name="text">Содержимое комментария.</param>
-        internal Comment(User user, long articleId, string text)
+        public Comment(User user, long articleId, string text)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));            

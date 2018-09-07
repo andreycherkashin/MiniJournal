@@ -15,13 +15,13 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// </summary>
         /// <param name="articleId">Идентификатор статьи.</param>
         /// <param name="comment">Комментарий.</param>
-        Task AddCommentAsync(long articleId, Comment comment);
+        Task AddAsync(long articleId, Comment comment);
 
         /// <summary>
         /// Удаляет комментарий.
         /// </summary>
         /// <param name="articleId">Идентификатор статьи.</param>
         /// <param name="comment">Комментарий.</param>
-        Task RemoveAsync(long articleId, Comment comment);
+        Task DeleteAsync(long articleId, Comment comment);
     }
 }

@@ -26,7 +26,10 @@ namespace Infotecs.MiniJournal.Domain.Articles
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            var article = new Article(user, text, new List<Comment>());
+            var article = new Article(user, text, new List<Comment>())
+            {
+                ImageId = imageId
+            };
 
             return Task.FromResult(article);
         }

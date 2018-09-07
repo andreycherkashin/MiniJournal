@@ -16,7 +16,7 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// <param name="user">Пользователь создавший статью.</param>
         /// <param name="text">Содержимое статьи.</param>
         /// <param name="comments">Комментарии, если есть.</param>
-        internal Article(User user, string text, List<Comment> comments = null)
+        public Article(User user, string text, List<Comment> comments = null)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));

@@ -11,7 +11,7 @@ namespace Infotecs.MiniJournal.Domain.Users
         /// Создает пользователя на основе имени.
         /// </summary>
         /// <param name="name">Имя пользователя.</param>
-        internal User(string name)
+        public User(string name)
         {
             this.Name = name;
         }
