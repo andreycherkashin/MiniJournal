@@ -78,7 +78,7 @@ namespace MiniJournal.PostgreSql
                     foreach (var dbComment in dbArticleComments)
                     {
                         var commentUser = users[dbComment.UserId].First();
-                        var comment = new Comment(commentUser, dbArticle, dbComment.Text);
+                        var comment = new Comment(commentUser, dbArticle.Id, dbComment.Text);
 
                         articleComments.Add(comment);
                     }

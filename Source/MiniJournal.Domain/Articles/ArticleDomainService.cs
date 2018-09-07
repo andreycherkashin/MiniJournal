@@ -5,6 +5,10 @@ using Infotecs.MiniJournal.Domain.Comments;
 
 namespace Infotecs.MiniJournal.Domain.Articles
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Класс для работы со статьей.
+    /// </summary>
     internal class ArticleDomainService : IArticleDomainService
     {
         private readonly IArticleRepository articleRepository;
@@ -14,6 +18,11 @@ namespace Infotecs.MiniJournal.Domain.Articles
             this.articleRepository = articleRepository;
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Создает статью.
+        /// </summary>
+        /// <param name="article">Статья.</param>
         public async Task CreateArticleAsync(Article article)
         {
             if (article == null)
@@ -22,6 +31,11 @@ namespace Infotecs.MiniJournal.Domain.Articles
             await this.articleRepository.AddAsync(article);
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Удаляет статью.
+        /// </summary>
+        /// <param name="article">Статья.</param>
         public async Task DeleteArticleAsync(Article article)
         {
             if (article == null)
@@ -30,6 +44,15 @@ namespace Infotecs.MiniJournal.Domain.Articles
             await this.articleRepository.DeleteAsync(article);
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Возвращает статью по идентификатору.
+        /// </summary>
+        /// <exception cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException">
+        /// Если статья не найдена.
+        /// </exception>
+        /// <param name="articleId">Идентификатор статьи.</param>
+        /// <returns>Найденную статью.</returns>
         public async Task<Article> GetArticleByIdAsync(long articleId)
         {
             var article = await this.articleRepository.FindByIdAsync(articleId);

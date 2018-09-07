@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Infotecs.MiniJournal.Domain.Articles.Exceptions
 {
+    /// <inheritdoc />    
     public class ArticleNotFoundException : Exception
     {
         public ArticleNotFoundException()
@@ -16,7 +17,7 @@ namespace Infotecs.MiniJournal.Domain.Articles.Exceptions
             : base(message)
         {
         }
-
+        
         public ArticleNotFoundException(string message, Exception innerException)
             : base(message, innerException)
         {

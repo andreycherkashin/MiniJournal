@@ -7,11 +7,29 @@ using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.Domain.Comments
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Инкапсулирует процесс и способ создания комментариев.
+    /// </summary>
     internal class CommentFactory : ICommentFactory
     {
+        /// <inheritdoc />
+        /// <summary>
+        /// Создает комментарий.
+        /// </summary>
+        /// <param name="text">Содержимое комментария.</param>
+        /// <param name="user">Пользователь.</param>
+        /// <param name="article">Статья.</param>
+        /// <returns>Созданный комментарий.</returns>
         public Task<Comment> CreateAsync(string text, User user, Article article)
         {
-            var comment = new Comment(user, article, text);
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            if (article == null)
+                throw new ArgumentNullException(nameof(article));
+
+            var comment = new Comment(user, article.Id, text);
 
             return Task.FromResult(comment);
         }

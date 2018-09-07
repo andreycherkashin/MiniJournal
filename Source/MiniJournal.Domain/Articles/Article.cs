@@ -10,7 +10,13 @@ namespace Infotecs.MiniJournal.Domain.Articles
     /// </summary>
     public class Article
     {
-        public Article(User user, string text, List<Comment> comments)
+        /// <summary>
+        /// Создает статью.
+        /// </summary>
+        /// <param name="user">Пользователь создавший статью.</param>
+        /// <param name="text">Содержимое статьи.</param>
+        /// <param name="comments">Комментарии, если есть.</param>
+        public Article(User user, string text, List<Comment> comments = null)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
@@ -32,10 +38,28 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// Содержимое статьи
         /// </summary>
         public string Text { get; set; }
-        public string ImageId { get; set; }
-        public User User { get; internal set; }
-        public List<Comment> Comments { get; internal set; }
 
-        public long UserId { get; internal set; }
+        /// <summary>
+        /// Уникальный идентификатор картинки 
+        /// </summary>
+        public string ImageId { get; set; }
+
+        /// <summary>
+        /// Пользователь, создавший статью.
+        /// </summary>
+        public User User { get; private set; }
+
+        /// <summary>
+        /// Список комментариев к статье.
+        /// </summary>
+        public List<Comment> Comments { get; private set; }
+
+
+
+        /// <summary>
+        /// Для ORM.
+        /// Идентификатор пользователя статьи.
+        /// </summary>
+        internal long UserId { get; private set; }
     }
 }
