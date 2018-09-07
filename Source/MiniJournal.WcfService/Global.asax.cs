@@ -14,7 +14,9 @@ namespace Infotecs.MiniJournal.WcfService
         protected void Application_Start(object sender, EventArgs e)
         {
             var builder = new ContainerBuilder();
+
             builder.RegisterModule<WcfServiceModule>();
+            
             AutofacHostFactory.Container = builder.Build();
         }
 

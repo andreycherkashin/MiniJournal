@@ -21,7 +21,7 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// <param name="imageId">Идентификатор картинки.</param>
         /// <param name="user">Пользователь создавший комментарий.</param>
         /// <returns>Созданный комментарий.</returns>
-        public Task<Article> CreateArticleAsync(string text, string imageId, User user)
+        public Task<Article> CreateAsync(string text, string imageId, User user)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));

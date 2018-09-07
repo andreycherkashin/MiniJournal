@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments;
 using Infotecs.MiniJournal.Domain.Users;
+using Microsoft.Toolkit.Extensions;
+using Serilog;
 
 namespace MiniJournal.Application
 {
@@ -21,6 +23,7 @@ namespace MiniJournal.Application
         private readonly ICommentDomainService commentService;
         private readonly IUserDomainService userService;
         private readonly IImagesService imagesService;
+        private readonly ILogger logger;
 
         public ArticlesService(
             IUnitOfWork unitOfWork,
@@ -30,7 +33,8 @@ namespace MiniJournal.Application
             ICommentFactory commentFactory,
             ICommentDomainService commentService,
             IUserDomainService userService,
-            IImagesService imagesService)
+            IImagesService imagesService,
+            ILogger logger)
         {
             this.unitOfWork = unitOfWork;
             this.articleFactory = articleFactory;
@@ -40,6 +44,7 @@ namespace MiniJournal.Application
             this.commentService = commentService;
             this.userService = userService;
             this.imagesService = imagesService;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -61,11 +66,13 @@ namespace MiniJournal.Application
         {
             var user = await this.userService.GetUserByIdAsync(userId);
             var imageId = await this.imagesService.UploadImageAsync(image);
-            var article = await this.articleFactory.CreateArticleAsync(text, imageId, user);
+            var article = await this.articleFactory.CreateAsync(text, imageId, user);
 
             await this.articleService.CreateArticleAsync(article);
 
             await this.unitOfWork.SaveChangesAsync();
+
+            this.logger.Verbose("user {@User.Id} created new article: {@Article.Text}", userId, article.Text.Truncate(30, true));
         }
 
         /// <summary>
@@ -78,6 +85,8 @@ namespace MiniJournal.Application
             await this.articleService.DeleteArticleAsync(article);
 
             await this.unitOfWork.SaveChangesAsync();
+
+            this.logger.Verbose("article {@Article.Id} was deleted", articleId);
         }
 
         /// <summary>
@@ -95,6 +104,8 @@ namespace MiniJournal.Application
             await this.commentService.AddCommentAsync(article, comment);
 
             await this.unitOfWork.SaveChangesAsync();
+
+            this.logger.Verbose("new comment added to article {@Article.Id}, comment text: {@Comment.Text}", articleId, comment.Text.Truncate(30, true));
         }
 
         /// <summary>
@@ -110,6 +121,8 @@ namespace MiniJournal.Application
             await this.commentService.DeleteCommentAsync(article, comment);
 
             await this.unitOfWork.SaveChangesAsync();
+
+            this.logger.Verbose("comment {@comment_id} was deleted", commentId);
         }
     }
 }

@@ -18,6 +18,6 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// <param name="imageId">Идентификатор картинки.</param>
         /// <param name="user">Пользователь создавший комментарий.</param>
         /// <returns>Созданный комментарий.</returns>
-        Task<Article> CreateArticleAsync(string text, string imageId, User user);
+        Task<Article> CreateAsync(string text, string imageId, User user);
     }
 }
