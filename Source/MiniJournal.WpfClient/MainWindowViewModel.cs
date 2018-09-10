@@ -183,11 +183,15 @@ namespace MiniJournal.WpfClient
 
         private async Task LoadArticles()
         {
+            var previouslySelectedArticle = this.SelectedArticle;
+
             using (var serviceClient = new WcfServiceClient.ArticlesServiceReference.ArticlesWebServiceClient())
             {
                 Article[] result = await serviceClient.GetArticlesAsync();
                 this.Articles = new ObservableCollection<Article>(result);
             }
+
+            this.SelectedArticle = this.Articles.FirstOrDefault(x => x.Id == previouslySelectedArticle?.Id);
         }
 
         private async Task AddComment()
