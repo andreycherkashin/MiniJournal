@@ -55,7 +55,8 @@ namespace Infotecs.MiniJournal.WpfClient
                     {
                         using (var serviceClient = new ArticlesWebServiceClient())
                         {
-                            this.SelectedArticleImage = serviceClient.FindImage(imageId);
+                            var response = serviceClient.FindImage(new FindImageRequest() { ImageId = imageId });
+                            this.SelectedArticleImage = response.Image;
                         }
                     }
                 });
@@ -185,8 +186,8 @@ namespace Infotecs.MiniJournal.WpfClient
 
             using (var serviceClient = new WcfServiceClient.ArticlesServiceReference.ArticlesWebServiceClient())
             {
-                Article[] result = await serviceClient.GetArticlesAsync();
-                this.Articles = new ObservableCollection<Article>(result);
+                var response = await serviceClient.GetArticlesAsync(new GetArticlesRequest());                
+                this.Articles = new ObservableCollection<Article>(response.Articles);
             }
 
             this.SelectedArticle = this.Articles.FirstOrDefault(x => x.Id == previouslySelectedArticle?.Id);
@@ -207,15 +208,17 @@ namespace Infotecs.MiniJournal.WpfClient
 
                 try
                 {
-                    user = await serviceClient.GetUserByNameAsync(userName);
+                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
+                    user = response.User;
                 }
-                catch
+                catch(Exception)
                 {
-                    await serviceClient.CreateNewUserAsync(userName);
-                    user = await serviceClient.GetUserByNameAsync(userName);
+                    await serviceClient.CreateNewUserAsync(new CreateNewUserRequest { UserName = userName });
+                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
+                    user = response.User;
                 }
-
-                await serviceClient.AddCommentAsync(text, user.Id, articleId);                
+                
+                await serviceClient.AddCommentAsync(new AddCommentRequest { ArticleId = articleId, Text = text, UserId = user.Id });
             }
 
             await this.LoadArticles();
@@ -237,15 +240,17 @@ namespace Infotecs.MiniJournal.WpfClient
 
                 try
                 {
-                    user = await serviceClient.GetUserByNameAsync(userName);
+                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
+                    user = response.User;
                 }
                 catch
                 {
-                    await serviceClient.CreateNewUserAsync(userName);
-                    user = await serviceClient.GetUserByNameAsync(userName);
+                    await serviceClient.CreateNewUserAsync(new CreateNewUserRequest { UserName = userName });
+                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
+                    user = response.User;
                 }                
                 
-                await serviceClient.CreateArticleAsync(text, image, user.Id);
+                await serviceClient.CreateArticleAsync(new CreateArticleRequest { Text = text, Image = image, UserId = user.Id });
             }                        
 
             await this.LoadArticles();

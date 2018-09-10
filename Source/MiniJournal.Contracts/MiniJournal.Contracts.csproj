@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Source\MiniJournal.Domain\MiniJournal.Domain.csproj" />
+    <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj" />
   </ItemGroup>
 
 </Project>

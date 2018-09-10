@@ -9,6 +9,15 @@ namespace Infotecs.MiniJournal.Contracts.ImagesApplicationsService
     /// </summary>
     public class UploadImageResponse
     {
+        public UploadImageResponse()
+        {
+        }
+
+        public UploadImageResponse(string imageId)
+        {
+            this.ImageId = imageId;
+        }
+
         /// <summary>
         /// Идентификатор загруженной картинки, если загрузка завершилась успешно.
         /// </summary>

@@ -1,40 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.WcfService.DataTransferObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.WcfService.DataTransferObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfArticle">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites" />
+  <xs:complexType name="GetArticlesRequest">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GetArticlesRequest" nillable="true" type="tns:GetArticlesRequest" />
+  <xs:complexType name="GetArticlesResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Article" nillable="true" type="tns:Article" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites" minOccurs="0" name="Articles" nillable="true" type="q1:ArrayOfArticle" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfArticle" nillable="true" type="tns:ArrayOfArticle" />
-  <xs:complexType name="Article">
+  <xs:element name="GetArticlesResponse" nillable="true" type="tns:GetArticlesResponse" />
+  <xs:complexType name="CreateArticleRequest">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Comments" nillable="true" type="tns:ArrayOfComment" />
-      <xs:element minOccurs="0" name="Id" type="xs:long" />
-      <xs:element minOccurs="0" name="ImageId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Article" nillable="true" type="tns:Article" />
-  <xs:complexType name="ArrayOfComment">
+  <xs:element name="CreateArticleRequest" nillable="true" type="tns:CreateArticleRequest" />
+  <xs:complexType name="CreateArticleResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Comment" nillable="true" type="tns:Comment" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfComment" nillable="true" type="tns:ArrayOfComment" />
-  <xs:complexType name="Comment">
+  <xs:element name="CreateArticleResponse" nillable="true" type="tns:CreateArticleResponse" />
+  <xs:complexType name="DeleteArticleRequest">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="ArticleId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteArticleRequest" nillable="true" type="tns:DeleteArticleRequest" />
+  <xs:complexType name="DeleteArticleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteArticleResponse" nillable="true" type="tns:DeleteArticleResponse" />
+  <xs:complexType name="AddCommentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArticleId" type="xs:long" />
       <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Comment" nillable="true" type="tns:Comment" />
-  <xs:complexType name="User">
+  <xs:element name="AddCommentRequest" nillable="true" type="tns:AddCommentRequest" />
+  <xs:complexType name="AddCommentResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:long" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:element name="AddCommentResponse" nillable="true" type="tns:AddCommentResponse" />
+  <xs:complexType name="DeleteCommentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArticleId" type="xs:long" />
+      <xs:element minOccurs="0" name="CommentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteCommentRequest" nillable="true" type="tns:DeleteCommentRequest" />
+  <xs:complexType name="DeleteCommentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteCommentResponse" nillable="true" type="tns:DeleteCommentResponse" />
 </xs:schema>

@@ -48,9 +48,6 @@ namespace Infotecs.MiniJournal.WcfService
 
         private void RegisterTypesAndModules(ContainerBuilder builder)
         {
-            builder.RegisterType<AutoMapperConfiguration>().AsSelf().SingleInstance();
-            builder.Register(context => context.Resolve<AutoMapperConfiguration>().GetMapper());
-
             builder.RegisterModule<ApplicationModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<PostgreSqlModule>();

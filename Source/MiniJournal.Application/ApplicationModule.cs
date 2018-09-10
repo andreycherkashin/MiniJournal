@@ -14,6 +14,9 @@ namespace Infotecs.MiniJournal.Application
                 .RegisterAssemblyTypes(this.ThisAssembly)
                 .Where(type => type.Name.EndsWith("Service"))
                 .AsImplementedInterfaces();
+
+            builder.RegisterType<AutoMapperConfiguration>().AsSelf().SingleInstance();
+            builder.Register(context => context.Resolve<AutoMapperConfiguration>().GetMapper());
         }
     }
 }

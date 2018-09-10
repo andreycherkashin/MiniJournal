@@ -9,6 +9,15 @@ namespace Infotecs.MiniJournal.Contracts.ImagesApplicationsService
     /// </summary>
     public class FindImageResponse
     {
+        public FindImageResponse()
+        {
+        }
+
+        public FindImageResponse(byte[] image)
+        {
+            this.Image = image;
+        }
+
         /// <summary>
         /// Картинка, если найдена. Null, если не найдена.
         /// </summary>

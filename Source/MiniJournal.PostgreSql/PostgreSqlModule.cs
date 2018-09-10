@@ -24,8 +24,7 @@ namespace Infotecs.MiniJournal.PostgreSql
             builder
                 .RegisterAssemblyTypes(this.ThisAssembly)
                 .Where(type => type.Name.EndsWith("Repository") || type.Name.EndsWith("Provider"))
-                .AsImplementedInterfaces()
-                .SingleInstance();
+                .AsImplementedInterfaces();
 
             builder
                 .Register(context => new DbConnectionFactory(context.ResolveNamed<string>("ConnectionString")))

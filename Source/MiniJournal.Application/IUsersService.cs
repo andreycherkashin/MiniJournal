@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService;
 using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.Application
@@ -15,14 +16,14 @@ namespace Infotecs.MiniJournal.Application
         /// Если пользователь с таким именем не найден будем выброшено исключение <see cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException"/>. 
         /// </exception>
         /// </summary>
-        /// <param name="name">Имя пользователя.</param>
+        /// <param name="request">Имя пользователя.</param>
         /// <returns>Найденный пользователь.</returns>
-        Task<User> GetUserByNameAsync(string name);
+        Task<GetUserByNameResponse> GetUserByNameAsync(GetUserByNameRequest request);
 
         /// <summary>
         /// Добавляет нового пользователя с указанным именем.
         /// </summary>
-        /// <param name="name">Имя пользователя.</param>
-        Task CreateNewUserAsync(string name);
+        /// <param name="request">Имя пользователя.</param>
+        Task<CreateNewUserResponse> CreateNewUserAsync(CreateNewUserRequest request);
     }
 }

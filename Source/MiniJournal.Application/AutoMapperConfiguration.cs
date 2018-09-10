@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using AutoMapper;
+using Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
 
-namespace Infotecs.MiniJournal.WcfService
+namespace Infotecs.MiniJournal.Application
 {
     public class AutoMapperConfiguration
     {
@@ -14,9 +13,9 @@ namespace Infotecs.MiniJournal.WcfService
         {
             this.mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Domain.Articles.Article, DataTransferObjects.Article>();
-                cfg.CreateMap<Domain.Comments.Comment, DataTransferObjects.Comment>();
-                cfg.CreateMap<Domain.Users.User, DataTransferObjects.User>();
+                cfg.CreateMap<Domain.Articles.Article, Article>();
+                cfg.CreateMap<Domain.Comments.Comment, Comment>();
+                cfg.CreateMap<Domain.Users.User, User>();
             });
             
             this.mapperConfiguration.AssertConfigurationIsValid();

@@ -1,7 +1,7 @@
-﻿using Infotecs.MiniJournal.Domain.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
 
 namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
 {
@@ -10,6 +10,15 @@ namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
     /// </summary>
     public class GetUserByNameResponse
     {
+        public GetUserByNameResponse()
+        {    
+        }        
+
+        public GetUserByNameResponse(User user)
+        {
+            this.User = user;
+        }
+
         /// <summary>
         /// Найденный пользователь.
         /// </summary>

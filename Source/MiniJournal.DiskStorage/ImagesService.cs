@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Application;
+using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
 
 namespace Infotecs.MiniJournal.DiskStorage
 {
@@ -14,22 +15,48 @@ namespace Infotecs.MiniJournal.DiskStorage
             this.imagesStoragePath = imagesStoragePath;
         }
 
-        public Task<byte[]> FindImageAsync(string imageId)
+        /// <summary>
+        /// Находит картинку по идентификатору.
+        /// </summary>        
+        public Task<FindImageResponse> FindImageAsync(FindImageRequest request)
         {
-            return Task.Run(() => File.ReadAllBytes(imageId));
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            byte[] image = null;
+
+            if (File.Exists(request.ImageId))
+            {
+                image = File.ReadAllBytes(request.ImageId);
+            }
+
+            return Task.FromResult(new FindImageResponse(image));
         }
 
-        public async Task<string> UploadImageAsync(byte[] image)
+        /// <summary>
+        /// Загружает картинку в хранилище.
+        /// </summary>
+        /// <param name="request">Запрос загрузки картинки.</param>
+        /// <returns>Результат запроса картинки.</returns>
+        public async Task<UploadImageResponse> UploadImageAsync(UploadImageRequest request)
         {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            if (request.Image == null)
+            {
+                return new UploadImageResponse();
+            }
+
             var guid = Guid.NewGuid().ToString("N");
             var fullImagePath = Path.Combine(this.imagesStoragePath, guid);
 
             using (var fileStream = new FileStream(fullImagePath, FileMode.Create, FileAccess.Write, FileShare.Read))
             {
-                await fileStream.WriteAsync(image, 0, image.Length);
+                await fileStream.WriteAsync(request.Image, 0, request.Image.Length);
             }
 
-            return fullImagePath;
+            return new UploadImageResponse(fullImagePath);
         }
     }
 }

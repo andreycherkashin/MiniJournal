@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
 
-namespace Infotecs.MiniJournal.WcfService.DataTransferObjects
+namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites
 {
     /// <summary>
     /// Комментарий к статье.

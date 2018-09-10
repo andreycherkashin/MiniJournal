@@ -9,6 +9,15 @@ namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
     /// </summary>
     public class CreateNewUserResponse
     {
+        public CreateNewUserResponse()
+        {
+        }
+
+        public CreateNewUserResponse(bool success)
+        {
+            this.Success = success;
+        }
+
         /// <summary>
         /// Успешно ли выполнена операция
         /// </summary>

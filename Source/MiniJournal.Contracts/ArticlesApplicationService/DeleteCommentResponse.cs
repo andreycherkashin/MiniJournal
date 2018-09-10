@@ -5,10 +5,19 @@ using System.Text;
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {
     /// <summary>
-    /// Результат добавления комментария к статье.
+    /// Результат запроса удаления статьи.
     /// </summary>
-    public class AddCommentResponse
+    public class DeleteCommentResponse
     {
+        public DeleteCommentResponse()
+        {
+        }
+
+        public DeleteCommentResponse(bool success)
+        {
+            this.Success = success;
+        }
+
         /// <summary>
         /// Успешно ли выполнена операция.
         /// </summary>

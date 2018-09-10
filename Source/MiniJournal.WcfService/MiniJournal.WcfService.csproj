@@ -29,7 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Out\Debug\MiniJournal.WcfService\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -71,10 +71,6 @@
     <Compile Include="ArticlesWebService.svc.cs">
       <DependentUpon>ArticlesWebService.svc</DependentUpon>
     </Compile>
-    <Compile Include="AutoMapperConfiguration.cs" />
-    <Compile Include="DataTransferObjects\Article.cs" />
-    <Compile Include="DataTransferObjects\Comment.cs" />
-    <Compile Include="DataTransferObjects\User.cs" />
     <Compile Include="ErrorHandling\ErrorHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -95,6 +91,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MiniJournal.Contracts\MiniJournal.Contracts.csproj">
+      <Project>{083F751B-526E-4708-8744-6B8D33D299FA}</Project>
+      <Name>MiniJournal.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj">
       <Project>{57291744-BA41-4C85-A0F9-9986A4AD635B}</Project>
       <Name>MiniJournal.DiskStorage</Name>
@@ -121,9 +121,6 @@
     </PackageReference>
     <PackageReference Include="AutofacSerilogIntegration">
       <Version>2.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="AutoMapper">
-      <Version>7.0.1</Version>
     </PackageReference>
     <PackageReference Include="MiniProfiler">
       <Version>4.0.138</Version>

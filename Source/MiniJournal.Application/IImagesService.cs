@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
 
 namespace Infotecs.MiniJournal.Application
 {
@@ -10,16 +11,14 @@ namespace Infotecs.MiniJournal.Application
     {
         /// <summary>
         /// Находит картинку по идентификатору.
-        /// </summary>
-        /// <param name="imageId">Идентификатор картинки.</param>
-        /// <returns>Массив байт, который представляет из себя картинку.</returns>
-        Task<byte[]> FindImageAsync(string imageId);
+        /// </summary>        
+        Task<FindImageResponse> FindImageAsync(FindImageRequest request);
 
         /// <summary>
         /// Загружает картинку в хранилище.
         /// </summary>
-        /// <param name="image">Картинка.</param>
-        /// <returns>Идентификатор загруженной картинки.</returns>
-        Task<string> UploadImageAsync(byte[] image);
+        /// <param name="request">Запрос загрузки картинки.</param>
+        /// <returns>Результат запроса картинки.</returns>
+        Task<UploadImageResponse> UploadImageAsync(UploadImageRequest request);
     }
 }

@@ -54,7 +54,7 @@ namespace Infotecs.MiniJournal.PostgreSql
 
             var connection = this.connectionFactory.GetConnection();
             
-            List<Article> dbArticles = (await connection.QueryAsync<Article>($"SELECT a.* FROM articles a {where}", param: param)).ToList();
+            List<Article> dbArticles = (await connection.QueryAsync<Article>($"SELECT a.* FROM articles a {where} ;", param: param)).ToList();
 
             if (!dbArticles.Any())
             {
@@ -62,11 +62,11 @@ namespace Infotecs.MiniJournal.PostgreSql
             }
 
             List<User> dbArticleUsers = (await connection.QueryAsync<User>(
-                "SELECT u.* FROM users u WHERE u.id IN @users ",
+                "SELECT u.* FROM users u WHERE u.id IN @users;",
                 new { users = dbArticles.Select(x => x.UserId).Distinct().ToList() })).ToList();
 
             List<Comment> dbComments = (await connection.QueryAsync<Comment>(
-                "SELECT c.* FROM comments c WHERE c.article_id IN @articles ",
+                "SELECT c.* FROM comments c WHERE c.article_id IN @articles;",
                 new { articles = dbArticles.Select(a => a.Id).ToList() })).ToList();
 
             List<User> dbCommentUsers;
@@ -74,7 +74,7 @@ namespace Infotecs.MiniJournal.PostgreSql
             if (dbComments.Any())
             {
                 dbCommentUsers = (await connection.QueryAsync<User>(
-                    "SELECT u.* FROM users u WHERE u.id IN @users ",
+                    "SELECT u.* FROM users u WHERE u.id IN @users;",
                     new { users = dbComments.Select(x => x.UserId).Distinct().ToList() })).ToList();
             }
             else

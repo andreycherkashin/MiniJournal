@@ -14,7 +14,7 @@ namespace Infotecs.MiniJournal.WinService.RabbitMq
 
         public void Start()
         {
-            this.busClient.
+            //this.busClient.
         }
 
         public void Stop()

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Infotecs.MiniJournal.Domain.Articles;
+using Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites;
 
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {

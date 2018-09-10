@@ -15,8 +15,84 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.WcfService.DataTrans" +
-        "ferObjects")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticlesRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class GetArticlesRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticlesResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class GetArticlesResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] ArticlesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] Articles {
+            get {
+                return this.ArticlesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ArticlesField, value) != true)) {
+                    this.ArticlesField = value;
+                    this.RaisePropertyChanged("Articles");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService.Entites")]
     [System.SerializableAttribute()]
     public partial class Article : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -125,8 +201,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.WcfService.DataTrans" +
-        "ferObjects")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
+        "cationService.Entities")]
     [System.SerializableAttribute()]
     public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -187,8 +263,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Comment", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.WcfService.DataTrans" +
-        "ferObjects")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Comment", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService.Entites")]
     [System.SerializableAttribute()]
     public partial class Comment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -263,57 +339,781 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateArticleRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class CreateArticleRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TextField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Image {
+            get {
+                return this.ImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
+                    this.ImageField = value;
+                    this.RaisePropertyChanged("Image");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateArticleResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class CreateArticleResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteArticleRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class DeleteArticleRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ArticleIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ArticleId {
+            get {
+                return this.ArticleIdField;
+            }
+            set {
+                if ((this.ArticleIdField.Equals(value) != true)) {
+                    this.ArticleIdField = value;
+                    this.RaisePropertyChanged("ArticleId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteArticleResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class DeleteArticleResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCommentRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class AddCommentRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ArticleIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TextField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ArticleId {
+            get {
+                return this.ArticleIdField;
+            }
+            set {
+                if ((this.ArticleIdField.Equals(value) != true)) {
+                    this.ArticleIdField = value;
+                    this.RaisePropertyChanged("ArticleId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCommentResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class AddCommentResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteCommentRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class DeleteCommentRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ArticleIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long CommentIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ArticleId {
+            get {
+                return this.ArticleIdField;
+            }
+            set {
+                if ((this.ArticleIdField.Equals(value) != true)) {
+                    this.ArticleIdField = value;
+                    this.RaisePropertyChanged("ArticleId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long CommentId {
+            get {
+                return this.CommentIdField;
+            }
+            set {
+                if ((this.CommentIdField.Equals(value) != true)) {
+                    this.CommentIdField = value;
+                    this.RaisePropertyChanged("CommentId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteCommentResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
+        "plicationService")]
+    [System.SerializableAttribute()]
+    public partial class DeleteCommentResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FindImageRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesAppl" +
+        "icationsService")]
+    [System.SerializableAttribute()]
+    public partial class FindImageRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImageIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ImageId {
+            get {
+                return this.ImageIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageIdField, value) != true)) {
+                    this.ImageIdField = value;
+                    this.RaisePropertyChanged("ImageId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FindImageResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesAppl" +
+        "icationsService")]
+    [System.SerializableAttribute()]
+    public partial class FindImageResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ImageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Image {
+            get {
+                return this.ImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
+                    this.ImageField = value;
+                    this.RaisePropertyChanged("Image");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserByNameRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
+        "cationService")]
+    [System.SerializableAttribute()]
+    public partial class GetUserByNameRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UseNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UseName {
+            get {
+                return this.UseNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UseNameField, value) != true)) {
+                    this.UseNameField = value;
+                    this.RaisePropertyChanged("UseName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserByNameResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
+        "cationService")]
+    [System.SerializableAttribute()]
+    public partial class GetUserByNameResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateNewUserRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
+        "cationService")]
+    [System.SerializableAttribute()]
+    public partial class CreateNewUserRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateNewUserResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
+        "cationService")]
+    [System.SerializableAttribute()]
+    public partial class CreateNewUserResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ArticlesServiceReference.IArticlesWebService")]
     public interface IArticlesWebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetArticles", ReplyAction="http://tempuri.org/IArticlesWebService/GetArticlesResponse")]
-        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] GetArticles();
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesResponse GetArticles(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetArticles", ReplyAction="http://tempuri.org/IArticlesWebService/GetArticlesResponse")]
-        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[]> GetArticlesAsync();
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesResponse> GetArticlesAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateArticle", ReplyAction="http://tempuri.org/IArticlesWebService/CreateArticleResponse")]
-        void CreateArticle(string text, byte[] image, long userId);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleResponse CreateArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateArticle", ReplyAction="http://tempuri.org/IArticlesWebService/CreateArticleResponse")]
-        System.Threading.Tasks.Task CreateArticleAsync(string text, byte[] image, long userId);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleResponse> CreateArticleAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/DeleteArticle", ReplyAction="http://tempuri.org/IArticlesWebService/DeleteArticleResponse")]
-        void DeleteArticle(long articleId);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleResponse DeleteArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/DeleteArticle", ReplyAction="http://tempuri.org/IArticlesWebService/DeleteArticleResponse")]
-        System.Threading.Tasks.Task DeleteArticleAsync(long articleId);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleResponse> DeleteArticleAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/AddComment", ReplyAction="http://tempuri.org/IArticlesWebService/AddCommentResponse")]
-        void AddComment(string text, long userId, long articleId);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentResponse AddComment(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/AddComment", ReplyAction="http://tempuri.org/IArticlesWebService/AddCommentResponse")]
-        System.Threading.Tasks.Task AddCommentAsync(string text, long userId, long articleId);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentResponse> AddCommentAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/DeleteComment", ReplyAction="http://tempuri.org/IArticlesWebService/DeleteCommentResponse")]
-        void DeleteComment(long articleId, long commentId);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentResponse DeleteComment(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/DeleteComment", ReplyAction="http://tempuri.org/IArticlesWebService/DeleteCommentResponse")]
-        System.Threading.Tasks.Task DeleteCommentAsync(long articleId, long commentId);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentResponse> DeleteCommentAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/FindImage", ReplyAction="http://tempuri.org/IArticlesWebService/FindImageResponse")]
-        byte[] FindImage(string imageId);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageResponse FindImage(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/FindImage", ReplyAction="http://tempuri.org/IArticlesWebService/FindImageResponse")]
-        System.Threading.Tasks.Task<byte[]> FindImageAsync(string imageId);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageResponse> FindImageAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetUserByName", ReplyAction="http://tempuri.org/IArticlesWebService/GetUserByNameResponse")]
-        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameResponse GetUserByName(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetUserByName", ReplyAction="http://tempuri.org/IArticlesWebService/GetUserByNameResponse")]
-        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameResponse> GetUserByNameAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateNewUser", ReplyAction="http://tempuri.org/IArticlesWebService/CreateNewUserResponse")]
-        void CreateNewUser(string name);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserResponse CreateNewUser(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateNewUser", ReplyAction="http://tempuri.org/IArticlesWebService/CreateNewUserResponse")]
-        System.Threading.Tasks.Task CreateNewUserAsync(string name);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserResponse> CreateNewUserAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -343,68 +1143,68 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] GetArticles() {
-            return base.Channel.GetArticles();
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesResponse GetArticles(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesRequest request) {
+            return base.Channel.GetArticles(request);
         }
         
-        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[]> GetArticlesAsync() {
-            return base.Channel.GetArticlesAsync();
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesResponse> GetArticlesAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesRequest request) {
+            return base.Channel.GetArticlesAsync(request);
         }
         
-        public void CreateArticle(string text, byte[] image, long userId) {
-            base.Channel.CreateArticle(text, image, userId);
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleResponse CreateArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleRequest request) {
+            return base.Channel.CreateArticle(request);
         }
         
-        public System.Threading.Tasks.Task CreateArticleAsync(string text, byte[] image, long userId) {
-            return base.Channel.CreateArticleAsync(text, image, userId);
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleResponse> CreateArticleAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleRequest request) {
+            return base.Channel.CreateArticleAsync(request);
         }
         
-        public void DeleteArticle(long articleId) {
-            base.Channel.DeleteArticle(articleId);
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleResponse DeleteArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleRequest request) {
+            return base.Channel.DeleteArticle(request);
         }
         
-        public System.Threading.Tasks.Task DeleteArticleAsync(long articleId) {
-            return base.Channel.DeleteArticleAsync(articleId);
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleResponse> DeleteArticleAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteArticleRequest request) {
+            return base.Channel.DeleteArticleAsync(request);
         }
         
-        public void AddComment(string text, long userId, long articleId) {
-            base.Channel.AddComment(text, userId, articleId);
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentResponse AddComment(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentRequest request) {
+            return base.Channel.AddComment(request);
         }
         
-        public System.Threading.Tasks.Task AddCommentAsync(string text, long userId, long articleId) {
-            return base.Channel.AddCommentAsync(text, userId, articleId);
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentResponse> AddCommentAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.AddCommentRequest request) {
+            return base.Channel.AddCommentAsync(request);
         }
         
-        public void DeleteComment(long articleId, long commentId) {
-            base.Channel.DeleteComment(articleId, commentId);
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentResponse DeleteComment(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentRequest request) {
+            return base.Channel.DeleteComment(request);
         }
         
-        public System.Threading.Tasks.Task DeleteCommentAsync(long articleId, long commentId) {
-            return base.Channel.DeleteCommentAsync(articleId, commentId);
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentResponse> DeleteCommentAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.DeleteCommentRequest request) {
+            return base.Channel.DeleteCommentAsync(request);
         }
         
-        public byte[] FindImage(string imageId) {
-            return base.Channel.FindImage(imageId);
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageResponse FindImage(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageRequest request) {
+            return base.Channel.FindImage(request);
         }
         
-        public System.Threading.Tasks.Task<byte[]> FindImageAsync(string imageId) {
-            return base.Channel.FindImageAsync(imageId);
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageResponse> FindImageAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageRequest request) {
+            return base.Channel.FindImageAsync(request);
         }
         
-        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name) {
-            return base.Channel.GetUserByName(name);
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameResponse GetUserByName(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameRequest request) {
+            return base.Channel.GetUserByName(request);
         }
         
-        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name) {
-            return base.Channel.GetUserByNameAsync(name);
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameResponse> GetUserByNameAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetUserByNameRequest request) {
+            return base.Channel.GetUserByNameAsync(request);
         }
         
-        public void CreateNewUser(string name) {
-            base.Channel.CreateNewUser(name);
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserResponse CreateNewUser(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserRequest request) {
+            return base.Channel.CreateNewUser(request);
         }
         
-        public System.Threading.Tasks.Task CreateNewUserAsync(string name) {
-            return base.Channel.CreateNewUserAsync(name);
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserResponse> CreateNewUserAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateNewUserRequest request) {
+            return base.Channel.CreateNewUserAsync(request);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService;
 using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.Application
@@ -11,13 +13,19 @@ namespace Infotecs.MiniJournal.Application
     {
         private readonly IUserDomainService userService;
         private readonly IUserFactory userFactory;
+        private readonly IMapper mapper;
+        private readonly IUnitOfWork unitOfWork;
 
         public UsersService(
             IUserDomainService userService,
-            IUserFactory userFactory)
+            IUserFactory userFactory,
+            IMapper mapper,
+            IUnitOfWork unitOfWork)
         {
             this.userService = userService;
             this.userFactory = userFactory;
+            this.mapper = mapper;
+            this.unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -26,22 +34,34 @@ namespace Infotecs.MiniJournal.Application
         /// Если пользователь с таким именем не найден будем выброшено исключение <see cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException"/>. 
         /// </exception>
         /// </summary>
-        /// <param name="name">Имя пользователя.</param>
+        /// <param name="request">Имя пользователя.</param>
         /// <returns>Найденный пользователь.</returns>
-        public Task<User> GetUserByNameAsync(string name)
+        public async Task<GetUserByNameResponse> GetUserByNameAsync(GetUserByNameRequest request)
         {
-            return this.userService.GetUserByNameAsync(name);
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var user = await this.userService.GetUserByNameAsync(request.UseName);
+
+            return new GetUserByNameResponse(this.mapper.Map<Contracts.UsersApplicationService.Entities.User>(user));
         }
 
         /// <summary>
         /// Добавляет нового пользователя с указанным именем.
         /// </summary>
-        /// <param name="name">Имя пользователя.</param>
-        public async Task CreateNewUserAsync(string name)
+        /// <param name="request">Имя пользователя.</param>
+        public async Task<CreateNewUserResponse> CreateNewUserAsync(CreateNewUserRequest request)
         {
-            var user = await this.userFactory.CreateAsync(name);
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var user = await this.userFactory.CreateAsync(request.UserName);
 
             await this.userService.CreateUserAsync(user);
+
+            await this.unitOfWork.SaveChangesAsync();
+
+            return new CreateNewUserResponse(true);
         }
     }
 }

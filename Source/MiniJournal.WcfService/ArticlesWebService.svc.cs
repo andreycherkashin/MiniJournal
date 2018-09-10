@@ -1,73 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.Threading.Tasks;
 using AutoMapper;
 using Infotecs.MiniJournal.Application;
-using Infotecs.MiniJournal.WcfService.DataTransferObjects;
-using Article = Infotecs.MiniJournal.WcfService.DataTransferObjects.Article;
+using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
+using Article = Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites.Article;
 
 namespace Infotecs.MiniJournal.WcfService
-{    
+{
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class ArticlesWebService : IArticlesWebService
     {
         private readonly IUsersService usersService;
         private readonly IArticlesService articlesService;
-        private readonly IMapper mapper;
         private readonly IImagesService imagesService;
 
         public ArticlesWebService(
-            IArticlesService articlesService, 
-            IMapper mapper,
+            IArticlesService articlesService,
             IImagesService imagesService,
             IUsersService usersService)
         {
             this.usersService = usersService;
             this.articlesService = articlesService;
-            this.mapper = mapper;
             this.imagesService = imagesService;
         }
 
-        public async Task<IEnumerable<Article>> GetArticlesAsync()
-        {
-            IEnumerable<Domain.Articles.Article> domainArticles = await this.articlesService.GetArticlesAsync();
-            var dataTransferObjects = this.mapper.Map<IEnumerable<Article>>(domainArticles);
-            return dataTransferObjects;
-        }
+        public Task<GetArticlesResponse> GetArticlesAsync(GetArticlesRequest request)
+            => this.articlesService.GetArticlesAsync(request);
 
-        public Task CreateArticleAsync(string text, byte[] image, long userId)
-        {
-            return this.articlesService.CreateArticleAsync(text, image, userId);
-        }
+        /// <summary>
+        /// Создать статью с указанным содержимым.
+        /// </summary>
+        public Task<CreateArticleResponse> CreateArticleAsync(CreateArticleRequest request)
+            => this.articlesService.CreateArticleAsync(request);
 
-        public Task DeleteArticleAsync(long articleId)
-        {
-            return this.articlesService.DeleteArticleAsync(articleId);
-        }
+        /// <summary>
+        /// Удаляет статью.
+        /// </summary>
+        public Task<DeleteArticleResponse> DeleteArticleAsync(DeleteArticleRequest request)
+            => this.articlesService.DeleteArticleAsync(request);
 
-        public Task AddCommentAsync(string text, long userId, long articleId)
-        {
-            return this.articlesService.AddCommentAsync(text, userId, articleId);
-        }
+        /// <summary>
+        /// Добавляет комментарий к статье.
+        /// </summary>
+        public Task<AddCommentResponse> AddCommentAsync(AddCommentRequest request)
+            => this.articlesService.AddCommentAsync(request);
 
-        public Task DeleteCommentAsync(long articleId, long commentId)
-        {
-            return this.articlesService.DeleteCommentAsync(articleId, commentId);
-        }
+        /// <summary>
+        /// Удаляет комментарий.
+        /// </summary>
+        public Task<DeleteCommentResponse> DeleteCommentAsync(DeleteCommentRequest request)
+            => this.articlesService.DeleteCommentAsync(request);
 
-        public Task<byte[]> FindImageAsync(string imageId)
-        {
-            return this.imagesService.FindImageAsync(imageId);
-        }
+        /// <summary>
+        /// Находит картинку по идентификатору.
+        /// </summary>
+        public Task<FindImageResponse> FindImageAsync(FindImageRequest request)
+            => this.imagesService.FindImageAsync(request);
 
-        public async Task<User> GetUserByNameAsync(string name)
-        {
-            var user = await this.usersService.GetUserByNameAsync(name);
-            return this.mapper.Map<User>(user);
-        }
+        /// <summary>
+        /// Получить пользователя по имени.
+        /// <exception cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+        /// Если пользователь с таким именем не найден будем выброшено исключение <see cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException"/>. 
+        /// </exception>
+        /// </summary>        
+        /// <returns>Найденный пользователь.</returns>
+        public Task<GetUserByNameResponse> GetUserByNameAsync(GetUserByNameRequest request)
+            => this.usersService.GetUserByNameAsync(request);
 
-        public Task CreateNewUserAsync(string name)
-        {
-            return this.usersService.CreateNewUserAsync(name);
-        }
+        /// <summary>
+        /// Добавляет нового пользователя с указанным именем.
+        /// </summary>
+        public Task<CreateNewUserResponse> CreateNewUserAsync(CreateNewUserRequest request)
+            => this.usersService.CreateNewUserAsync(request);
     }
 }
