@@ -9,7 +9,7 @@ namespace MiniJournal.PostgreSql
 {
     public class PostgreSqlModule : Autofac.Module
     {
-        protected override void Load(ContainerBuilder builder)
+        public static void InitializeMappings()
         {
             FluentMapper.Initialize(config =>
             {
@@ -17,10 +17,15 @@ namespace MiniJournal.PostgreSql
                 config.AddMap(new CommentMap());
                 config.AddMap(new ArticleMap());
             });
+        }
+
+        protected override void Load(ContainerBuilder builder)
+        {
+            InitializeMappings();
 
             builder
                 .RegisterAssemblyTypes(this.ThisAssembly)
-                .Where(type => type.Name.EndsWith("Repository"))
+                .Where(type => type.Name.EndsWith("Repository") || type.Name.EndsWith("Provider"))
                 .AsImplementedInterfaces()
                 .SingleInstance();
 

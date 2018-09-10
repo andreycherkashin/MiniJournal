@@ -18,26 +18,20 @@ namespace MiniJournal.PostgreSql
 
         public async Task<User> FindByIdAsync(long id)
         {
-            using (var connection = this.connectionFactory.GetConnection())
-            {
-                return await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE id = @id", new { id });
-            }
+            var connection = this.connectionFactory.GetConnection();
+            return await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE id = @id", new { id });
         }
 
         public async Task<User> FindByNameAsync(string name)
         {
-            using (var connection = this.connectionFactory.GetConnection())
-            {
-                return await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE name = @name", new { name });
-            }
+            var connection = this.connectionFactory.GetConnection();
+            return await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE name = @name", new { name });
         }
 
         public async Task AddAsync(User user)
         {
-            using (var connection = this.connectionFactory.GetConnection())
-            {
-                await connection.QueryFirstOrDefaultAsync<User>("INSERT INTO users (name) VALUES (@Name)", user);
-            }
+            var connection = this.connectionFactory.GetConnection();
+            await connection.QueryFirstOrDefaultAsync<User>("INSERT INTO users (name) VALUES (@Name)", user);
         }
     }
 }
