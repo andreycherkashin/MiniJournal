@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using MiniJournal.Application;
+using Infotecs.MiniJournal.Application;
 
-namespace MiniJournal.DiskStorage
+namespace Infotecs.MiniJournal.DiskStorage
 {
     public class ImagesService : IImagesService
     {

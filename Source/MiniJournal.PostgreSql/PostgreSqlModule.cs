@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Autofac;
 using Dapper.FluentMap;
-using MiniJournal.PostgreSql.DapperMappings;
+using Infotecs.MiniJournal.PostgreSql.DapperMappings;
 
-namespace MiniJournal.PostgreSql
+namespace Infotecs.MiniJournal.PostgreSql
 {
     public class PostgreSqlModule : Autofac.Module
     {

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments;
 using Infotecs.MiniJournal.Domain.Users;
 
-namespace MiniJournal.PostgreSql
+namespace Infotecs.MiniJournal.PostgreSql
 {
     internal class ArticleRepository : IArticleRepository
     {

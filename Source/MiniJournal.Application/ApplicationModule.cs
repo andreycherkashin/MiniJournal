@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Autofac;
 
-namespace MiniJournal.Application
+namespace Infotecs.MiniJournal.Application
 {
     /// <summary>
     /// Регистрация компонентов модуля в контейнере зависимостей.

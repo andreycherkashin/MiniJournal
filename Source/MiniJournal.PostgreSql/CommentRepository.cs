@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Infotecs.MiniJournal.Domain.Comments;
 
-namespace MiniJournal.PostgreSql
+namespace Infotecs.MiniJournal.PostgreSql
 {
     internal class CommentRepository : ICommentRepository
     {

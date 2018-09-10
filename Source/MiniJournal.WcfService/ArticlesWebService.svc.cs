@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.WcfService.DataTransferObjects;
-using MiniJournal.Application;
 using Article = Infotecs.MiniJournal.WcfService.DataTransferObjects.Article;
 
 namespace Infotecs.MiniJournal.WcfService

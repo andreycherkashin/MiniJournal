@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using Autofac;
-using Autofac.Integration.Wcf;
 using AutofacSerilogIntegration;
 using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
@@ -12,23 +8,24 @@ using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql;
 using Serilog;
 
-namespace Infotecs.MiniJournal.WcfService
+namespace Infotecs.MiniJournal.WinService
 {
-    public class WcfServiceModule : Autofac.Module
+    public class WinServiceModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            this.RegisterWcfComponents(builder);
-            this.RegisterLogger(builder);    
+            this.RegisterWinServiceComponents(builder);
+            this.RegisterLogger(builder);
             this.RegisterTypesAndModules(builder);
             this.RegisterSettings(builder);
         }
 
-        private void RegisterWcfComponents(ContainerBuilder builder)
+        private void RegisterWinServiceComponents(ContainerBuilder builder)
         {
-            builder.RegisterType<ArticlesWebService>().AsSelf().AsImplementedInterfaces();
-
-            builder.RegisterType<ErrorHandling.ErrorHandler>().AsImplementedInterfaces();
+            builder
+                .RegisterType<WindowsService>()
+                .AsSelf()
+                .SingleInstance();
         }
 
         private void RegisterSettings(ContainerBuilder builder)
@@ -48,9 +45,6 @@ namespace Infotecs.MiniJournal.WcfService
 
         private void RegisterTypesAndModules(ContainerBuilder builder)
         {
-            builder.RegisterType<AutoMapperConfiguration>().AsSelf().SingleInstance();
-            builder.Register(context => context.Resolve<AutoMapperConfiguration>().GetMapper());
-
             builder.RegisterModule<ApplicationModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<PostgreSqlModule>();

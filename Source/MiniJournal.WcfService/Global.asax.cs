@@ -15,19 +15,25 @@ namespace Infotecs.MiniJournal.WcfService
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            // create io container
             var builder = new ContainerBuilder();
             builder.RegisterModule<WcfServiceModule>();
-
             var container = builder.Build();
 
+            // resolve and add to pipeline wcf service behaviors
             ResolveAndApplyServiceBehaviors(container);
 
+            // set container
             AutofacHostFactory.Container = container;
 
+            // configure profiler
             MiniProfiler.Configure(new MiniProfilerOptions
             {
                 ResultsAuthorize = request => true
             });
+
+            // set environment variable for serilog configuration
+            Environment.SetEnvironmentVariable("BASEDIR", AppDomain.CurrentDomain.BaseDirectory);
         }
 
         private static void ResolveAndApplyServiceBehaviors(IContainer container)

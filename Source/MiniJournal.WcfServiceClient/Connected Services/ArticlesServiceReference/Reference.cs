@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
+namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -24,7 +24,7 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private MiniJournal.WcfServiceClient.ArticlesServiceReference.Comment[] CommentsField;
+        private Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Comment[] CommentsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long IdField;
@@ -36,7 +36,7 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         private string TextField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private MiniJournal.WcfServiceClient.ArticlesServiceReference.User UserField;
+        private Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -49,7 +49,7 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public MiniJournal.WcfServiceClient.ArticlesServiceReference.Comment[] Comments {
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Comment[] Comments {
             get {
                 return this.CommentsField;
             }
@@ -101,7 +101,7 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public MiniJournal.WcfServiceClient.ArticlesServiceReference.User User {
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User User {
             get {
                 return this.UserField;
             }
@@ -202,7 +202,7 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         private string TextField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private MiniJournal.WcfServiceClient.ArticlesServiceReference.User UserField;
+        private Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -241,7 +241,7 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public MiniJournal.WcfServiceClient.ArticlesServiceReference.User User {
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User User {
             get {
                 return this.UserField;
             }
@@ -268,10 +268,10 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
     public interface IArticlesWebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetArticles", ReplyAction="http://tempuri.org/IArticlesWebService/GetArticlesResponse")]
-        MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] GetArticles();
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] GetArticles();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetArticles", ReplyAction="http://tempuri.org/IArticlesWebService/GetArticlesResponse")]
-        System.Threading.Tasks.Task<MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[]> GetArticlesAsync();
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[]> GetArticlesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateArticle", ReplyAction="http://tempuri.org/IArticlesWebService/CreateArticleResponse")]
         void CreateArticle(string text, byte[] image, long userId);
@@ -304,10 +304,10 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         System.Threading.Tasks.Task<byte[]> FindImageAsync(string imageId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetUserByName", ReplyAction="http://tempuri.org/IArticlesWebService/GetUserByNameResponse")]
-        MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name);
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetUserByName", ReplyAction="http://tempuri.org/IArticlesWebService/GetUserByNameResponse")]
-        System.Threading.Tasks.Task<MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name);
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateNewUser", ReplyAction="http://tempuri.org/IArticlesWebService/CreateNewUserResponse")]
         void CreateNewUser(string name);
@@ -317,12 +317,12 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IArticlesWebServiceChannel : MiniJournal.WcfServiceClient.ArticlesServiceReference.IArticlesWebService, System.ServiceModel.IClientChannel {
+    public interface IArticlesWebServiceChannel : Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.IArticlesWebService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ArticlesWebServiceClient : System.ServiceModel.ClientBase<MiniJournal.WcfServiceClient.ArticlesServiceReference.IArticlesWebService>, MiniJournal.WcfServiceClient.ArticlesServiceReference.IArticlesWebService {
+    public partial class ArticlesWebServiceClient : System.ServiceModel.ClientBase<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.IArticlesWebService>, Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.IArticlesWebService {
         
         public ArticlesWebServiceClient() {
         }
@@ -343,11 +343,11 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] GetArticles() {
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[] GetArticles() {
             return base.Channel.GetArticles();
         }
         
-        public System.Threading.Tasks.Task<MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[]> GetArticlesAsync() {
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article[]> GetArticlesAsync() {
             return base.Channel.GetArticlesAsync();
         }
         
@@ -391,11 +391,11 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
             return base.Channel.FindImageAsync(imageId);
         }
         
-        public MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name) {
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name) {
             return base.Channel.GetUserByName(name);
         }
         
-        public System.Threading.Tasks.Task<MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name) {
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name) {
             return base.Channel.GetUserByNameAsync(name);
         }
         

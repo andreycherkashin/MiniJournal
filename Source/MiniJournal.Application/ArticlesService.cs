@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments;
@@ -8,7 +7,7 @@ using Infotecs.MiniJournal.Domain.Users;
 using Microsoft.Toolkit.Extensions;
 using Serilog;
 
-namespace MiniJournal.Application
+namespace Infotecs.MiniJournal.Application
 {
     /// <summary>
     /// Класс реализует различные высокоуровневые операции над статьей.
@@ -72,7 +71,7 @@ namespace MiniJournal.Application
 
             await this.unitOfWork.SaveChangesAsync();
 
-            this.logger.Verbose("user {@User.Id} created new article: {@Article.Text}", userId, article.Text.Truncate(30, true));
+            this.logger.Verbose("user {UserId} created new article: {ArticleText}", userId, article.Text.Truncate(30, true));
         }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace MiniJournal.Application
 
             await this.unitOfWork.SaveChangesAsync();
 
-            this.logger.Verbose("article {@Article.Id} was deleted", articleId);
+            this.logger.Verbose("article {ArticleId} was deleted", articleId);
         }
 
         /// <summary>
@@ -105,7 +104,7 @@ namespace MiniJournal.Application
 
             await this.unitOfWork.SaveChangesAsync();
 
-            this.logger.Verbose("new comment added to article {@Article.Id}, comment text: {@Comment.Text}", articleId, comment.Text.Truncate(30, true));
+            this.logger.Verbose("new comment added to article {ArticleId}, comment text: {CommentText}", articleId, comment.Text.Truncate(30, true));
         }
 
         /// <summary>
@@ -122,7 +121,7 @@ namespace MiniJournal.Application
 
             await this.unitOfWork.SaveChangesAsync();
 
-            this.logger.Verbose("comment {@comment_id} was deleted", commentId);
+            this.logger.Verbose("comment {CommentId} was deleted", commentId);
         }
     }
 }

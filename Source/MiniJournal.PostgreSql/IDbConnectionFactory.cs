@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
-namespace MiniJournal.PostgreSql
+namespace Infotecs.MiniJournal.PostgreSql
 {
     /// <summary>
     /// Фабрика, предоставляющая подключения к базе данных.

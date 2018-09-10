@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 
-namespace MiniJournal.PostgreSql
+namespace Infotecs.MiniJournal.PostgreSql
 {
     /// <inheritdoc />
     /// <summary>
@@ -44,8 +42,10 @@ namespace MiniJournal.PostgreSql
         /// <summary>
         /// Комитит транзакцию.
         /// </summary>
-        internal async Task CommitTransactionAsync()
+        internal Task CommitTransactionAsync()
         {
+            return Task.CompletedTask;
+
             //await this.transaction?.CommitAsync();
             //this.connection?.Close();
             //this.connection = null;

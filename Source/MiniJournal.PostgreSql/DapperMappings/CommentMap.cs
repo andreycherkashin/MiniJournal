@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Dapper.FluentMap.Mapping;
 using Infotecs.MiniJournal.Domain.Comments;
 
-namespace MiniJournal.PostgreSql.DapperMappings
+namespace Infotecs.MiniJournal.PostgreSql.DapperMappings
 {
     internal class CommentMap : EntityMap<Comment>
     {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniJournal.Application
+namespace Infotecs.MiniJournal.Application
 {
     /// <summary>
     /// Единица бизнес-транзакции.

@@ -7,11 +7,12 @@
     <ProjectGuid>{7F37DD18-2738-40D6-AC70-D03E142C81F3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MiniJournal.WcfServiceClient</RootNamespace>
-    <AssemblyName>MiniJournal.WcfServiceClient</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>Infotecs.MiniJournal.WcfServiceClient</RootNamespace>
+    <AssemblyName>Infotecs.MiniJournal.WcfServiceClient</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -68,10 +71,10 @@
     <None Include="Connected Services\ArticlesServiceReference\ArticlesWebService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ArticlesServiceReference\MiniJournal.WcfServiceClient.ArticlesServiceReference.Article.datasource">
+    <None Include="Connected Services\ArticlesServiceReference\Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ArticlesServiceReference\MiniJournal.WcfServiceClient.ArticlesServiceReference.User.datasource">
+    <None Include="Connected Services\ArticlesServiceReference\Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />

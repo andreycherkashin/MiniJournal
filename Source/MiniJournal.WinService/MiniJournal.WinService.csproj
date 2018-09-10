@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CC02D932-5771-47C9-B466-CC816A521E19}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Infotecs.MiniJournal.WinService</RootNamespace>
+    <AssemblyName>Infotecs.MiniJournal.WinService</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Out\Debug\WinService\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Out\Release\WinService\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RabbitMq\RabbitMqListener.cs" />
+    <Compile Include="WindowsService.cs" />
+    <Compile Include="WinServiceModule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac">
+      <Version>4.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="AutofacSerilogIntegration">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Serilog">
+      <Version>2.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="Serilog.Settings.AppSettings">
+      <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Serilog.Sinks.Console">
+      <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Serilog.Sinks.File">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Topshelf">
+      <Version>4.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Topshelf.Serilog">
+      <Version>4.0.4</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MiniJournal.Application\MiniJournal.Application.csproj">
+      <Project>{d436a986-8a68-4328-b4c4-e50e354609ee}</Project>
+      <Name>MiniJournal.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj">
+      <Project>{57291744-ba41-4c85-a0f9-9986a4ad635b}</Project>
+      <Name>MiniJournal.DiskStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj">
+      <Project>{1254e2ad-0b5f-44bb-8c9d-372604519835}</Project>
+      <Name>MiniJournal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MiniJournal.PostgreSql\MiniJournal.PostgreSql.csproj">
+      <Project>{e162e9c3-7d52-467d-b7ac-8070987cf71b}</Project>
+      <Name>MiniJournal.PostgreSql</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -13,7 +13,7 @@ using FluentAssertions;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments;
 using Infotecs.MiniJournal.Domain.Users;
-using MiniJournal.PostgreSql;
+using Infotecs.MiniJournal.PostgreSql;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -65,7 +65,7 @@ namespace Tests.Common.DataAccess
 
             var createDbScript = File.ReadAllText(Path.Combine(scriptsDirectory, "create_db.sql"));
 
-            // remove postrgres specific syntax with sqlite specific
+            // replace postrgres specific syntax with sqlite specific
             createDbScript = Regex.Replace(createDbScript, "bigint(.*?)generated always as identity", "INTEGER$1AUTOINCREMENT");
             await this.connection.ExecuteAsync(createDbScript);
 
@@ -124,11 +124,11 @@ namespace Tests.Common.DataAccess
             // Arrange
             var repository = this.fixture.Create<ArticleRepository>();
             var articleId = 1;
-
-            // Act
+            
             var article = await repository.FindByIdAsync(articleId);
             article.Should().NotBeNull();
 
+            // Act
             await repository.DeleteAsync(article);
 
             // Assert
@@ -139,7 +139,7 @@ namespace Tests.Common.DataAccess
         [Test]
         public async Task AddTest()
         {
-            // arrange 
+            // Arrange 
             var repository = this.fixture.Create<ArticleRepository>();
             var userRepository = this.fixture.Create<UserRepository>();
 
@@ -150,9 +150,9 @@ namespace Tests.Common.DataAccess
             var article = new Article(user,  articleText, new List<Comment>());
 
             // Act 
-            await repository.AddAsync(article);            
+            await repository.AddAsync(article);
 
-            // Arrange
+            // Assert
             var result = await repository.FindByIdAsync(article.Id);
             result.Should().NotBeNull();
         }

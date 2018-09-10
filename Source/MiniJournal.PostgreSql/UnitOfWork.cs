@@ -1,10 +1,8 @@
-﻿using MiniJournal.Application;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using Infotecs.MiniJournal.Application;
 
-namespace MiniJournal.PostgreSql
+namespace Infotecs.MiniJournal.PostgreSql
 {
     internal class UnitOfWork : IUnitOfWork
     {
