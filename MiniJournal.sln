@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Common", "UnitTests\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.WinService", "Source\MiniJournal.WinService\MiniJournal.WinService.csproj", "{CC02D932-5771-47C9-B466-CC816A521E19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.Contracts", "MiniJournal.Contracts\MiniJournal.Contracts.csproj", "{083F751B-526E-4708-8744-6B8D33D299FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{CC02D932-5771-47C9-B466-CC816A521E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC02D932-5771-47C9-B466-CC816A521E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC02D932-5771-47C9-B466-CC816A521E19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{083F751B-526E-4708-8744-6B8D33D299FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083F751B-526E-4708-8744-6B8D33D299FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083F751B-526E-4708-8744-6B8D33D299FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083F751B-526E-4708-8744-6B8D33D299FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
