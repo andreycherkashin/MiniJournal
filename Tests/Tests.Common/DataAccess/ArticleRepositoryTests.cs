@@ -25,6 +25,12 @@ namespace Tests.Common.DataAccess
         private IFixture fixture;
         private SQLiteConnection connection;
 
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            PostgreSqlModule.InitializeMappings();
+        }
+
         [SetUp]
         public async Task SetUp()
         {
@@ -32,9 +38,7 @@ namespace Tests.Common.DataAccess
 
             this.CreateInMemoryDatabase();
             await this.SeedTestData();
-            this.CreateSqliteStatementsProvider();
-
-            PostgreSqlModule.InitializeMappings();
+            this.CreateSqliteStatementsProvider();            
         }
 
         private void CreateSqliteStatementsProvider()
