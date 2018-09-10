@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Source\MiniJournal.Application\MiniJournal.Application.csproj" />
+    <ProjectReference Include="..\MiniJournal.Application\MiniJournal.Application.csproj" />
   </ItemGroup>
 
 </Project>

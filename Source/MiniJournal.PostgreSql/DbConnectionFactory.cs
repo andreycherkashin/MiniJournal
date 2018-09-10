@@ -30,26 +30,38 @@ namespace MiniJournal.PostgreSql
         /// <returns>Соединение к базе данных</returns>
         public IDbConnection GetConnection()
         {
-            if (this.connection == null)
-            {
-                this.CreateConnection();
-            }
+            //if (this.connection == null)
+            //{
+            //    this.CreateConnection();
+            //}
 
-            return this.connection;
+            //return this.connection;
+
+            var connection = new NpgsqlConnection(this.connectionString);
+            return new StackExchange.Profiling.Data.ProfiledDbConnection(connection, StackExchange.Profiling.MiniProfiler.Current);
         }
 
         /// <summary>
         /// Комитит транзакцию.
         /// </summary>
-        internal Task CommitTransactionAsync()
+        internal async Task CommitTransactionAsync()
         {
-            return this.transaction?.CommitAsync();
+            //await this.transaction?.CommitAsync();
+            //this.connection?.Close();
+            //this.connection = null;
         }
 
         private void CreateConnection()
         {
             this.connection = new NpgsqlConnection(this.connectionString);
+            this.connection.Open();
             this.transaction = this.connection.BeginTransaction();
+        }
+
+        public void Dispose()
+        {
+            //this.transaction?.Rollback();
+            //this.connection?.Dispose();
         }
     }
 }

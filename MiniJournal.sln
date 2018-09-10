@@ -20,9 +20,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.Application", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{697BABA6-4903-4F54-B07C-E238BCB25796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.DiskStorage", "MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj", "{57291744-BA41-4C85-A0F9-9986A4AD635B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.DiskStorage", "Source\MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj", "{57291744-BA41-4C85-A0F9-9986A4AD635B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Common", "Tests.Common\Tests.Common.csproj", "{3FEFCFC0-40AF-4A3B-84C8-767DA542F0BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Common", "Tests\Tests.Common\Tests.Common.csproj", "{3FEFCFC0-40AF-4A3B-84C8-767DA542F0BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

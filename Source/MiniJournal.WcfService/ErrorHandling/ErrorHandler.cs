@@ -27,7 +27,7 @@ namespace Infotecs.MiniJournal.WcfService.ErrorHandling
         }
 
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
-        {            
+        {
         }
 
 

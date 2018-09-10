@@ -120,7 +120,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj">
+    <ProjectReference Include="..\MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj">
       <Project>{57291744-BA41-4C85-A0F9-9986A4AD635B}</Project>
       <Name>MiniJournal.DiskStorage</Name>
     </ProjectReference>
@@ -136,6 +136,11 @@
       <Project>{E162E9C3-7D52-467D-B7AC-8070987CF71B}</Project>
       <Name>MiniJournal.PostgreSql</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MiniProfiler">
+      <Version>4.0.138</Version>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

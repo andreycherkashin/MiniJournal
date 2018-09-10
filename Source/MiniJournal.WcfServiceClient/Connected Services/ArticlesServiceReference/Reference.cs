@@ -296,6 +296,24 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/DeleteComment", ReplyAction="http://tempuri.org/IArticlesWebService/DeleteCommentResponse")]
         System.Threading.Tasks.Task DeleteCommentAsync(long articleId, long commentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/FindImage", ReplyAction="http://tempuri.org/IArticlesWebService/FindImageResponse")]
+        byte[] FindImage(string imageId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/FindImage", ReplyAction="http://tempuri.org/IArticlesWebService/FindImageResponse")]
+        System.Threading.Tasks.Task<byte[]> FindImageAsync(string imageId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetUserByName", ReplyAction="http://tempuri.org/IArticlesWebService/GetUserByNameResponse")]
+        MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetUserByName", ReplyAction="http://tempuri.org/IArticlesWebService/GetUserByNameResponse")]
+        System.Threading.Tasks.Task<MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateNewUser", ReplyAction="http://tempuri.org/IArticlesWebService/CreateNewUserResponse")]
+        void CreateNewUser(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateNewUser", ReplyAction="http://tempuri.org/IArticlesWebService/CreateNewUserResponse")]
+        System.Threading.Tasks.Task CreateNewUserAsync(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -363,6 +381,30 @@ namespace MiniJournal.WcfServiceClient.ArticlesServiceReference {
         
         public System.Threading.Tasks.Task DeleteCommentAsync(long articleId, long commentId) {
             return base.Channel.DeleteCommentAsync(articleId, commentId);
+        }
+        
+        public byte[] FindImage(string imageId) {
+            return base.Channel.FindImage(imageId);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> FindImageAsync(string imageId) {
+            return base.Channel.FindImageAsync(imageId);
+        }
+        
+        public MiniJournal.WcfServiceClient.ArticlesServiceReference.User GetUserByName(string name) {
+            return base.Channel.GetUserByName(name);
+        }
+        
+        public System.Threading.Tasks.Task<MiniJournal.WcfServiceClient.ArticlesServiceReference.User> GetUserByNameAsync(string name) {
+            return base.Channel.GetUserByNameAsync(name);
+        }
+        
+        public void CreateNewUser(string name) {
+            base.Channel.CreateNewUser(name);
+        }
+        
+        public System.Threading.Tasks.Task CreateNewUserAsync(string name) {
+            return base.Channel.CreateNewUserAsync(name);
         }
     }
 }

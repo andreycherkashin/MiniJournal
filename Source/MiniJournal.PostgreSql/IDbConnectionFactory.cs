@@ -8,7 +8,7 @@ namespace MiniJournal.PostgreSql
     /// <summary>
     /// Фабрика, предоставляющая подключения к базе данных.
     /// </summary>
-    internal interface IDbConnectionFactory
+    internal interface IDbConnectionFactory : IDisposable
     {
         /// <summary>
         /// Возвращает соединение к базе данных.

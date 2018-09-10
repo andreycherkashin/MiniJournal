@@ -48,5 +48,31 @@ namespace Infotecs.MiniJournal.WcfService
         /// <param name="commentId">Идентификатор комментария.</param>
         [OperationContract]
         Task DeleteCommentAsync(long articleId, long commentId);
+
+        /// <summary>
+        /// Находит картинку по идентификатору.
+        /// </summary>
+        /// <param name="imageId">Идентификатор картинки.</param>
+        /// <returns>Массив байт, который представляет из себя картинку.</returns>
+        [OperationContract]
+        Task<byte[]> FindImageAsync(string imageId);
+
+        /// <summary>
+        /// Получить пользователя по имени.
+        /// <exception cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+        /// Если пользователь с таким именем не найден будем выброшено исключение <see cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException"/>. 
+        /// </exception>
+        /// </summary>
+        /// <param name="name">Имя пользователя.</param>
+        /// <returns>Найденный пользователь.</returns>
+        [OperationContract]
+        Task<User> GetUserByNameAsync(string name);
+
+        /// <summary>
+        /// Добавляет нового пользователя с указанным именем.
+        /// </summary>
+        /// <param name="name">Имя пользователя.</param>
+        [OperationContract]
+        Task CreateNewUserAsync(string name);
     }    
 }

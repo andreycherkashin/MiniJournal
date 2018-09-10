@@ -9,6 +9,10 @@ namespace Infotecs.MiniJournal.Domain.Comments
     /// </summary>
     public class Comment
     {
+        private Comment()
+        {
+        }
+
         /// <summary>
         /// Создает комментарий
         /// </summary>

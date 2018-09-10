@@ -7,6 +7,10 @@ namespace Infotecs.MiniJournal.Domain.Users
     /// </summary>
     public class User
     {
+        private User()
+        {
+        }
+
         /// <summary>
         /// Создает пользователя на основе имени.
         /// </summary>

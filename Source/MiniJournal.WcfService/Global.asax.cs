@@ -7,6 +7,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using Autofac;
 using Autofac.Integration.Wcf;
+using StackExchange.Profiling;
 
 namespace Infotecs.MiniJournal.WcfService
 {
@@ -22,6 +23,11 @@ namespace Infotecs.MiniJournal.WcfService
             ResolveAndApplyServiceBehaviors(container);
 
             AutofacHostFactory.Container = container;
+
+            MiniProfiler.Configure(new MiniProfilerOptions
+            {
+                ResultsAuthorize = request => true
+            });
         }
 
         private static void ResolveAndApplyServiceBehaviors(IContainer container)
@@ -42,7 +48,15 @@ namespace Infotecs.MiniJournal.WcfService
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            if (this.Request.IsLocal)
+            {
+                MiniProfiler.StartNew();
+            }
+        }
 
+        protected void Application_EndRequest(object sender, EventArgs e)
+        {
+            MiniProfiler.Current?.Stop();
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

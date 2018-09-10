@@ -37,6 +37,24 @@
   <wsdl:message name="IArticlesWebService_DeleteComment_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteCommentResponse" />
   </wsdl:message>
+  <wsdl:message name="IArticlesWebService_FindImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindImage" />
+  </wsdl:message>
+  <wsdl:message name="IArticlesWebService_FindImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IArticlesWebService_GetUserByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByName" />
+  </wsdl:message>
+  <wsdl:message name="IArticlesWebService_GetUserByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IArticlesWebService_CreateNewUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewUser" />
+  </wsdl:message>
+  <wsdl:message name="IArticlesWebService_CreateNewUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IArticlesWebService">
     <wsdl:operation name="GetArticles">
       <wsdl:input wsaw:Action="http://tempuri.org/IArticlesWebService/GetArticles" message="tns:IArticlesWebService_GetArticles_InputMessage" />
@@ -57,6 +75,18 @@
     <wsdl:operation name="DeleteComment">
       <wsdl:input wsaw:Action="http://tempuri.org/IArticlesWebService/DeleteComment" message="tns:IArticlesWebService_DeleteComment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IArticlesWebService/DeleteCommentResponse" message="tns:IArticlesWebService_DeleteComment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IArticlesWebService/FindImage" message="tns:IArticlesWebService_FindImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IArticlesWebService/FindImageResponse" message="tns:IArticlesWebService_FindImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IArticlesWebService/GetUserByName" message="tns:IArticlesWebService_GetUserByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IArticlesWebService/GetUserByNameResponse" message="tns:IArticlesWebService_GetUserByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IArticlesWebService/CreateNewUser" message="tns:IArticlesWebService_CreateNewUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IArticlesWebService/CreateNewUserResponse" message="tns:IArticlesWebService_CreateNewUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IArticlesWebService" type="tns:IArticlesWebService">
@@ -99,6 +129,33 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteComment">
       <soap:operation soapAction="http://tempuri.org/IArticlesWebService/DeleteComment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindImage">
+      <soap:operation soapAction="http://tempuri.org/IArticlesWebService/FindImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <soap:operation soapAction="http://tempuri.org/IArticlesWebService/GetUserByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewUser">
+      <soap:operation soapAction="http://tempuri.org/IArticlesWebService/CreateNewUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

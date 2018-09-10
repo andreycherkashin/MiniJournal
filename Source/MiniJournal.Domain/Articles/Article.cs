@@ -10,6 +10,11 @@ namespace Infotecs.MiniJournal.Domain.Articles
     /// </summary>
     public class Article
     {
+        private Article()
+        {
+            
+        }
+
         /// <summary>
         /// Создает статью.
         /// </summary>

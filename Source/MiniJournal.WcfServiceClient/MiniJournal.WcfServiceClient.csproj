@@ -71,6 +71,9 @@
     <None Include="Connected Services\ArticlesServiceReference\MiniJournal.WcfServiceClient.ArticlesServiceReference.Article.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ArticlesServiceReference\MiniJournal.WcfServiceClient.ArticlesServiceReference.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

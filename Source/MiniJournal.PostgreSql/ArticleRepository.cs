@@ -53,19 +53,33 @@ namespace MiniJournal.PostgreSql
 
             using (var connection = this.connectionFactory.GetConnection())
             {
-                IEnumerable<Article> dbArticles = await connection.QueryAsync<Article>($"SELECT a.* FROM articles a {where}", param: param);
+                List<Article> dbArticles = (await connection.QueryAsync<Article>($"SELECT a.* FROM articles a {where}", param: param)).ToList();
 
-                IEnumerable<User> dbArticleUsers = await connection.QueryAsync<User>(
-                    "SELECT u.* FROM users u WHERE u.id IN @users",
-                    new { @users = dbArticles.Select(x => x.UserId).Distinct() });
+                if (!dbArticles.Any())
+                {
+                    return new List<Article>();
+                }
 
-                IEnumerable<Comment> dbComments = await connection.QueryAsync<Comment>(
-                    "SELECT c.* FROM comments c WHERE c.article_id IN @articles",
-                    new { articles = dbArticles.Select(a => a.Id) });
+                List<User> dbArticleUsers = (await connection.QueryAsync<User>(
+                    "SELECT u.* FROM users u WHERE u.id IN @users ",
+                    new { users = dbArticles.Select(x => x.UserId).Distinct().ToList() })).ToList();
 
-                IEnumerable<User> dbCommentUsers = await connection.QueryAsync<User>(
-                    "SELECT u.* FROM users u WHERE u.id IN @users",
-                    new { @users = dbComments.Select(x => x.UserId).Distinct() });
+                List<Comment> dbComments = (await connection.QueryAsync<Comment>(
+                    "SELECT c.* FROM comments c WHERE c.article_id IN @articles ",
+                    new { articles = dbArticles.Select(a => a.Id).ToList() })).ToList();
+
+                List<User> dbCommentUsers;
+
+                if (dbComments.Any())
+                {
+                    dbCommentUsers = (await connection.QueryAsync<User>(
+                        "SELECT u.* FROM users u WHERE u.id IN @users ",
+                        new { users = dbComments.Select(x => x.UserId).Distinct().ToList() })).ToList();
+                }
+                else
+                {
+                    dbCommentUsers = new List<User>();
+                }
 
                 ILookup<long, User> users = dbArticleUsers.Concat(dbCommentUsers).ToLookup(x => x.Id);
 

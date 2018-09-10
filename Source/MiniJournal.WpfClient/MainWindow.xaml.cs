@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace MiniJournal.WpfClient
 {
@@ -22,7 +24,17 @@ namespace MiniJournal.WpfClient
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+        }
+
+        private void ArticleImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();                   
+            if (fileDialog.ShowDialog() == true)
+            {
+                var image = File.ReadAllBytes(fileDialog.FileName);
+                ((MainWindowViewModel)this.DataContext).ArticleImage = image;
+            }
         }
     }
 }
