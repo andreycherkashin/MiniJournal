@@ -95,6 +95,10 @@
       <Project>{d436a986-8a68-4328-b4c4-e50e354609ee}</Project>
       <Name>MiniJournal.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MiniJournal.Contracts\MiniJournal.Contracts.csproj">
+      <Project>{083F751B-526E-4708-8744-6B8D33D299FA}</Project>
+      <Name>MiniJournal.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj">
       <Project>{57291744-ba41-4c85-a0f9-9986a4ad635b}</Project>
       <Name>MiniJournal.DiskStorage</Name>

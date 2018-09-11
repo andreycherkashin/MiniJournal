@@ -6,9 +6,6 @@
         xmlns:wpfClient="clr-namespace:Infotecs.MiniJournal.WpfClient"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <wpfClient:MainWindowViewModel/>
-    </Window.DataContext>
     <Window.Resources>
         <wpfClient:ByteToImageConverter x:Key="ByteToImageConverter" x:Name="ByteToImageConverter"/>
     </Window.Resources>

@@ -9,9 +9,18 @@ namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
     /// </summary>
     public class GetUserByNameRequest
     {
+        public GetUserByNameRequest()
+        {
+        }
+
+        public GetUserByNameRequest(string userName)
+        {
+            this.UserName = userName;
+        }
+
         /// <summary>
         /// Имя пользователя.
         /// </summary>
-        public string UseName { get; set; }
+        public string UserName { get; set; }
     }
 }

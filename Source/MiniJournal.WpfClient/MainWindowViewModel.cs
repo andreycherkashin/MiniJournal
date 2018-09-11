@@ -5,13 +5,16 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Infotecs.MiniJournal.RabbitMqClient;
 using Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference;
 using Infotecs.MiniJournal.WpfClient.Properties;
+using Serilog;
 
 namespace Infotecs.MiniJournal.WpfClient
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private readonly IArticlesServiceRabbitMqClient articlesServiceRabbitMqClient;
         private ObservableCollection<Article> articles;
         private Article selectedArticle;
         private string commentUser;
@@ -24,8 +27,9 @@ namespace Infotecs.MiniJournal.WpfClient
         private byte[] articleImage;
         private byte[] selectedArticleImage;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IArticlesServiceRabbitMqClient articlesServiceRabbitMqClient)
         {
+            this.articlesServiceRabbitMqClient = articlesServiceRabbitMqClient;
         }
 
         public ObservableCollection<Article> Articles
@@ -202,24 +206,9 @@ namespace Infotecs.MiniJournal.WpfClient
             this.CommentUser = null;
             this.CommentText = null;
 
-            using (var serviceClient = new ArticlesWebServiceClient())
-            {
-                User user;
+            var user = await this.GetUser(userName);
 
-                try
-                {
-                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
-                    user = response.User;
-                }
-                catch(Exception)
-                {
-                    await serviceClient.CreateNewUserAsync(new CreateNewUserRequest { UserName = userName });
-                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
-                    user = response.User;
-                }
-                
-                await serviceClient.AddCommentAsync(new AddCommentRequest { ArticleId = articleId, Text = text, UserId = user.Id });
-            }
+            await this.articlesServiceRabbitMqClient.AddCommentAsync(new Contracts.ArticlesApplicationService.AddCommentRequest(user.Id, articleId, text));
 
             await this.LoadArticles();
         }
@@ -232,86 +221,34 @@ namespace Infotecs.MiniJournal.WpfClient
 
             this.ArticleUser = null;
             this.ArticleText = null;
-            this.ArticleImage = null;
+            this.ArticleImage = null;    
 
-            using (var serviceClient = new ArticlesWebServiceClient())
-            {
-                User user;
+            var user = await this.GetUser(userName);
 
-                try
-                {
-                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
-                    user = response.User;
-                }
-                catch
-                {
-                    await serviceClient.CreateNewUserAsync(new CreateNewUserRequest { UserName = userName });
-                    var response = await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UseName = userName });
-                    user = response.User;
-                }                
-                
-                await serviceClient.CreateArticleAsync(new CreateArticleRequest { Text = text, Image = image, UserId = user.Id });
-            }                        
+            await this.articlesServiceRabbitMqClient.CreateArticleAsync(new Contracts.ArticlesApplicationService.CreateArticleRequest(text, image, user.Id));
 
             await this.LoadArticles();
         }
 
-        private void SeedData()
+        private async Task<Contracts.UsersApplicationService.Entities.User> GetUser(string userName)
         {
-            var user1 = new User
-            {
-                Id = 1, 
-                Name =  "user 1"
-            };
 
-            var user2 = new User
+            Contracts.UsersApplicationService.Entities.User user;
+            try
             {
-                Id = 2,
-                Name = "user 2"
-            };
+                var response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new Contracts.UsersApplicationService.GetUserByNameRequest(userName));
+                user = response.User;
+            }
+            catch (RawRabbit.Exceptions.MessageHandlerException ex) when (ex.InnerMessage == "User not found.")
+            {
+                Log.Information(ex, "creating new user");
 
-            this.Articles = new ObservableCollection<Article>()
-            {
-                new Article
-                {
-                    Id = 1,
-                    ImageId = "1",
-                    Text = "hello world 1",
-                    User = user1,
-                    Comments = new Comment[]
-                    {
-                        new Comment { Id = 11, User = user2, Text = "comment 1 1" },
-                        new Comment { Id = 12, User = user1, Text = "comment 1 2" },
-                        new Comment { Id = 13, User = user2, Text = "comment 1 3" }
-                    }
-                },
-                new Article
-                {
-                    Id = 2,
-                    ImageId = "2",
-                    Text = "hello world 2",
-                    User = user1,
-                    Comments = new Comment[]
-                    {
-                        new Comment { Id = 21, User = user2, Text = "comment 2 1" },
-                        new Comment { Id = 22, User = user1, Text = "comment 2 2" },
-                        new Comment { Id = 23, User = user2, Text = "comment 2 3" }
-                    }
-                },
-                new Article
-                {
-                    Id = 3,
-                    ImageId = "3",
-                    Text = "hello world 3",
-                    User = user2,
-                    Comments = new Comment[]
-                    {
-                        new Comment { Id = 31, User = user1, Text = "comment 3 1" },
-                        new Comment { Id = 32, User = user2, Text = "comment 3 2" },
-                        new Comment { Id = 33, User = user1, Text = "comment 3 3" }
-                    }
-                }
-            };
+                await this.articlesServiceRabbitMqClient.CreateNewUserAsync(new Contracts.UsersApplicationService.CreateNewUserRequest(userName));
+                var response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new Contracts.UsersApplicationService.GetUserByNameRequest(userName));
+                user = response.User;
+            }
+
+            return user;
         }
     }
 }

@@ -9,6 +9,19 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
     /// </summary>
     public class AddCommentRequest
     {
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        public AddCommentRequest()
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        public AddCommentRequest(long userId, long articleId, string text)
+        {
+            this.UserId = userId;
+            this.ArticleId = articleId;
+            this.Text = text;
+        }
+
         /// <summary>
         /// Идентификатор пользователя.
         /// </summary>

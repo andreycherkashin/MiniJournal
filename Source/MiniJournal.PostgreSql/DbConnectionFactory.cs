@@ -13,8 +13,8 @@ namespace Infotecs.MiniJournal.PostgreSql
     {
         private readonly string connectionString;
 
-        private NpgsqlConnection connection;
-        private NpgsqlTransaction transaction;
+        private IDbConnection connection;
+        private IDbTransaction transaction;
 
         public DbConnectionFactory(string connectionString)
         {
@@ -39,18 +39,19 @@ namespace Infotecs.MiniJournal.PostgreSql
         /// <summary>
         /// Комитит транзакцию.
         /// </summary>
-        internal async Task CommitTransactionAsync()
+        internal Task CommitTransactionAsync()
         {
-            await this.transaction?.CommitAsync();
+            this.transaction?.Commit();
             this.transaction = null;
             
             this.CloseConnection();
+
+            return Task.CompletedTask;
         }
 
         private void CreateConnection()
         {
-            this.connection = new NpgsqlConnection(this.connectionString);
-            //this.connection = new StackExchange.Profiling.Data.ProfiledDbConnection(new NpgsqlConnection(this.connectionString), StackExchange.Profiling.MiniProfiler.Current);
+            this.connection = new StackExchange.Profiling.Data.ProfiledDbConnection(new NpgsqlConnection(this.connectionString), StackExchange.Profiling.MiniProfiler.Current);
             this.connection.Open();
 
             this.transaction?.Dispose();

@@ -22,14 +22,14 @@ namespace Infotecs.MiniJournal.WcfService.ErrorHandling
 
         public bool HandleError(Exception error)
         {
-            this.logger.Error(error, "an error occured while processing request");
+            this.logger.Error(error, "[HandleError] an error occured while processing request");
             return true;
         }
 
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
         {
+            //this.logger.Error(error, "[ProvideFault] an error occured while processing request");
         }
-
 
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {

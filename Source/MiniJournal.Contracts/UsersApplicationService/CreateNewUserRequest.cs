@@ -9,6 +9,15 @@ namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
     /// </summary>
     public class CreateNewUserRequest
     {
+        public CreateNewUserRequest()
+        {
+        }
+
+        public CreateNewUserRequest(string userName)
+        {
+            this.UserName = userName;
+        }
+
         /// <summary>
         /// Имя нового пользователя.
         /// </summary>

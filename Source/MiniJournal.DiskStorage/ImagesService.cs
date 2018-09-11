@@ -25,9 +25,10 @@ namespace Infotecs.MiniJournal.DiskStorage
 
             byte[] image = null;
 
+            var fullImagePath = Path.Combine(this.imagesStoragePath, request.ImageId);
             if (File.Exists(request.ImageId))
             {
-                image = File.ReadAllBytes(request.ImageId);
+                image = File.ReadAllBytes(fullImagePath);
             }
 
             return Task.FromResult(new FindImageResponse(image));
@@ -50,6 +51,8 @@ namespace Infotecs.MiniJournal.DiskStorage
 
             var guid = Guid.NewGuid().ToString("N");
             var fullImagePath = Path.Combine(this.imagesStoragePath, guid);
+
+            Directory.CreateDirectory(this.imagesStoragePath);
 
             using (var fileStream = new FileStream(fullImagePath, FileMode.Create, FileAccess.Write, FileShare.Read))
             {

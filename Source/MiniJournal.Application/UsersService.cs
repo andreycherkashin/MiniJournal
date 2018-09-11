@@ -41,7 +41,7 @@ namespace Infotecs.MiniJournal.Application
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            var user = await this.userService.GetUserByNameAsync(request.UseName);
+            var user = await this.userService.GetUserByNameAsync(request.UserName);
 
             return new GetUserByNameResponse(this.mapper.Map<Contracts.UsersApplicationService.Entities.User>(user));
         }

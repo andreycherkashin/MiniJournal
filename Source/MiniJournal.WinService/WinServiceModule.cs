@@ -6,6 +6,11 @@ using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql;
+using Infotecs.MiniJournal.WinService.RabbitMq;
+using RawRabbit.Common;
+using RawRabbit.Configuration;
+using RawRabbit.DependencyInjection.Autofac;
+using RawRabbit.Logging;
 using Serilog;
 
 namespace Infotecs.MiniJournal.WinService
@@ -18,20 +23,25 @@ namespace Infotecs.MiniJournal.WinService
             this.RegisterLogger(builder);
             this.RegisterTypesAndModules(builder);
             this.RegisterSettings(builder);
+            this.RegisterRabbitMq(builder);
         }
 
         private void RegisterWinServiceComponents(ContainerBuilder builder)
         {
-            builder
-                .RegisterType<WindowsService>()
-                .AsSelf()
-                .SingleInstance();
+            builder.RegisterType<WindowsService>().AsSelf().SingleInstance();
+            builder.RegisterType<RabbitMqListener>().AsSelf().SingleInstance();
         }
 
         private void RegisterSettings(ContainerBuilder builder)
         {
             builder.Register(context => ConfigurationManager.AppSettings["ConnectionString"]).Named<string>("ConnectionString");
             builder.Register(context => ConfigurationManager.AppSettings["ImagesStoragePath"]).Named<string>("ImagesStoragePath");
+        }
+
+        private void RegisterRabbitMq(ContainerBuilder builder)
+        {
+            builder.RegisterRawRabbit(ConfigurationManager.AppSettings["RabbitMq"]);
+            builder.RegisterType<RawRabbit.Logging.Serilog.LoggerFactory>().As<ILoggerFactory>().SingleInstance();
         }
 
         private void RegisterLogger(ContainerBuilder builder)
