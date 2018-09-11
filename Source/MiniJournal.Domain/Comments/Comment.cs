@@ -9,7 +9,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
     /// </summary>
     public class Comment
     {
-        private Comment()
+        protected Comment()
         {
         }
 
@@ -17,52 +17,36 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// Создает комментарий
         /// </summary>
         /// <param name="user">Пользователь создавший комментарий.</param>
-        /// <param name="articleId"> Идентификатор статьи, к который был написан комментарий.</param>
+        /// <param name="article">Статьи, к который был написан комментарий.</param>
         /// <param name="text">Содержимое комментария.</param>
-        public Comment(User user, long articleId, string text)
+        public Comment(User user, Article article, string text)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));            
 
             this.Text = text;
-            this.User = user;            
-
-            this.UserId = user.Id;
-            this.ArticleId = articleId;
+            this.User = user;
+            this.Article = article;
         }
 
         /// <summary>
         /// Уникальный идентификатор комментария.
         /// </summary>
-        public long Id
-        {
-            get;
-            // internal для ORM.
-            internal set;
-        }
+        public virtual long Id { get; protected internal set;}
 
         /// <summary>
         /// Содержимое комментария.
         /// </summary>
-        public string Text { get; set; }
+        public virtual string Text { get; set; }
 
         /// <summary>
         /// Пользователь создавший комментарий.
         /// </summary>
-        public User User { get; private set; }
-
-
+        public virtual User User { get; protected set; }
 
         /// <summary>
-        /// Для ORM.
-        /// Идентификатор пользователя, который написал комментарий.
+        /// Статья
         /// </summary>
-        public long UserId { get; private set; }
-
-        /// <summary>
-        /// Для ORM.
-        /// Идентификатор статьи, к которой был написан комментарий.
-        /// </summary>
-        public long ArticleId { get; private set; }
+        public virtual Article Article { get; protected set; }
     }
 }

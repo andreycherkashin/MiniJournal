@@ -29,7 +29,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
             if (article == null)
                 throw new ArgumentNullException(nameof(article));
 
-            var comment = new Comment(user, article.Id, text);
+            var comment = new Comment(user, article, text);
 
             return Task.FromResult(comment);
         }

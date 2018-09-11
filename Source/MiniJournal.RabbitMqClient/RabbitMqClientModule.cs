@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Autofac;
+using RawRabbit.Common;
 using RawRabbit.DependencyInjection.Autofac;
 using RawRabbit.Logging;
 
@@ -24,7 +25,13 @@ namespace Infotecs.MiniJournal.RabbitMqClient
         /// registered.</param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterRawRabbit(this.rabbitMqConnectionString);
+            var configuration = ConnectionStringParser.Parse(this.rabbitMqConnectionString);
+
+            configuration.PublishConfirmTimeout = TimeSpan.FromHours(1);
+            configuration.RequestTimeout = TimeSpan.FromHours(1);
+
+            builder.RegisterRawRabbit(configuration);
+
             builder.RegisterType<RawRabbit.Logging.Serilog.LoggerFactory>().As<ILoggerFactory>().SingleInstance();
             builder.RegisterType<ArticlesServiceRabbitMqClient>().AsImplementedInterfaces();
         }

@@ -107,9 +107,9 @@
       <Project>{1254e2ad-0b5f-44bb-8c9d-372604519835}</Project>
       <Name>MiniJournal.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniJournal.PostgreSql\MiniJournal.PostgreSql.csproj">
-      <Project>{e162e9c3-7d52-467d-b7ac-8070987cf71b}</Project>
-      <Name>MiniJournal.PostgreSql</Name>
+    <ProjectReference Include="..\MiniJournal.PsotgreSql.NHibernate\MiniJournal.PostgreSql.NHibernate.csproj">
+      <Project>{0EBD9AE1-581C-4000-92B2-549592B1B98D}</Project>
+      <Name>MiniJournal.PostgreSql.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles;
@@ -57,7 +58,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
             if (article == null)
                 throw new ArgumentNullException(nameof(article));
 
-            var comment = article.Comments.Find(c => c.Id == commentId);
+            var comment = article.Comments.FirstOrDefault(c => c.Id == commentId);
             if (comment == null)
             {
                 throw new CommentNotFoundException();

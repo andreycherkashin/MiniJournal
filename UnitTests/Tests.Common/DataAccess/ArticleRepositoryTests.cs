@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -10,10 +11,13 @@ using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using Dapper;
 using FluentAssertions;
+using FluentNHibernate.Cfg;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments;
 using Infotecs.MiniJournal.Domain.Users;
-using Infotecs.MiniJournal.PostgreSql;
+using Infotecs.MiniJournal.PostgreSql.NHibernate;
+using Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings;
+using NHibernate;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -23,43 +27,32 @@ namespace Tests.Common.DataAccess
     public class ArticleRepositoryTests
     {
         private IFixture fixture;
-        private SQLiteConnection connection;
-
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            PostgreSqlModule.InitializeMappings();
-        }
+        private SessionProvider sessionProvider;
 
         [SetUp]
         public async Task SetUp()
         {
             this.fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
 
-            this.CreateInMemoryDatabase();
-            await this.SeedTestData();
-            this.CreateSqliteStatementsProvider();            
+            await this.CreateInMemoryDatabase();
         }
 
-        private void CreateSqliteStatementsProvider()
+        private async Task CreateInMemoryDatabase()
         {
-            var sqliteStatementsProvider = Substitute.For<IDbEngineStatementsProvider>();
-            sqliteStatementsProvider.GetLastInsertedIdSelectStatement().Returns("; select last_insert_rowid() as id;");
-            this.fixture.Register<IDbEngineStatementsProvider>(() => sqliteStatementsProvider);
+            var sessionFactory = Fluently.Configure()
+                .Database(
+                    FluentNHibernate.Cfg.Db.SQLiteConfiguration.Standard.InMemory()
+                )
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<ArticleMap>())
+                .BuildSessionFactory();
+
+            this.sessionProvider = new SessionProvider(sessionFactory);
+            await SeedTestData(this.sessionProvider.GetSession().Connection);
+                       
+            this.fixture.Register<ISessionProvider>(() => this.sessionProvider);
         }
 
-        private void CreateInMemoryDatabase()
-        {
-            this.connection = new SQLiteConnection("Data Source=:memory:");
-            this.connection.Open();
-
-            var inMemoryDatabaseConnectionFactory = Substitute.For<IDbConnectionFactory>();
-            inMemoryDatabaseConnectionFactory.GetConnection().Returns(this.connection);
-
-            this.fixture.Register<IDbConnectionFactory>(() => inMemoryDatabaseConnectionFactory);
-        }
-
-        private async Task SeedTestData()
+        private static async Task SeedTestData(IDbConnection connection)
         {
             var scriptsDirectory = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\..\Database");
 
@@ -67,17 +60,16 @@ namespace Tests.Common.DataAccess
 
             // replace postrgres specific syntax with sqlite specific
             createDbScript = Regex.Replace(createDbScript, "bigint(.*?)generated always as identity", "INTEGER$1AUTOINCREMENT");
-            await this.connection.ExecuteAsync(createDbScript);
-
-            await this.connection.ExecuteAsync(File.ReadAllText(Path.Combine(scriptsDirectory, "insert_test_users.sql")));
-            await this.connection.ExecuteAsync(File.ReadAllText(Path.Combine(scriptsDirectory, "insert_test_articles.sql")));
-            await this.connection.ExecuteAsync(File.ReadAllText(Path.Combine(scriptsDirectory, "insert_test_comments.sql")));
+            await connection.ExecuteAsync(createDbScript);
+            await connection.ExecuteAsync(File.ReadAllText(Path.Combine(scriptsDirectory, "insert_test_users.sql")));
+            await connection.ExecuteAsync(File.ReadAllText(Path.Combine(scriptsDirectory, "insert_test_articles.sql")));
+            await connection.ExecuteAsync(File.ReadAllText(Path.Combine(scriptsDirectory, "insert_test_comments.sql")));
         }
 
         [TearDown]
         public void TearDown()
         {
-            this.connection?.Dispose();
+            this.sessionProvider?.Dispose();
         }
 
         [Test]
@@ -100,7 +92,7 @@ namespace Tests.Common.DataAccess
                 article.User.Should().NotBeNull();
                 article.User.Name.Should().NotBeEmpty();
                 article.Text.Should().NotBeEmpty();
-                article.UserId.Should().Be(article.User.Id);
+                article.User.Id.Should().Be(article.User.Id);
             }                       
         }
 

@@ -107,9 +107,9 @@
       <Project>{1254E2AD-0B5F-44BB-8C9D-372604519835}</Project>
       <Name>MiniJournal.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniJournal.PostgreSql\MiniJournal.PostgreSql.csproj">
-      <Project>{E162E9C3-7D52-467D-B7AC-8070987CF71B}</Project>
-      <Name>MiniJournal.PostgreSql</Name>
+    <ProjectReference Include="..\MiniJournal.PsotgreSql.NHibernate\MiniJournal.PostgreSql.NHibernate.csproj">
+      <Project>{0EBD9AE1-581C-4000-92B2-549592B1B98D}</Project>
+      <Name>MiniJournal.PostgreSql.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

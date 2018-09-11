@@ -42,8 +42,7 @@ namespace Tests.Common.Domain.Articles
 
             // Assert
             article.Should().NotBeNull();
-            article.User.Should().BeSameAs(user);
-            article.UserId.Should().Be(user.Id);
+            article.User.Should().BeSameAs(user);            
             article.ImageId.Should().Be(imageId);
             article.Text.Should().Be(text);
             article.Comments.Should().BeNullOrEmpty();

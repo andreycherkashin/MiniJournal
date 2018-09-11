@@ -9,7 +9,7 @@ using AutofacSerilogIntegration;
 using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
-using Infotecs.MiniJournal.PostgreSql;
+using Infotecs.MiniJournal.PsotgreSql.NHibernate;
 using Serilog;
 
 namespace Infotecs.MiniJournal.WcfService
@@ -50,7 +50,7 @@ namespace Infotecs.MiniJournal.WcfService
         {
             builder.RegisterModule<ApplicationModule>();
             builder.RegisterModule<DomainModule>();
-            builder.RegisterModule<PostgreSqlModule>();
+            builder.RegisterModule<NHibernateModule>();
             builder.RegisterModule<DiskStorageModule>();
         }
     }

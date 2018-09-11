@@ -7,7 +7,7 @@ namespace Infotecs.MiniJournal.Domain.Users
     /// </summary>
     public class User
     {
-        private User()
+        protected User()
         {
         }
 
@@ -23,11 +23,11 @@ namespace Infotecs.MiniJournal.Domain.Users
         /// <summary>
         /// Идентификатор пользователя. 
         /// </summary>
-        public long Id { get; private set; }
+        public virtual long Id { get; protected set; }
 
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string Name { get; private set; }
+        public virtual string Name { get; protected set; }
     }
 }

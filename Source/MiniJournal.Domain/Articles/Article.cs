@@ -10,7 +10,7 @@ namespace Infotecs.MiniJournal.Domain.Articles
     /// </summary>
     public class Article
     {
-        private Article()
+        protected Article()
         {
             
         }
@@ -30,46 +30,31 @@ namespace Infotecs.MiniJournal.Domain.Articles
             this.User = user;
 
             this.Comments = comments ?? new List<Comment>();
-
-            this.UserId = user.Id;
         }
 
         /// <summary>
         /// Уникальный идентификатор статьи
         /// </summary>
-        public long Id
-        {
-            get;
-            // internal для ORM.
-            internal set;
-        }
+        public virtual long Id { get; protected internal set; }
 
         /// <summary>
         /// Содержимое статьи
         /// </summary>
-        public string Text { get; set; }
+        public virtual string Text { get; set; }
 
         /// <summary>
         /// Уникальный идентификатор картинки 
         /// </summary>
-        public string ImageId { get; set; }
+        public virtual string ImageId { get; protected internal set; }
 
         /// <summary>
         /// Пользователь, создавший статью.
         /// </summary>
-        public User User { get; private set; }
+        public virtual User User { get; protected set; }
 
         /// <summary>
         /// Список комментариев к статье.
         /// </summary>
-        public List<Comment> Comments { get; private set; }
-
-
-
-        /// <summary>
-        /// Для ORM.
-        /// Идентификатор пользователя статьи.
-        /// </summary>
-        public long UserId { get; private set; }
+        public virtual ICollection<Comment> Comments { get; protected set; }
     }
 }
