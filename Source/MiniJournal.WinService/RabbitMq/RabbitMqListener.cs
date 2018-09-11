@@ -25,13 +25,13 @@ namespace Infotecs.MiniJournal.WinService.RabbitMq
 
         public void Start()
         {
-            this.busClient.RespondAsync<AddCommentRequest, AddCommentResponse>((request, context) => this.articlesService.AddCommentAsync(request));
-            this.busClient.RespondAsync<DeleteCommentRequest, DeleteCommentResponse>((request, context) => this.articlesService.DeleteCommentAsync(request));
-            this.busClient.RespondAsync<CreateArticleRequest, CreateArticleResponse>((request, context) => this.articlesService.CreateArticleAsync(request));
-            this.busClient.RespondAsync<DeleteArticleRequest, DeleteArticleResponse>((request, context) => this.articlesService.DeleteArticleAsync(request));
+            this.busClient.SubscribeAsync<AddCommentRequest>((request, context) => this.articlesService.AddCommentAsync(request));
+            this.busClient.SubscribeAsync<DeleteCommentRequest>((request, context) => this.articlesService.DeleteCommentAsync(request));
+            this.busClient.SubscribeAsync<CreateArticleRequest>((request, context) => this.articlesService.CreateArticleAsync(request));
+            this.busClient.SubscribeAsync<DeleteArticleRequest>((request, context) => this.articlesService.DeleteArticleAsync(request));
 
             this.busClient.RespondAsync<GetUserByNameRequest, GetUserByNameResponse>((request, context) => this.usersService.GetUserByNameAsync(request));
-            this.busClient.RespondAsync<CreateNewUserRequest, CreateNewUserResponse>((request, context) => this.usersService.CreateNewUserAsync(request));            
+            this.busClient.SubscribeAsync<CreateNewUserRequest>((request, context) => this.usersService.CreateNewUserAsync(request));            
         }
 
         public void Stop()

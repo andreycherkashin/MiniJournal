@@ -19,9 +19,25 @@ namespace Infotecs.MiniJournal.WpfClient
                 .ReadFrom.AppSettings()
                 .CreateLogger();
 
-            AppDomain.CurrentDomain.UnhandledException += (sender, args) => Log.Fatal(args.ExceptionObject as Exception, "DomainUnhandledException");
-            Current.DispatcherUnhandledException += (o, eventArgs) => Log.Fatal(eventArgs.Exception, "DispatcherUnhandledException");
-            TaskScheduler.UnobservedTaskException += (sender, args) => Log.Fatal(args.Exception, "TaskSchedulerUnobservedTaskException");
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+            {
+                Log.Fatal(args.ExceptionObject as Exception, "DomainUnhandledException");
+                MessageBox.Show(args.ExceptionObject.ToString(), "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            };
+
+            TaskScheduler.UnobservedTaskException += (sender, args) =>
+            {
+                Log.Fatal(args.Exception, "TaskSchedulerUnobservedTaskException");
+                args.SetObserved();
+                MessageBox.Show(args.Exception.ToString(), "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            };
+
+            Current.DispatcherUnhandledException += (o, eventArgs) =>
+            {
+                Log.Fatal(eventArgs.Exception, "DispatcherUnhandledException");
+                eventArgs.Handled = true;
+                MessageBox.Show(eventArgs.Exception.ToString(), "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            };
         }
 
         /// <summary>Raises the <see cref="E:System.Windows.Application.Startup" /> event.</summary>

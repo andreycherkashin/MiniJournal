@@ -21,29 +21,29 @@ namespace Infotecs.MiniJournal.RabbitMqClient
         /// Создать статью с указанным содержимым.
         /// </summary>
         /// <param name="request">Запрос создания статьи.</param>
-        public Task<CreateArticleResponse> CreateArticleAsync(CreateArticleRequest request)
-            => this.busClient.RequestAsync<CreateArticleRequest, CreateArticleResponse>(request);
+        public Task CreateArticleAsync(CreateArticleRequest request)
+            => this.busClient.PublishAsync(request);
 
         /// <summary>
         /// Удаляет статью.
         /// </summary>
         /// <param name="request">Запрос удаления статьи.</param>
-        public Task<DeleteArticleResponse> DeleteArticleAsync(DeleteArticleRequest request)
-            => this.busClient.RequestAsync<DeleteArticleRequest, DeleteArticleResponse>(request);
+        public Task DeleteArticleAsync(DeleteArticleRequest request)
+            => this.busClient.PublishAsync(request);
 
         /// <summary>
         /// Добавляет комментарий к статье.
         /// </summary>
         /// <param name="request">Запрос добавления статьи.</param>        
-        public Task<AddCommentResponse> AddCommentAsync(AddCommentRequest request)
-            => this.busClient.RequestAsync<AddCommentRequest, AddCommentResponse>(request);
+        public Task AddCommentAsync(AddCommentRequest request)
+            => this.busClient.PublishAsync(request);
 
         /// <summary>
         /// Удаляет комментарий.
         /// </summary>
         /// <param name="request">Запрос удаления комментария.</param>        
-        public Task<DeleteCommentResponse> DeleteCommentAsync(DeleteCommentRequest request)
-            => this.busClient.RequestAsync<DeleteCommentRequest, DeleteCommentResponse>(request);
+        public Task DeleteCommentAsync(DeleteCommentRequest request)
+            => this.busClient.PublishAsync(request);
 
         /// <summary>
         /// Получить пользователя по имени.
@@ -60,7 +60,7 @@ namespace Infotecs.MiniJournal.RabbitMqClient
         /// Добавляет нового пользователя с указанным именем.
         /// </summary>
         /// <param name="request">Имя пользователя.</param>
-        public Task<CreateNewUserResponse> CreateNewUserAsync(CreateNewUserRequest request)
-            => this.busClient.RequestAsync<CreateNewUserRequest, CreateNewUserResponse>(request);
+        public Task CreateNewUserAsync(CreateNewUserRequest request)
+            => this.busClient.PublishAsync(request);
     }
 }

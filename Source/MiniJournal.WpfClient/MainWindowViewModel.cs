@@ -209,8 +209,6 @@ namespace Infotecs.MiniJournal.WpfClient
             var user = await this.GetUser(userName);
 
             await this.articlesServiceRabbitMqClient.AddCommentAsync(new Contracts.ArticlesApplicationService.AddCommentRequest(user.Id, articleId, text));
-
-            await this.LoadArticles();
         }
 
         private async Task AddArticle()
@@ -226,8 +224,6 @@ namespace Infotecs.MiniJournal.WpfClient
             var user = await this.GetUser(userName);
 
             await this.articlesServiceRabbitMqClient.CreateArticleAsync(new Contracts.ArticlesApplicationService.CreateArticleRequest(text, image, user.Id));
-
-            await this.LoadArticles();
         }
 
         private async Task<Contracts.UsersApplicationService.Entities.User> GetUser(string userName)
@@ -244,6 +240,10 @@ namespace Infotecs.MiniJournal.WpfClient
                 Log.Information(ex, "creating new user");
 
                 await this.articlesServiceRabbitMqClient.CreateNewUserAsync(new Contracts.UsersApplicationService.CreateNewUserRequest(userName));
+
+                // ждем секунду чтобы создался пользователь
+                await Task.Delay(1000);
+
                 var response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new Contracts.UsersApplicationService.GetUserByNameRequest(userName));
                 user = response.User;
             }

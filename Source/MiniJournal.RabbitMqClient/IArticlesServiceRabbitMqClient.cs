@@ -13,25 +13,25 @@ namespace Infotecs.MiniJournal.RabbitMqClient
         /// Создать статью с указанным содержимым.
         /// </summary>
         /// <param name="request">Запрос создания статьи.</param>
-        Task<CreateArticleResponse> CreateArticleAsync(CreateArticleRequest request);
+        Task CreateArticleAsync(CreateArticleRequest request);
 
         /// <summary>
         /// Удаляет статью.
         /// </summary>
         /// <param name="request">Запрос удаления статьи.</param>
-        Task<DeleteArticleResponse> DeleteArticleAsync(DeleteArticleRequest request);
+        Task DeleteArticleAsync(DeleteArticleRequest request);
 
         /// <summary>
         /// Добавляет комментарий к статье.
         /// </summary>
         /// <param name="request">Запрос добавления статьи.</param>        
-        Task<AddCommentResponse> AddCommentAsync(AddCommentRequest request);
+        Task AddCommentAsync(AddCommentRequest request);
 
         /// <summary>
         /// Удаляет комментарий.
         /// </summary>
         /// <param name="request">Запрос удаления комментария.</param>        
-        Task<DeleteCommentResponse> DeleteCommentAsync(DeleteCommentRequest request);
+        Task DeleteCommentAsync(DeleteCommentRequest request);
 
         /// <summary>
         /// Получить пользователя по имени.
@@ -47,6 +47,6 @@ namespace Infotecs.MiniJournal.RabbitMqClient
         /// Добавляет нового пользователя с указанным именем.
         /// </summary>
         /// <param name="request">Имя пользователя.</param>
-        Task<CreateNewUserResponse> CreateNewUserAsync(CreateNewUserRequest request);
+        Task CreateNewUserAsync(CreateNewUserRequest request);
     }
 }
