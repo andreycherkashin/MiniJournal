@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.ImagesApplicationsService
 {
@@ -10,7 +8,7 @@ namespace Infotecs.MiniJournal.Contracts.ImagesApplicationsService
     public class FindImageRequest
     {
         /// <summary>
-        /// Идентификатор картинки.
+        /// Gets or sets идентификатор картинки.
         /// </summary>
         public string ImageId { get; set; }
     }

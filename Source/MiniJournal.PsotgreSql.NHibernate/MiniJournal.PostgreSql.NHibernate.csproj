@@ -1,30 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Infotecs.MiniJournal.PostgreSql.NHibernate</AssemblyName>
     <RootNamespace>Infotecs.MiniJournal.PostgreSql.NHibernate</RootNamespace>
+    <CodeAnalysisRuleSet>..\..\infotecs.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
+    <DocumentationFile>C:\Users\Cherkashin.And\source\repos\MiniJournal\Source\MiniJournal.PsotgreSql.NHibernate\Infotecs.MiniJournal.PostgreSql.NHibernate.xml</DocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" Version="2.1.2" />
     <PackageReference Include="NHibernate" Version="5.1.3" />
     <PackageReference Include="Npgsql" Version="4.0.3" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\MiniJournal.Application\MiniJournal.Application.csproj" />
     <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj" />
   </ItemGroup>
-
 </Project>

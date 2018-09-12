@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {
@@ -9,19 +7,25 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
     /// </summary>
     public class DeleteArticleRequest
     {
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteArticleRequest"/> class.
+        /// </summary>
         public DeleteArticleRequest()
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteArticleRequest"/> class.
+        /// </summary>
+        /// <param name="articleId">Идентификатор статьи.</param>
         public DeleteArticleRequest(long articleId)
         {
             this.ArticleId = articleId;
         }
 
         /// <summary>
-        /// Идентификатор статьи.
+        /// Gets or sets идентификатор статьи.
         /// </summary>
         public long ArticleId { get; set; }
     }

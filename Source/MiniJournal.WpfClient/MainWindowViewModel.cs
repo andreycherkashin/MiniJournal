@@ -8,30 +8,50 @@ using System.Windows.Input;
 using Infotecs.MiniJournal.RabbitMqClient;
 using Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference;
 using Infotecs.MiniJournal.WpfClient.Properties;
+using RawRabbit.Exceptions;
 using Serilog;
+using AddCommentRequest = Infotecs.MiniJournal.Contracts.ArticlesApplicationService.AddCommentRequest;
+using CreateArticleRequest = Infotecs.MiniJournal.Contracts.ArticlesApplicationService.CreateArticleRequest;
+using CreateNewUserRequest = Infotecs.MiniJournal.Contracts.UsersApplicationService.CreateNewUserRequest;
+using GetUserByNameRequest = Infotecs.MiniJournal.Contracts.UsersApplicationService.GetUserByNameRequest;
+using GetUserByNameResponse = Infotecs.MiniJournal.Contracts.UsersApplicationService.GetUserByNameResponse;
+using User = Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities.User;
 
 namespace Infotecs.MiniJournal.WpfClient
 {
+    /// <summary>
+    /// Модель состояния главного экрана формы.
+    /// </summary>
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly IArticlesServiceRabbitMqClient articlesServiceRabbitMqClient;
+        private ICommand addArticleCommand;
+        private ICommand addCommentCommand;
+        private byte[] articleImage;
         private ObservableCollection<Article> articles;
-        private Article selectedArticle;
-        private string commentUser;
-        private string commentText;
         private string articleText;
         private string articleUser;
-        private ICommand addCommentCommand;
-        private ICommand addArticleCommand;
+        private string commentText;
+        private string commentUser;
         private ICommand loadArticlesCommand;
-        private byte[] articleImage;
+        private Article selectedArticle;
         private byte[] selectedArticleImage;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+        /// </summary>
+        /// <param name="articlesServiceRabbitMqClient">Класс длы размещения зада в очереди.</param>
         public MainWindowViewModel(IArticlesServiceRabbitMqClient articlesServiceRabbitMqClient)
         {
             this.articlesServiceRabbitMqClient = articlesServiceRabbitMqClient;
         }
 
+        /// <inheritdoc />
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Список статей.
+        /// </summary>
         public ObservableCollection<Article> Articles
         {
             get => this.articles;
@@ -43,6 +63,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Выбранная статья.
+        /// </summary>
         public Article SelectedArticle
         {
             get => this.selectedArticle;
@@ -54,12 +77,12 @@ namespace Infotecs.MiniJournal.WpfClient
 
                 Task.Run(() =>
                 {
-                    var imageId = this.SelectedArticle?.ImageId;
+                    string imageId = this.SelectedArticle?.ImageId;
                     if (imageId != null)
                     {
                         using (var serviceClient = new ArticlesWebServiceClient())
                         {
-                            var response = serviceClient.FindImage(new FindImageRequest() { ImageId = imageId });
+                            FindImageResponse response = serviceClient.FindImage(new FindImageRequest() { ImageId = imageId });
                             this.SelectedArticleImage = response.Image;
                         }
                     }
@@ -67,6 +90,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Картинка к выбранной статье.
+        /// </summary>
         public byte[] SelectedArticleImage
         {
             get => this.selectedArticleImage;
@@ -78,6 +104,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Пользователь нового комментария.
+        /// </summary>
         public string CommentUser
         {
             get => this.commentUser;
@@ -89,6 +118,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Текст нового комментария.
+        /// </summary>
         public string CommentText
         {
             get => this.commentText;
@@ -100,6 +132,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Текст новой статьи.
+        /// </summary>
         public string ArticleText
         {
             get => this.articleText;
@@ -111,6 +146,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Пользователь новой статьи.
+        /// </summary>
         public string ArticleUser
         {
             get => this.articleUser;
@@ -122,6 +160,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Картинка новой статьи.
+        /// </summary>
         public byte[] ArticleImage
         {
             get => this.articleImage;
@@ -133,6 +174,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Команда добавления нового комментария.
+        /// </summary>
         public ICommand AddCommentCommand
         {
             get
@@ -148,6 +192,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Команда добавления новой статьи.
+        /// </summary>
         public ICommand AddArticleCommand
         {
             get
@@ -163,6 +210,9 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Команда загрузки статей.
+        /// </summary>
         public ICommand LoadArticlesCommand
         {
             get
@@ -176,9 +226,10 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
+        /// <summary>
+        /// Вызывает событие <see cref="PropertyChanged"/>.
+        /// </summary>
+        /// <param name="propertyName">Название свойства, которое изменилось.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -186,11 +237,11 @@ namespace Infotecs.MiniJournal.WpfClient
 
         private async Task LoadArticles()
         {
-            var previouslySelectedArticle = this.SelectedArticle;
+            Article previouslySelectedArticle = this.SelectedArticle;
 
-            using (var serviceClient = new WcfServiceClient.ArticlesServiceReference.ArticlesWebServiceClient())
+            using (var serviceClient = new ArticlesWebServiceClient())
             {
-                var response = await serviceClient.GetArticlesAsync(new GetArticlesRequest());                
+                GetArticlesResponse response = await serviceClient.GetArticlesAsync(new GetArticlesRequest());
                 this.Articles = new ObservableCollection<Article>(response.Articles);
             }
 
@@ -199,52 +250,51 @@ namespace Infotecs.MiniJournal.WpfClient
 
         private async Task AddComment()
         {
-            var userName = this.CommentUser;
-            var text = this.CommentText;
-            var articleId = this.SelectedArticle.Id;
+            string userName = this.CommentUser;
+            string text = this.CommentText;
+            long articleId = this.SelectedArticle.Id;
 
             this.CommentUser = null;
             this.CommentText = null;
 
-            var user = await this.GetUser(userName);
+            User user = await this.GetUser(userName);
 
-            await this.articlesServiceRabbitMqClient.AddCommentAsync(new Contracts.ArticlesApplicationService.AddCommentRequest(user.Id, articleId, text));
+            await this.articlesServiceRabbitMqClient.AddCommentAsync(new AddCommentRequest(user.Id, articleId, text));
         }
 
         private async Task AddArticle()
         {
-            var userName = this.ArticleUser;
-            var text = this.ArticleText;
+            string userName = this.ArticleUser;
+            string text = this.ArticleText;
             byte[] image = this.ArticleImage;
 
             this.ArticleUser = null;
             this.ArticleText = null;
-            this.ArticleImage = null;    
+            this.ArticleImage = null;
 
-            var user = await this.GetUser(userName);
+            User user = await this.GetUser(userName);
 
-            await this.articlesServiceRabbitMqClient.CreateArticleAsync(new Contracts.ArticlesApplicationService.CreateArticleRequest(text, image, user.Id));
+            await this.articlesServiceRabbitMqClient.CreateArticleAsync(new CreateArticleRequest(text, image, user.Id));
         }
 
-        private async Task<Contracts.UsersApplicationService.Entities.User> GetUser(string userName)
+        private async Task<User> GetUser(string userName)
         {
-
-            Contracts.UsersApplicationService.Entities.User user;
+            User user;
             try
             {
-                var response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new Contracts.UsersApplicationService.GetUserByNameRequest(userName));
+                GetUserByNameResponse response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new GetUserByNameRequest(userName));
                 user = response.User;
             }
-            catch (RawRabbit.Exceptions.MessageHandlerException ex) when (ex.InnerMessage == "User not found.")
+            catch (MessageHandlerException ex) when (ex.InnerMessage == "User not found.")
             {
                 Log.Information(ex, "creating new user");
 
-                await this.articlesServiceRabbitMqClient.CreateNewUserAsync(new Contracts.UsersApplicationService.CreateNewUserRequest(userName));
+                await this.articlesServiceRabbitMqClient.CreateNewUserAsync(new CreateNewUserRequest(userName));
 
                 // ждем секунду чтобы создался пользователь
                 await Task.Delay(1000);
 
-                var response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new Contracts.UsersApplicationService.GetUserByNameRequest(userName));
+                GetUserByNameResponse response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new GetUserByNameRequest(userName));
                 user = response.User;
             }
 

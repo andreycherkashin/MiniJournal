@@ -5,9 +5,16 @@ using Topshelf;
 
 namespace Infotecs.MiniJournal.WinService
 {
-    class Program
+    /// <summary>
+    /// Class for EntryPoint method.
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Entry Point.
+        /// </summary>
+        /// <param name="args">Args array.</param>
+        public static void Main(string[] args)
         {
             // set environment variable for serilog configuration
             Environment.SetEnvironmentVariable("BASEDIR", AppDomain.CurrentDomain.BaseDirectory);
@@ -20,10 +27,10 @@ namespace Infotecs.MiniJournal.WinService
             // build container
             var builder = new ContainerBuilder();
             builder.RegisterModule<WinServiceModule>();
-            var container = builder.Build();            
+            IContainer container = builder.Build();
 
             // build service
-            var host = HostFactory.New(x =>
+            Host host = HostFactory.New(x =>
             {
                 x.Service(s => container.Resolve<WindowsService>());
 
@@ -40,7 +47,7 @@ namespace Infotecs.MiniJournal.WinService
                 x.UseSerilog();
             });
 
-            var returnCode = host.Run();
+            TopshelfExitCode returnCode = host.Run();
 
             var exitCode = (int)Convert.ChangeType(returnCode, returnCode.GetTypeCode());
             Environment.ExitCode = exitCode;

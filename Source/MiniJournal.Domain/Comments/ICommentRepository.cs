@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infotecs.MiniJournal.Domain.Comments
@@ -15,6 +13,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// </summary>
         /// <param name="articleId">Идентификатор статьи.</param>
         /// <param name="comment">Комментарий.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         Task AddAsync(long articleId, Comment comment);
 
         /// <summary>
@@ -22,6 +21,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// </summary>
         /// <param name="articleId">Идентификатор статьи.</param>
         /// <param name="comment">Комментарий.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         Task DeleteAsync(long articleId, Comment comment);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Users.Exceptions;
 
 namespace Infotecs.MiniJournal.Domain.Users
@@ -9,12 +10,13 @@ namespace Infotecs.MiniJournal.Domain.Users
     public interface IUserDomainService
     {
         /// <summary>
-        /// Создает пользователя.        
+        /// Создает пользователя.
         /// </summary>
         /// <exception cref="UserNotFoundException">
         /// Если пользователь не найден.
         /// </exception>
         /// <param name="user">Пользователь.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         Task CreateUserAsync(User user);
 
         /// <summary>

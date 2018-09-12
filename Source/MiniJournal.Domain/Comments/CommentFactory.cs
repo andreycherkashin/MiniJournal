@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.Domain.Comments
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     /// <summary>
     /// Инкапсулирует процесс и способ создания комментариев.
     /// </summary>
     internal class CommentFactory : ICommentFactory
     {
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Создает комментарий.
         /// </summary>
@@ -24,10 +22,14 @@ namespace Infotecs.MiniJournal.Domain.Comments
         public Task<Comment> CreateAsync(string text, User user, Article article)
         {
             if (user == null)
+            {
                 throw new ArgumentNullException(nameof(user));
+            }
 
             if (article == null)
+            {
                 throw new ArgumentNullException(nameof(article));
+            }
 
             var comment = new Comment(user, article, text);
 

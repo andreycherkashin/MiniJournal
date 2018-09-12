@@ -4,8 +4,12 @@ using Infotecs.MiniJournal.Domain.Articles;
 
 namespace Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings
 {
+    /// <inheritdoc />
     internal class ArticleMap : ClassMap<Article>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArticleMap"/> class.
+        /// </summary>
         public ArticleMap()
         {
             this.Table("articles");

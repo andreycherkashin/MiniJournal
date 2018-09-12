@@ -1,7 +1,7 @@
 ﻿using System;
 using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
 
-namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites
+namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entities
 {
     /// <summary>
     /// Комментарий к статье.
@@ -9,17 +9,17 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites
     public class Comment
     {
         /// <summary>
-        /// Уникальный идентификатор комментария.
+        /// Gets or sets уникальный идентификатор комментария.
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Содержимое комментария.
+        /// Gets or sets содержимое комментария.
         /// </summary>
         public string Text { get; set; }
 
         /// <summary>
-        /// Пользователь создавший комментарий.
+        /// Gets or sets пользователь создавший комментарий.
         /// </summary>
         public User User { get; set; }
     }

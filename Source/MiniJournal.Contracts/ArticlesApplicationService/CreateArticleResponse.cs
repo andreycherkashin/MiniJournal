@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {
@@ -9,17 +7,24 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
     /// </summary>
     public class CreateArticleResponse
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateArticleResponse"/> class.
+        /// </summary>
         public CreateArticleResponse()
-        {    
+        {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateArticleResponse"/> class.
+        /// </summary>
+        /// <param name="success">Результат операции.</param>
         public CreateArticleResponse(bool success)
         {
             this.Success = success;
         }
 
         /// <summary>
-        /// Успешно ли выполнена операция.
+        /// Gets or sets a value indicating whether успешно ли выполнена операция.
         /// </summary>
         public bool Success { get; set; }
     }

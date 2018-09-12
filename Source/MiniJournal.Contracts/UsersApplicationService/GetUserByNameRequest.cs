@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
 {
@@ -9,17 +7,24 @@ namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
     /// </summary>
     public class GetUserByNameRequest
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetUserByNameRequest"/> class.
+        /// </summary>
         public GetUserByNameRequest()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetUserByNameRequest"/> class.
+        /// </summary>
+        /// <param name="userName">Имя пользователя.</param>
         public GetUserByNameRequest(string userName)
         {
             this.UserName = userName;
         }
 
         /// <summary>
-        /// Имя пользователя.
+        /// Gets or sets имя пользователя.
         /// </summary>
         public string UserName { get; set; }
     }

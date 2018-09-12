@@ -1,23 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Infotecs.MiniJournal.Contracts</AssemblyName>
     <RootNamespace>Infotecs.MiniJournal.Contracts</RootNamespace>
+    <CodeAnalysisRuleSet>..\..\infotecs.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
+    <DocumentationFile>C:\Users\Cherkashin.And\source\repos\MiniJournal\Source\MiniJournal.Contracts\Infotecs.MiniJournal.Contracts.xml</DocumentationFile>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj" />
   </ItemGroup>
-
 </Project>

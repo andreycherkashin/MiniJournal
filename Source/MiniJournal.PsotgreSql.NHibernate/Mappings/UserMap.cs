@@ -4,8 +4,12 @@ using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings
 {
+    /// <inheritdoc />
     internal class UserMap : ClassMap<User>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserMap"/> class.
+        /// </summary>
         public UserMap()
         {
             this.Table("users");

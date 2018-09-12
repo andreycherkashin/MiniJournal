@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments.Exceptions;
 
 namespace Infotecs.MiniJournal.Domain.Comments
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     /// <summary>
     /// Действия над комментарием.
     /// </summary>
@@ -16,16 +14,17 @@ namespace Infotecs.MiniJournal.Domain.Comments
     {
         private readonly ICommentRepository commentRepository;
 
+
         /// <summary>
-        /// Конструктор.
+        /// Initializes a new instance of the <see cref="CommentDomainService"/> class.
         /// </summary>
-        /// <param name="commentRepository"></param>
+        /// <param name="commentRepository">Репозиторий комментариев.</param>
         public CommentDomainService(ICommentRepository commentRepository)
         {
             this.commentRepository = commentRepository;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Добавляет комментарий к статье.
         /// </summary>
@@ -34,31 +33,37 @@ namespace Infotecs.MiniJournal.Domain.Comments
         public async Task AddCommentAsync(Article article, Comment comment)
         {
             if (article == null)
+            {
                 throw new ArgumentNullException(nameof(article));
+            }
 
             if (comment == null)
+            {
                 throw new ArgumentNullException(nameof(comment));
+            }
 
             await this.commentRepository.AddAsync(article.Id, comment);
             article.Comments.Add(comment);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Возвращает комментарий по идентификатору.
         /// </summary>
         /// <exception cref="T:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException">
         /// Если комментарий я таким идентификатором не найден.
         /// </exception>
-        /// <param name="article">Статья</param>
+        /// <param name="article">Статья.</param>
         /// <param name="commentId">Идентификатор комментария.</param>
         /// <returns>Комментарий.</returns>
         public Task<Comment> GetCommentById(Article article, long commentId)
         {
             if (article == null)
+            {
                 throw new ArgumentNullException(nameof(article));
+            }
 
-            var comment = article.Comments.FirstOrDefault(c => c.Id == commentId);
+            Comment comment = article.Comments.FirstOrDefault(c => c.Id == commentId);
             if (comment == null)
             {
                 throw new CommentNotFoundException();
@@ -67,7 +72,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
             return Task.FromResult(comment);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Удаляет комментарий.
         /// </summary>
@@ -76,9 +81,14 @@ namespace Infotecs.MiniJournal.Domain.Comments
         public async Task DeleteCommentAsync(Article article, Comment comment)
         {
             if (article == null)
+            {
                 throw new ArgumentNullException(nameof(article));
+            }
+
             if (comment == null)
-                throw new ArgumentNullException(nameof(comment));            
+            {
+                throw new ArgumentNullException(nameof(comment));
+            }
 
             await this.commentRepository.DeleteAsync(article.Id, comment);
             article.Comments.Remove(comment);

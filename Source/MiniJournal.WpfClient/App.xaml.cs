@@ -6,10 +6,11 @@ using Serilog;
 namespace Infotecs.MiniJournal.WpfClient
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaction logic for App.xaml.
     /// </summary>
     public partial class App : Application
     {
+        /// <inheritdoc cref="Application"/>
         public App()
         {
             // set environment variable for serilog configuration
@@ -40,8 +41,8 @@ namespace Infotecs.MiniJournal.WpfClient
             };
         }
 
-        /// <summary>Raises the <see cref="E:System.Windows.Application.Startup" /> event.</summary>
-        /// <param name="e">A <see cref="T:System.Windows.StartupEventArgs" /> that contains the event data.</param>
+        /// <summary>Raises the <see cref="E:System.Windows.Application.Startup"/> event.</summary>
+        /// <param name="e">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
         protected override void OnStartup(StartupEventArgs e)
         {
             Boostraper.Start();

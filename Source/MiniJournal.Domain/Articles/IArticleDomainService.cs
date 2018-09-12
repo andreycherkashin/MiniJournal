@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles.Exceptions;
 
 namespace Infotecs.MiniJournal.Domain.Articles
@@ -12,12 +13,14 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// Создает статью.
         /// </summary>
         /// <param name="article">Статья.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         Task CreateArticleAsync(Article article);
 
         /// <summary>
         /// Удаляет статью.
         /// </summary>
         /// <param name="article">Статья.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         Task DeleteArticleAsync(Article article);
 
         /// <summary>

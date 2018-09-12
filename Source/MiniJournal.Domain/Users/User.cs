@@ -7,12 +7,8 @@ namespace Infotecs.MiniJournal.Domain.Users
     /// </summary>
     public class User
     {
-        protected User()
-        {
-        }
-
         /// <summary>
-        /// Создает пользователя на основе имени.
+        /// Initializes a new instance of the <see cref="User"/> class.
         /// </summary>
         /// <param name="name">Имя пользователя.</param>
         public User(string name)
@@ -21,12 +17,19 @@ namespace Infotecs.MiniJournal.Domain.Users
         }
 
         /// <summary>
-        /// Идентификатор пользователя. 
+        /// Initializes a new instance of the <see cref="User"/> class.
+        /// </summary>
+        protected User()
+        {
+        }
+
+        /// <summary>
+        /// Gets or sets идентификатор пользователя.
         /// </summary>
         public virtual long Id { get; protected set; }
 
         /// <summary>
-        /// Имя пользователя
+        /// Gets or sets имя пользователя.
         /// </summary>
         public virtual string Name { get; protected set; }
     }

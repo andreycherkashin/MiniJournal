@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Users.Exceptions;
 
 namespace Infotecs.MiniJournal.Domain.Users
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     /// <summary>
     /// Действия над пользователем.
     /// </summary>
@@ -14,12 +12,16 @@ namespace Infotecs.MiniJournal.Domain.Users
     {
         private readonly IUserRepository userRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserDomainService"/> class.
+        /// </summary>
+        /// <param name="userRepository"><see cref="IUserRepository"/>IUserRepository.</param>
         public UserDomainService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Находит пользователя по имени.
         /// </summary>
@@ -34,19 +36,21 @@ namespace Infotecs.MiniJournal.Domain.Users
         public async Task<User> GetUserByNameAsync(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
+            {
                 throw new EmptyUserNameException();
+            }
 
-            var user = await this.userRepository.FindByNameAsync(name);
+            User user = await this.userRepository.FindByNameAsync(name);
 
             if (user == null)
             {
-                throw new UserNotFoundException();                
+                throw new UserNotFoundException();
             }
 
             return user;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Находит пользователя по идентификатору.
         /// </summary>
@@ -57,7 +61,7 @@ namespace Infotecs.MiniJournal.Domain.Users
         /// <returns>Пользователя.</returns>
         public async Task<User> GetUserByIdAsync(long userId)
         {
-            var user = await this.userRepository.FindByIdAsync(userId);
+            User user = await this.userRepository.FindByIdAsync(userId);
 
             if (user == null)
             {
@@ -67,9 +71,9 @@ namespace Infotecs.MiniJournal.Domain.Users
             return user;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
-        /// Создает пользователя.        
+        /// Создает пользователя.
         /// </summary>
         /// <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
         /// Если пользователь не найден.
@@ -78,7 +82,9 @@ namespace Infotecs.MiniJournal.Domain.Users
         public async Task CreateUserAsync(User user)
         {
             if (user == null)
+            {
                 throw new ArgumentNullException(nameof(user));
+            }
 
             if (await this.userRepository.FindByNameAsync(user.Name) != null)
             {

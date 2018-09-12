@@ -7,44 +7,45 @@ using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql.NHibernate;
 using Infotecs.MiniJournal.WinService.RabbitMq;
-using RawRabbit.Common;
-using RawRabbit.Configuration;
 using RawRabbit.DependencyInjection.Autofac;
 using RawRabbit.Logging;
 using Serilog;
+using LoggerFactory = RawRabbit.Logging.Serilog.LoggerFactory;
 
 namespace Infotecs.MiniJournal.WinService
 {
-    public class WinServiceModule : Autofac.Module
+    /// <inheritdoc/>
+    public class WinServiceModule : Module
     {
+        /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            this.RegisterWinServiceComponents(builder);
-            this.RegisterLogger(builder);
-            this.RegisterTypesAndModules(builder);
-            this.RegisterSettings(builder);
-            this.RegisterRabbitMq(builder);
+            RegisterWinServiceComponents(builder);
+            RegisterLogger(builder);
+            RegisterTypesAndModules(builder);
+            RegisterSettings(builder);
+            RegisterRabbitMq(builder);
         }
 
-        private void RegisterWinServiceComponents(ContainerBuilder builder)
+        private static void RegisterWinServiceComponents(ContainerBuilder builder)
         {
             builder.RegisterType<WindowsService>().AsSelf().SingleInstance();
             builder.RegisterType<RabbitMqListener>().AsSelf().SingleInstance();
         }
 
-        private void RegisterSettings(ContainerBuilder builder)
+        private static void RegisterSettings(ContainerBuilder builder)
         {
             builder.Register(context => ConfigurationManager.AppSettings["ConnectionString"]).Named<string>("ConnectionString");
             builder.Register(context => ConfigurationManager.AppSettings["ImagesStoragePath"]).Named<string>("ImagesStoragePath");
         }
 
-        private void RegisterRabbitMq(ContainerBuilder builder)
+        private static void RegisterRabbitMq(ContainerBuilder builder)
         {
             builder.RegisterRawRabbit(ConfigurationManager.AppSettings["RabbitMq"]);
-            builder.RegisterType<RawRabbit.Logging.Serilog.LoggerFactory>().As<ILoggerFactory>().SingleInstance();
+            builder.RegisterType<LoggerFactory>().As<ILoggerFactory>().SingleInstance();
         }
 
-        private void RegisterLogger(ContainerBuilder builder)
+        private static void RegisterLogger(ContainerBuilder builder)
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
@@ -53,7 +54,7 @@ namespace Infotecs.MiniJournal.WinService
             builder.RegisterLogger();
         }
 
-        private void RegisterTypesAndModules(ContainerBuilder builder)
+        private static void RegisterTypesAndModules(ContainerBuilder builder)
         {
             builder.RegisterModule<ApplicationModule>();
             builder.RegisterModule<DomainModule>();

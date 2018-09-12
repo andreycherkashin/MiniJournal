@@ -1,31 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Infotecs.MiniJournal.Application</AssemblyName>
     <RootNamespace>Infotecs.MiniJournal.Application</RootNamespace>
+    <CodeAnalysisRuleSet>..\..\infotecs.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
+    <DocumentationFile>C:\Users\Cherkashin.And\source\repos\MiniJournal\Source\MiniJournal.Application\Infotecs.MiniJournal.Application.xml</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.Toolkit" Version="4.0.0" />
     <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\MiniJournal.Contracts\MiniJournal.Contracts.csproj" />
     <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj" />
   </ItemGroup>
-
 </Project>

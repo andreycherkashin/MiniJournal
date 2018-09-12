@@ -6,26 +6,31 @@ using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
 
 namespace Infotecs.MiniJournal.DiskStorage
 {
+    /// <inheritdoc />
     public class ImagesService : IImagesService
     {
         private readonly string imagesStoragePath;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImagesService"/> class.
+        /// </summary>
+        /// <param name="imagesStoragePath">Путь сохранения картинок.</param>
         public ImagesService(string imagesStoragePath)
         {
             this.imagesStoragePath = imagesStoragePath;
         }
 
-        /// <summary>
-        /// Находит картинку по идентификатору.
-        /// </summary>        
+        /// <inheritdoc />
         public Task<FindImageResponse> FindImageAsync(FindImageRequest request)
         {
             if (request == null)
+            {
                 throw new ArgumentNullException(nameof(request));
+            }
 
             byte[] image = null;
 
-            var fullImagePath = Path.Combine(this.imagesStoragePath, request.ImageId);
+            string fullImagePath = Path.Combine(this.imagesStoragePath, request.ImageId);
             if (File.Exists(request.ImageId))
             {
                 image = File.ReadAllBytes(fullImagePath);
@@ -34,23 +39,21 @@ namespace Infotecs.MiniJournal.DiskStorage
             return Task.FromResult(new FindImageResponse(image));
         }
 
-        /// <summary>
-        /// Загружает картинку в хранилище.
-        /// </summary>
-        /// <param name="request">Запрос загрузки картинки.</param>
-        /// <returns>Результат запроса картинки.</returns>
+        /// <inheritdoc />
         public async Task<UploadImageResponse> UploadImageAsync(UploadImageRequest request)
         {
             if (request == null)
+            {
                 throw new ArgumentNullException(nameof(request));
+            }
 
             if (request.Image == null)
             {
                 return new UploadImageResponse();
             }
 
-            var guid = Guid.NewGuid().ToString("N");
-            var fullImagePath = Path.Combine(this.imagesStoragePath, guid);
+            string guid = Guid.NewGuid().ToString("N");
+            string fullImagePath = Path.Combine(this.imagesStoragePath, guid);
 
             Directory.CreateDirectory(this.imagesStoragePath);
 

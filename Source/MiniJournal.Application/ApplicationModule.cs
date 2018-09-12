@@ -3,11 +3,10 @@ using Autofac;
 
 namespace Infotecs.MiniJournal.Application
 {
-    /// <summary>
-    /// Регистрация компонентов модуля в контейнере зависимостей.
-    /// </summary>
-    public class ApplicationModule : Autofac.Module
+    /// <inheritdoc />
+    public class ApplicationModule : Module
     {
+        /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
             builder

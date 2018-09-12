@@ -1,9 +1,7 @@
-﻿using Infotecs.MiniJournal.Domain.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles;
+using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.Domain.Comments
 {
@@ -21,4 +19,4 @@ namespace Infotecs.MiniJournal.Domain.Comments
         /// <returns>Созданный комментарий.</returns>
         Task<Comment> CreateAsync(string text, User user, Article article);
     }
-} 
+}

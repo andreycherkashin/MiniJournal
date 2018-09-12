@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {
@@ -9,12 +7,20 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
     /// </summary>
     public class CreateArticleRequest
     {
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateArticleRequest"/> class.
+        /// </summary>
         public CreateArticleRequest()
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateArticleRequest"/> class.
+        /// </summary>
+        /// <param name="text">Текст статьи.</param>
+        /// <param name="image">Картинка.</param>
+        /// <param name="userId">Идентификатор пользователя.</param>
         public CreateArticleRequest(string text, byte[] image, long userId)
         {
             this.Text = text;
@@ -23,17 +29,17 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
         }
 
         /// <summary>
-        /// Текст статьи.
+        /// Gets or sets текст статьи.
         /// </summary>
-        public string Text { get; set; }        
+        public string Text { get; set; }
 
         /// <summary>
-        /// Картинка-тизер статьи.
+        /// Gets or sets картинка-тизер статьи.
         /// </summary>
         public byte[] Image { get; set; }
 
         /// <summary>
-        /// Идентификатор пользователя создавшего статью.
+        /// Gets or sets идентификатор пользователя создавшего статью.
         /// </summary>
         public long UserId { get; set; }
     }

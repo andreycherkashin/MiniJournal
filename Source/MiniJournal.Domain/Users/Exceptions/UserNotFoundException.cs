@@ -1,23 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Domain.Users.Exceptions
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public class UserNotFoundException : Exception
-    {        
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.UserNotFoundException" /> class.
+        /// </summary>        
         public UserNotFoundException()
             : base("User not found.")
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.UserNotFoundException" /> class.
+        /// </summary>
+        /// <param name="message">The error message that explains the reason for the exception. </param>
         public UserNotFoundException(string message)
             : base(message)
         {
         }
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.UserNotFoundException" /> class.
+        /// </summary>
+        /// <param name="message">The error message that explains the reason for the exception. </param>
+        /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (<see langword="Nothing" /> in Visual Basic) if no inner exception is specified. </param>
         public UserNotFoundException(string message, Exception innerException)
             : base(message, innerException)
         {

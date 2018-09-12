@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {
@@ -10,12 +8,12 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
     public class DeleteCommentRequest
     {
         /// <summary>
-        /// Идентификатор статьи.
+        /// Gets or sets идентификатор статьи.
         /// </summary>
         public long ArticleId { get; set; }
 
         /// <summary>
-        /// Идентификатор комментария.
+        /// Gets or sets идентификатор комментария.
         /// </summary>
         public long CommentId { get; set; }
     }

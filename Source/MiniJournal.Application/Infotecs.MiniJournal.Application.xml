@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infotecs.MiniJournal.Application</name>
+    </assembly>
+    <members>
+        <member name="T:Infotecs.MiniJournal.Application.ApplicationModule">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.ApplicationModule.Load(Autofac.ContainerBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Infotecs.MiniJournal.Application.ArticlesService">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.ArticlesService.#ctor(Infotecs.MiniJournal.Application.IUnitOfWork,Infotecs.MiniJournal.Domain.Articles.IArticleFactory,Infotecs.MiniJournal.Domain.Articles.IArticleRepository,Infotecs.MiniJournal.Domain.Articles.IArticleDomainService,Infotecs.MiniJournal.Domain.Comments.ICommentFactory,Infotecs.MiniJournal.Domain.Comments.ICommentDomainService,Infotecs.MiniJournal.Domain.Users.IUserDomainService,Infotecs.MiniJournal.Application.IImagesService,Serilog.ILogger,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Application.ArticlesService"/> class.
+            </summary>
+            <param name="unitOfWork">Implementation of <see cref="T:Infotecs.MiniJournal.Application.IUnitOfWork"/>.</param>
+            <param name="articleFactory">Implementation of <see cref="T:Infotecs.MiniJournal.Domain.Articles.IArticleFactory"/>.</param>
+            <param name="articleRepository">Implementation of <see cref="T:Infotecs.MiniJournal.Domain.Articles.IArticleRepository"/>.</param>
+            <param name="articleService">Implementation of <see cref="T:Infotecs.MiniJournal.Domain.Articles.IArticleDomainService"/>.</param>
+            <param name="commentFactory">Implementation of <see cref="T:Infotecs.MiniJournal.Domain.Comments.ICommentFactory"/>.</param>
+            <param name="commentService">Implementation of <see cref="T:Infotecs.MiniJournal.Domain.Comments.ICommentDomainService"/>.</param>
+            <param name="userService">Implementation of <see cref="T:Infotecs.MiniJournal.Domain.Users.IUserDomainService"/>.</param>
+            <param name="imagesService">Implementation of <see cref="T:Infotecs.MiniJournal.Application.IImagesService"/>.</param>
+            <param name="logger">Implementation of <see cref="T:Serilog.ILogger"/>.</param>
+            <param name="mapper">Implementation of <see cref="T:AutoMapper.IMapper"/>.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.ArticlesService.GetArticlesAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.GetArticlesRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.ArticlesService.CreateArticleAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.CreateArticleRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.ArticlesService.DeleteArticleAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.DeleteArticleRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.ArticlesService.AddCommentAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.AddCommentRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.ArticlesService.DeleteCommentAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.DeleteCommentRequest)">
+            <inheritdoc />
+        </member>
+        <member name="T:Infotecs.MiniJournal.Application.AutoMapperConfiguration">
+            <summary>
+            Конфигурация AutoMapper.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.AutoMapperConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Application.AutoMapperConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.AutoMapperConfiguration.GetMapper">
+            <summary>
+            Возвращает экземпляр AutoMapper.
+            </summary>
+            <returns>Экземпляр маппера.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Application.IArticlesService">
+            <summary>
+            Класс реализует различные высокоуровневые операции над статьей.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IArticlesService.GetArticlesAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.GetArticlesRequest)">
+            <summary>
+            Возвращает список всех имеющихся статей.
+            </summary>
+            <param name="request">Запрос списка статей.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IArticlesService.CreateArticleAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.CreateArticleRequest)">
+            <summary>
+            Создать статью с указанным содержимым.
+            </summary>
+            <param name="request">Запрос создания статьи.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IArticlesService.DeleteArticleAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.DeleteArticleRequest)">
+            <summary>
+            Удаляет статью.
+            </summary>
+            <param name="request">Запрос удаления статьи.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IArticlesService.AddCommentAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.AddCommentRequest)">
+            <summary>
+            Добавляет комментарий к статье.
+            </summary>
+            <param name="request">Запрос добавления статьи.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IArticlesService.DeleteCommentAsync(Infotecs.MiniJournal.Contracts.ArticlesApplicationService.DeleteCommentRequest)">
+            <summary>
+            Удаляет комментарий.
+            </summary>
+            <param name="request">Запрос удаления комментария.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Application.IImagesService">
+            <summary>
+            Сохраняет, возвращает картинки.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IImagesService.FindImageAsync(Infotecs.MiniJournal.Contracts.ImagesApplicationsService.FindImageRequest)">
+            <summary>
+            Находит картинку по идентификатору.
+            </summary>
+            <param name="request"><see cref="T:Infotecs.MiniJournal.Contracts.ImagesApplicationsService.FindImageRequest"/>Объект запроса.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IImagesService.UploadImageAsync(Infotecs.MiniJournal.Contracts.ImagesApplicationsService.UploadImageRequest)">
+            <summary>
+            Загружает картинку в хранилище.
+            </summary>
+            <param name="request">Запрос загрузки картинки.</param>
+            <returns>Результат запроса картинки.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Application.IUnitOfWork">
+            <summary>
+            Единица бизнес-транзакции.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IUnitOfWork.SaveChangesAsync">
+            <summary>
+            Применяет изменения сделанные в рамках текущей бизнес транзакции.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Application.IUsersService">
+            <summary>
+            Реализует высокоуровненвый интерфейс для работы с пользователями.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IUsersService.GetUserByNameAsync(Infotecs.MiniJournal.Contracts.UsersApplicationService.GetUserByNameRequest)">
+            <summary>
+            Получить пользователя по имени.
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь с таким именем не найден будем выброшено исключение
+            <see cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException"/>.
+            </exception>
+            </summary>
+            <param name="request">Имя пользователя.</param>
+            <returns>Найденный пользователь.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.IUsersService.CreateNewUserAsync(Infotecs.MiniJournal.Contracts.UsersApplicationService.CreateNewUserRequest)">
+            <summary>
+            Добавляет нового пользователя с указанным именем.
+            </summary>
+            <param name="request">Имя пользователя.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Application.UsersService">
+            <summary>
+            Реализует высокоуровненвый интерфейс для работы с пользователями.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.UsersService.#ctor(Infotecs.MiniJournal.Domain.Users.IUserDomainService,Infotecs.MiniJournal.Domain.Users.IUserFactory,AutoMapper.IMapper,Infotecs.MiniJournal.Application.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Application.UsersService"/> class.
+            </summary>
+            <param name="userService"><see cref="T:Infotecs.MiniJournal.Domain.Users.IUserDomainService"/>IUserDomainService.</param>
+            <param name="userFactory"><see cref="T:Infotecs.MiniJournal.Domain.Users.IUserFactory"/>IUserFactory.</param>
+            <param name="mapper"><see cref="T:AutoMapper.IMapper"/>Mapper.</param>
+            <param name="unitOfWork"><see cref="T:Infotecs.MiniJournal.Application.IUnitOfWork"/>Unit of work.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.UsersService.GetUserByNameAsync(Infotecs.MiniJournal.Contracts.UsersApplicationService.GetUserByNameRequest)">
+            <summary>
+            Получить пользователя по имени.
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь с таким именем не найден будем выброшено исключение
+            <see cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException"/>.
+            </exception>
+            </summary>
+            <param name="request">Имя пользователя.</param>
+            <returns>Найденный пользователь.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Application.UsersService.CreateNewUserAsync(Infotecs.MiniJournal.Contracts.UsersApplicationService.CreateNewUserRequest)">
+            <summary>
+            Добавляет нового пользователя с указанным именем.
+            </summary>
+            <param name="request">Имя пользователя.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the result of the asynchronous operation.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infotecs.MiniJournal.PostgreSql.NHibernate</name>
+    </assembly>
+    <members>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.ArticleRepository">
+            <inheritdoc cref="T:Infotecs.MiniJournal.Domain.Articles.IArticleRepository"/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.ArticleRepository.#ctor(Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.ArticleRepository"/> class.
+            </summary>
+            <param name="sessionProvider">Implementation of <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider"/>.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.ArticleRepository.GetArticlesAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.ArticleRepository.FindByIdAsync(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.ArticleRepository.DeleteAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.ArticleRepository.AddAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <inheritdoc />
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.BaseNHibernateRepository">
+            <summary>
+            Базовый класс для реализации репозиториев с использованием NHibernate.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.BaseNHibernateRepository.#ctor(Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.BaseNHibernateRepository"/> class.
+            </summary>
+            <param name="sessionProvider">Провайдер текущей сессии.</param>
+        </member>
+        <member name="P:Infotecs.MiniJournal.PostgreSql.NHibernate.BaseNHibernateRepository.Session">
+            <summary>
+            Текущая сессия.
+            </summary>
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.CommentRepository">
+            <inheritdoc cref="T:Infotecs.MiniJournal.Domain.Comments.ICommentRepository" />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.CommentRepository.#ctor(Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider)">
+            <inheritdoc cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.BaseNHibernateRepository"/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.CommentRepository.AddAsync(System.Int64,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.CommentRepository.DeleteAsync(System.Int64,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <inheritdoc />
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider">
+            <summary>
+            Провайдер сессий для репозиториев.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider.GetSession">
+            <summary>
+            Возвращает текущую сессию.
+            </summary>
+            <returns>Текущая сессия.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.ArticleMap">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.ArticleMap.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.ArticleMap"/> class.
+            </summary>
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.CommentMap">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.CommentMap.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.CommentMap"/> class.
+            </summary>
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.UserMap">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.UserMap.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings.UserMap"/> class.
+            </summary>
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.NHibernateModule">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.NHibernateModule.Load(Autofac.ContainerBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.SessionProvider">
+            <inheritdoc cref="T:System.IServiceProvider"/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.SessionProvider.#ctor(NHibernate.ISessionFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.SessionProvider"/> class.
+            </summary>
+            <param name="sessionFactory">Фабрика сессий.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.SessionProvider.GetSession">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.SessionProvider.Dispose">
+            <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.SessionProvider.SaveChangesAsync">
+            <summary>
+            Комитит текущую транзакцию текущей сессии.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.UnitOfWork">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.UnitOfWork.#ctor(Infotecs.MiniJournal.PostgreSql.NHibernate.SessionProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.UnitOfWork"/> class.
+            </summary>
+            <param name="sessionProvider"><see cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider"/>.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.UnitOfWork.SaveChangesAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:Infotecs.MiniJournal.PostgreSql.NHibernate.UserRepository">
+            <inheritdoc cref="T:Infotecs.MiniJournal.Domain.Users.IUserRepository" />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.UserRepository.#ctor(Infotecs.MiniJournal.PostgreSql.NHibernate.ISessionProvider)">
+            <inheritdoc cref="T:Infotecs.MiniJournal.PostgreSql.NHibernate.BaseNHibernateRepository" />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.UserRepository.FindByIdAsync(System.Int64)">
+            <summary>
+            Находит пользователя по идентификатору.
+            </summary>
+            <param name="id">Идентификатор пользователя.</param>
+            <returns>Пользователя, либо null, если не найден.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.UserRepository.FindByNameAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.PostgreSql.NHibernate.UserRepository.AddAsync(Infotecs.MiniJournal.Domain.Users.User)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

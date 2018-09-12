@@ -1,25 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
 {
     /// <summary>
-    /// Запрос создания нового пользователя. 
+    /// Запрос создания нового пользователя.
     /// </summary>
     public class CreateNewUserRequest
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateNewUserRequest"/> class.
+        /// </summary>
         public CreateNewUserRequest()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateNewUserRequest"/> class.
+        /// </summary>
+        /// <param name="userName">Имя пользователя.</param>
         public CreateNewUserRequest(string userName)
         {
             this.UserName = userName;
         }
 
         /// <summary>
-        /// Имя нового пользователя.
+        /// Gets or sets имя нового пользователя.
         /// </summary>
         public string UserName { get; set; }
     }

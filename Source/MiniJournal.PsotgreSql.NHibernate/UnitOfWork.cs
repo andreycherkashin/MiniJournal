@@ -4,19 +4,24 @@ using Infotecs.MiniJournal.Application;
 
 namespace Infotecs.MiniJournal.PostgreSql.NHibernate
 {
+    /// <inheritdoc />
     internal class UnitOfWork : IUnitOfWork
     {
         private readonly SessionProvider sessionProvider;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
+        /// </summary>
+        /// <param name="sessionProvider"><see cref="ISessionProvider"/>.</param>
         public UnitOfWork(SessionProvider sessionProvider)
         {
             this.sessionProvider = sessionProvider;
         }
 
-        /// <summary>
-        /// Применяет изменения сделанные в рамках текущей бизнес транзакции.
-        /// </summary>
+        /// <inheritdoc />
         public Task SaveChangesAsync()
-            => this.sessionProvider.SaveChangesAsync();
+        {
+            return this.sessionProvider.SaveChangesAsync();
+        }
     }
 }

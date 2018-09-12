@@ -9,43 +9,44 @@ namespace Infotecs.MiniJournal.Domain.Comments
     /// </summary>
     public class Comment
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Comment"/> class.
+        /// </summary>
         public Comment()
         {
         }
 
+
         /// <summary>
-        /// Создает комментарий
+        /// Initializes a new instance of the <see cref="Comment"/> class.
         /// </summary>
         /// <param name="user">Пользователь создавший комментарий.</param>
         /// <param name="article">Статьи, к который был написан комментарий.</param>
         /// <param name="text">Содержимое комментария.</param>
         public Comment(User user, Article article, string text)
         {
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));            
-
             this.Text = text;
-            this.User = user;
+            this.User = user ?? throw new ArgumentNullException(nameof(user));
             this.Article = article;
         }
 
         /// <summary>
         /// Уникальный идентификатор комментария.
         /// </summary>
-        public virtual long Id { get; protected internal set;}
+        public virtual long Id { get; protected internal set; }
 
         /// <summary>
-        /// Содержимое комментария.
+        /// Gets or sets содержимое комментария.
         /// </summary>
         public virtual string Text { get; set; }
 
         /// <summary>
-        /// Пользователь создавший комментарий.
+        /// Gets or sets пользователь создавший комментарий.
         /// </summary>
         public virtual User User { get; protected set; }
 
         /// <summary>
-        /// Статья
+        /// Gets or sets статья.
         /// </summary>
         public virtual Article Article { get; protected set; }
     }

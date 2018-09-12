@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Users.Exceptions;
 
 namespace Infotecs.MiniJournal.Domain.Users
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     /// <summary>
     /// Инкапсулирует процесс и способ создания пользователей.
     /// </summary>
     internal class UserFactory : IUserFactory
     {
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Создает пользователя.
         /// </summary>

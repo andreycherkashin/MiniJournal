@@ -1,0 +1,614 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infotecs.MiniJournal.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Infotecs.MiniJournal.Domain.Articles.Article">
+            <summary>
+            Статья с комментариями.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.Article.#ctor(Infotecs.MiniJournal.Domain.Users.User,System.String,System.Collections.Generic.List{Infotecs.MiniJournal.Domain.Comments.Comment})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Article"/> class.
+            </summary>
+            <param name="user">Пользователь создавший статью.</param>
+            <param name="text">Содержимое статьи.</param>
+            <param name="comments">Комментарии, если есть.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.Article.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Article"/> class.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Articles.Article.Id">
+            <summary>
+            Gets or sets уникальный идентификатор статьи.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Articles.Article.Text">
+            <summary>
+            Gets or sets содержимое статьи.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Articles.Article.ImageId">
+            <summary>
+            Gets or sets уникальный идентификатор картинки.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Articles.Article.User">
+            <summary>
+            Gets or sets пользователь, создавший статью.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Articles.Article.Comments">
+            <summary>
+            Gets or sets список комментариев к статье.
+            </summary>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Articles.ArticleDomainService">
+            <inheritdoc/>
+            <summary>
+            Класс для работы со статьей.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.ArticleDomainService.#ctor(Infotecs.MiniJournal.Domain.Articles.IArticleRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.ArticleDomainService"/> class.
+            </summary>
+            <param name="articleRepository">Репозиторий статей.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.ArticleDomainService.CreateArticleAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <inheritdoc/>
+            <summary>
+            Создает статью.
+            </summary>
+            <param name="article">Статья.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.ArticleDomainService.DeleteArticleAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <inheritdoc/>
+            <summary>
+            Удаляет статью.
+            </summary>
+            <param name="article">Статья.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.ArticleDomainService.GetArticleByIdAsync(System.Int64)">
+            <inheritdoc/>
+            <summary>
+            Возвращает статью по идентификатору.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException">
+            Если статья не найдена.
+            </exception>
+            <param name="articleId">Идентификатор статьи.</param>
+            <returns>Найденную статью.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Articles.ArticleFactory">
+            <inheritdoc/>
+            <summary>
+            Инкапсулирует процесс и способ создания статьи.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.ArticleFactory.CreateAsync(System.String,System.String,Infotecs.MiniJournal.Domain.Users.User)">
+            <inheritdoc/>
+            <summary>
+            Создает статью.
+            </summary>
+            <param name="text">Содержимое статьи.</param>
+            <param name="imageId">Идентификатор картинки.</param>
+            <param name="user">Пользователь создавший комментарий.</param>
+            <returns>Созданный комментарий.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException">
+            <inheritdoc/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException" /> class.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>        
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (<see langword="Nothing" /> in Visual Basic) if no inner exception is specified. </param>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Articles.IArticleDomainService">
+            <summary>
+            Класс для работы со статьей.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleDomainService.CreateArticleAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <summary>
+            Создает статью.
+            </summary>
+            <param name="article">Статья.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleDomainService.DeleteArticleAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <summary>
+            Удаляет статью.
+            </summary>
+            <param name="article">Статья.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleDomainService.GetArticleByIdAsync(System.Int64)">
+            <summary>
+            Возвращает статью по идентификатору.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException">
+            Если статья не найдена.
+            </exception>
+            <param name="articleId">Идентификатор статьи.</param>
+            <returns>Найденную статью.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Articles.IArticleFactory">
+            <summary>
+            Инкапсулирует процесс и способ создания статьи.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleFactory.CreateAsync(System.String,System.String,Infotecs.MiniJournal.Domain.Users.User)">
+            <summary>
+            Создает статью.
+            </summary>
+            <param name="text">Содержимое статьи.</param>
+            <param name="imageId">Идентификатор картинки.</param>
+            <param name="user">Пользователь создавший комментарий.</param>
+            <returns>Созданный комментарий.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Articles.IArticleRepository">
+            <summary>
+            Предоставляет методы для работы с хранилищем комментариев.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleRepository.GetArticlesAsync">
+            <summary>
+            Возвращает список имеющихся статей.
+            </summary>
+            <returns>Список статей.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleRepository.FindByIdAsync(System.Int64)">
+            <summary>
+            Находит статью по идентификатору. Если статья не найдена, возвращается null.
+            </summary>
+            <param name="articleId">Идентификатор статьи.</param>
+            <returns>Статью, либо null, если не найдена.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleRepository.DeleteAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <summary>
+            Удаляет статью.
+            </summary>
+            <param name="article">Статья.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Articles.IArticleRepository.AddAsync(Infotecs.MiniJournal.Domain.Articles.Article)">
+            <summary>
+            Добавляет статью.
+            </summary>
+            <param name="article">Статья.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Comments.Comment">
+            <summary>
+            Комментарий к статье.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.Comment.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Comments.Comment"/> class.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.Comment.#ctor(Infotecs.MiniJournal.Domain.Users.User,Infotecs.MiniJournal.Domain.Articles.Article,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Comments.Comment"/> class.
+            </summary>
+            <param name="user">Пользователь создавший комментарий.</param>
+            <param name="article">Статьи, к который был написан комментарий.</param>
+            <param name="text">Содержимое комментария.</param>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Comments.Comment.Id">
+            <summary>
+            Уникальный идентификатор комментария.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Comments.Comment.Text">
+            <summary>
+            Gets or sets содержимое комментария.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Comments.Comment.User">
+            <summary>
+            Gets or sets пользователь создавший комментарий.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Comments.Comment.Article">
+            <summary>
+            Gets or sets статья.
+            </summary>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Comments.CommentDomainService">
+            <inheritdoc/>
+            <summary>
+            Действия над комментарием.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.CommentDomainService.#ctor(Infotecs.MiniJournal.Domain.Comments.ICommentRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Comments.CommentDomainService"/> class.
+            </summary>
+            <param name="commentRepository">Репозиторий комментариев.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.CommentDomainService.AddCommentAsync(Infotecs.MiniJournal.Domain.Articles.Article,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <inheritdoc/>
+            <summary>
+            Добавляет комментарий к статье.
+            </summary>
+            <param name="article">Статья.</param>
+            <param name="comment">Комментарий.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.CommentDomainService.GetCommentById(Infotecs.MiniJournal.Domain.Articles.Article,System.Int64)">
+            <inheritdoc/>
+            <summary>
+            Возвращает комментарий по идентификатору.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException">
+            Если комментарий я таким идентификатором не найден.
+            </exception>
+            <param name="article">Статья.</param>
+            <param name="commentId">Идентификатор комментария.</param>
+            <returns>Комментарий.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.CommentDomainService.DeleteCommentAsync(Infotecs.MiniJournal.Domain.Articles.Article,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <inheritdoc/>
+            <summary>
+            Удаляет комментарий.
+            </summary>
+            <param name="article">Статья.</param>
+            <param name="comment">Комментарий.</param>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Comments.CommentFactory">
+            <inheritdoc/>
+            <summary>
+            Инкапсулирует процесс и способ создания комментариев.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.CommentFactory.CreateAsync(System.String,Infotecs.MiniJournal.Domain.Users.User,Infotecs.MiniJournal.Domain.Articles.Article)">
+            <inheritdoc/>
+            <summary>
+            Создает комментарий.
+            </summary>
+            <param name="text">Содержимое комментария.</param>
+            <param name="user">Пользователь.</param>
+            <param name="article">Статья.</param>
+            <returns>Созданный комментарий.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException">
+            <inheritdoc/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.CommentNotFoundException" /> class.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.CommentNotFoundException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.CommentNotFoundException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (<see langword="Nothing" /> in Visual Basic) if no inner exception is specified. </param>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Comments.ICommentDomainService">
+            <summary>
+            Действия над комментарием.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.ICommentDomainService.AddCommentAsync(Infotecs.MiniJournal.Domain.Articles.Article,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <summary>
+            Добавляет комментарий к статье.
+            </summary>
+            <param name="article">Статья.</param>
+            <param name="comment">Комментарий.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.ICommentDomainService.DeleteCommentAsync(Infotecs.MiniJournal.Domain.Articles.Article,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <summary>
+            Удаляет комментарий.
+            </summary>
+            <param name="article">Статья.</param>
+            <param name="comment">Комментарий.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.ICommentDomainService.GetCommentById(Infotecs.MiniJournal.Domain.Articles.Article,System.Int64)">
+            <summary>
+            Возвращает комментарий по идентификатору.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException">
+            Если комментарий я таким идентификатором не найден.
+            </exception>
+            <param name="article">Статья.</param>
+            <param name="commentId">Идентификатор комментария.</param>
+            <returns>Комментарий.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Comments.ICommentFactory">
+            <summary>
+            Инкапсулирует процесс и способ создания комментариев.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.ICommentFactory.CreateAsync(System.String,Infotecs.MiniJournal.Domain.Users.User,Infotecs.MiniJournal.Domain.Articles.Article)">
+            <summary>
+            Создает комментарий.
+            </summary>
+            <param name="text">Содержимое комментария.</param>
+            <param name="user">Пользователь.</param>
+            <param name="article">Статья.</param>
+            <returns>Созданный комментарий.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Comments.ICommentRepository">
+            <summary>
+            Предоставляет методы для работы с хранилищем комментариев.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.ICommentRepository.AddAsync(System.Int64,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <summary>
+            Добавляет комментарий.
+            </summary>
+            <param name="articleId">Идентификатор статьи.</param>
+            <param name="comment">Комментарий.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Comments.ICommentRepository.DeleteAsync(System.Int64,Infotecs.MiniJournal.Domain.Comments.Comment)">
+            <summary>
+            Удаляет комментарий.
+            </summary>
+            <param name="articleId">Идентификатор статьи.</param>
+            <param name="comment">Комментарий.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.DomainModule">
+            <inheritdoc />
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.DomainModule.Load(Autofac.ContainerBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.Exceptions.DuplicateUserNameException">
+            <inheritdoc/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.DuplicateUserNameException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.DuplicateUserNameException" /> class.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.DuplicateUserNameException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.DuplicateUserNameException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.DuplicateUserNameException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.DuplicateUserNameException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (<see langword="Nothing" /> in Visual Basic) if no inner exception is specified. </param>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.Exceptions.EmptyUserNameException">
+            <inheritdoc/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.EmptyUserNameException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.EmptyUserNameException" /> class.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.EmptyUserNameException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.EmptyUserNameException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.EmptyUserNameException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.EmptyUserNameException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (<see langword="Nothing" /> in Visual Basic) if no inner exception is specified. </param>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            <inheritdoc/>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.UserNotFoundException" /> class.
+            </summary>        
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.UserNotFoundException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.UserNotFoundException" /> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (<see langword="Nothing" /> in Visual Basic) if no inner exception is specified. </param>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.IUserDomainService">
+            <summary>
+            Действия над пользователем.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.IUserDomainService.CreateUserAsync(Infotecs.MiniJournal.Domain.Users.User)">
+            <summary>
+            Создает пользователя.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь не найден.
+            </exception>
+            <param name="user">Пользователь.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.IUserDomainService.GetUserByNameAsync(System.String)">
+            <summary>
+            Находит пользователя по имени.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.EmptyUserNameException">
+            Если имя пользователя является пустой строкой или null.
+            </exception>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь не найден.
+            </exception>
+            <param name="name">Имя пользователя.</param>
+            <returns>Пользователя.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.IUserDomainService.GetUserByIdAsync(System.Int64)">
+            <summary>
+            Находит пользователя по идентификатору.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь не найден.
+            </exception>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Пользователя.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.IUserFactory">
+            <summary>
+            Инкапсулирует процесс и способ создания пользователей.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.IUserFactory.CreateAsync(System.String)">
+            <summary>
+            Создает пользователя.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+            <returns>Пользователя.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.IUserRepository">
+            <summary>
+            Предоставляет методы для работы с хранилищем пользователей.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.IUserRepository.FindByIdAsync(System.Int64)">
+            <summary>
+            Находит пользователя по идентификатору.
+            </summary>
+            <param name="id">Идентификатор пользователя.</param>
+            <returns>Пользователя, либо null, если не найден.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.IUserRepository.FindByNameAsync(System.String)">
+            <summary>
+            Находит пользователя по имени.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+            <returns>Пользователя, либо null, если не найден.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.IUserRepository.AddAsync(Infotecs.MiniJournal.Domain.Users.User)">
+            <summary>
+            Добавляет пользователя.
+            </summary>
+            <param name="user">Пользователь.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the result of the asynchronous operation.</returns>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.User">
+            <summary>
+            Пользователь.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.User.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Users.User"/> class.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.User.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Users.User"/> class.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Users.User.Id">
+            <summary>
+            Gets or sets идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="P:Infotecs.MiniJournal.Domain.Users.User.Name">
+            <summary>
+            Gets or sets имя пользователя.
+            </summary>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.UserDomainService">
+            <inheritdoc/>
+            <summary>
+            Действия над пользователем.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.UserDomainService.#ctor(Infotecs.MiniJournal.Domain.Users.IUserRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.MiniJournal.Domain.Users.UserDomainService"/> class.
+            </summary>
+            <param name="userRepository"><see cref="T:Infotecs.MiniJournal.Domain.Users.IUserRepository"/>IUserRepository.</param>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.UserDomainService.GetUserByNameAsync(System.String)">
+            <inheritdoc/>
+            <summary>
+            Находит пользователя по имени.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.EmptyUserNameException">
+            Если имя пользователя является пустой строкой или null.
+            </exception>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь не найден.
+            </exception>
+            <param name="name">Имя пользователя.</param>
+            <returns>Пользователя.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.UserDomainService.GetUserByIdAsync(System.Int64)">
+            <inheritdoc/>
+            <summary>
+            Находит пользователя по идентификатору.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь не найден.
+            </exception>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Пользователя.</returns>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.UserDomainService.CreateUserAsync(Infotecs.MiniJournal.Domain.Users.User)">
+            <inheritdoc/>
+            <summary>
+            Создает пользователя.
+            </summary>
+            <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+            Если пользователь не найден.
+            </exception>
+            <param name="user">Пользователь.</param>
+        </member>
+        <member name="T:Infotecs.MiniJournal.Domain.Users.UserFactory">
+            <inheritdoc/>
+            <summary>
+            Инкапсулирует процесс и способ создания пользователей.
+            </summary>
+        </member>
+        <member name="M:Infotecs.MiniJournal.Domain.Users.UserFactory.CreateAsync(System.String)">
+            <inheritdoc/>
+            <summary>
+            Создает пользователя.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+            <returns>Пользователя.</returns>
+        </member>
+    </members>
+</doc>

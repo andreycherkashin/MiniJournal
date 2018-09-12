@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Autofac;
 
 namespace Infotecs.MiniJournal.Domain
 {
-    public class DomainModule : Autofac.Module
+    /// <inheritdoc />
+    public class DomainModule : Module
     {
+        /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
             builder

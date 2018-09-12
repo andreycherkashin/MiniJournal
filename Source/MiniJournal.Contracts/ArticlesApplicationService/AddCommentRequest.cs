@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {
@@ -9,12 +7,19 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
     /// </summary>
     public class AddCommentRequest
     {
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddCommentRequest"/> class.
+        /// </summary>
         public AddCommentRequest()
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddCommentRequest"/> class.
+        /// </summary>
+        /// <param name="userId">Идентификатор пользователя.</param>
+        /// <param name="articleId">Идентификатор статьи.</param>
+        /// <param name="text">Текст комментария.</param>
         public AddCommentRequest(long userId, long articleId, string text)
         {
             this.UserId = userId;
@@ -23,17 +28,17 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
         }
 
         /// <summary>
-        /// Идентификатор пользователя.
+        /// Gets or sets идентификатор пользователя.
         /// </summary>
         public long UserId { get; set; }
 
         /// <summary>
-        /// Идентификатор статьи.
+        /// Gets or sets идентификатор статьи.
         /// </summary>
         public long ArticleId { get; set; }
 
         /// <summary>
-        /// Текст комментария.
+        /// Gets or sets текст комментария.
         /// </summary>
         public string Text { get; set; }
     }

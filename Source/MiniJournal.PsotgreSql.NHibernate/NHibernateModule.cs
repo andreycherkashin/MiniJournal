@@ -1,19 +1,16 @@
 ﻿using System;
 using Autofac;
 using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 using Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings;
 using NHibernate;
 
 namespace Infotecs.MiniJournal.PostgreSql.NHibernate
 {
-    public class NHibernateModule : Autofac.Module
+    /// <inheritdoc />
+    public class NHibernateModule : Module
     {
-        /// <summary>Override to add registrations to the container.</summary>
-        /// <remarks>
-        /// Note that the ContainerBuilder parameter is unique to this module.
-        /// </remarks>
-        /// <param name="builder">The builder through which components can be
-        /// registered.</param>
+        /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
             builder
@@ -37,7 +34,7 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
         {
             return Fluently.Configure()
                 .Database(
-                    FluentNHibernate.Cfg.Db.PostgreSQLConfiguration.PostgreSQL81.ConnectionString(context.ResolveNamed<string>("ConnectionString"))
+                    PostgreSQLConfiguration.PostgreSQL81.ConnectionString(context.ResolveNamed<string>("ConnectionString"))
                 )
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<ArticleMap>())
                 .BuildSessionFactory();

@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel.Description;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 using Autofac;
 using Autofac.Integration.Wcf;
 using StackExchange.Profiling;
 
 namespace Infotecs.MiniJournal.WcfService
 {
-    public class Global : System.Web.HttpApplication
+    /// <inheritdoc />
+    public class Global : HttpApplication
     {
+        /// <summary>
+        /// Application_Start.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Application_Start(object sender, EventArgs e)
         {
             // create io container
             var builder = new ContainerBuilder();
             builder.RegisterModule<WcfServiceModule>();
-            var container = builder.Build();
+            IContainer container = builder.Build();
 
             // resolve and add to pipeline wcf service behaviors
             ResolveAndApplyServiceBehaviors(container);
@@ -36,22 +39,20 @@ namespace Infotecs.MiniJournal.WcfService
             Environment.SetEnvironmentVariable("BASEDIR", AppDomain.CurrentDomain.BaseDirectory);
         }
 
-        private static void ResolveAndApplyServiceBehaviors(IContainer container)
-        {
-            AutofacHostFactory.HostConfigurationAction += host =>
-            {
-                foreach (var serviceBehavior in container.Resolve<IEnumerable<IServiceBehavior>>())
-                {
-                    host.Description.Behaviors.Add(serviceBehavior);
-                }
-            };
-        }
-
+        /// <summary>
+        /// Session_Start.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Session_Start(object sender, EventArgs e)
         {
-
         }
 
+        /// <summary>
+        /// Application_BeginRequest.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             if (this.Request.IsLocal)
@@ -60,29 +61,61 @@ namespace Infotecs.MiniJournal.WcfService
             }
         }
 
+        /// <summary>
+        /// Application_EndRequest.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Application_EndRequest(object sender, EventArgs e)
         {
             MiniProfiler.Current?.Stop();
         }
 
+        /// <summary>
+        /// Application_AuthenticateRequest.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-
         }
 
+        /// <summary>
+        /// Application_Error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Application_Error(object sender, EventArgs e)
         {
-
         }
 
+        /// <summary>
+        /// Session_End.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Session_End(object sender, EventArgs e)
         {
-
         }
 
+        /// <summary>
+        /// Application_End.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The evenArgs.</param>
         protected void Application_End(object sender, EventArgs e)
         {
+        }
 
+        private static void ResolveAndApplyServiceBehaviors(IContainer container)
+        {
+            AutofacHostFactory.HostConfigurationAction += host =>
+            {
+                foreach (IServiceBehavior serviceBehavior in container.Resolve<IEnumerable<IServiceBehavior>>())
+                {
+                    host.Description.Behaviors.Add(serviceBehavior);
+                }
+            };
         }
     }
 }

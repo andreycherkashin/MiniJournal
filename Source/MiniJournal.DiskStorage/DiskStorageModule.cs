@@ -3,8 +3,10 @@ using Autofac;
 
 namespace Infotecs.MiniJournal.DiskStorage
 {
-    public class DiskStorageModule : Autofac.Module
+    /// <inheritdoc />
+    public class DiskStorageModule : Module
     {
+        /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
             builder

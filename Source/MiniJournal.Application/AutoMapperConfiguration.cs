@@ -1,26 +1,37 @@
 ﻿using System;
 using AutoMapper;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites;
-using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
+using Infotecs.MiniJournal.Domain.Articles;
+using Infotecs.MiniJournal.Domain.Comments;
+using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.Application
 {
+    /// <summary>
+    /// Конфигурация AutoMapper.
+    /// </summary>
     public class AutoMapperConfiguration
     {
         private readonly MapperConfiguration mapperConfiguration;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoMapperConfiguration"/> class.
+        /// </summary>
         public AutoMapperConfiguration()
         {
             this.mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Domain.Articles.Article, Article>();
-                cfg.CreateMap<Domain.Comments.Comment, Comment>();
-                cfg.CreateMap<Domain.Users.User, User>();
+                cfg.CreateMap<Article, Contracts.ArticlesApplicationService.Entities.Article>();
+                cfg.CreateMap<Comment, Contracts.ArticlesApplicationService.Entities.Comment>();
+                cfg.CreateMap<User, Contracts.UsersApplicationService.Entities.User>();
             });
-            
+
             this.mapperConfiguration.AssertConfigurationIsValid();
         }
 
+        /// <summary>
+        /// Возвращает экземпляр AutoMapper.
+        /// </summary>
+        /// <returns>Экземпляр маппера.</returns>
         public IMapper GetMapper()
         {
             return this.mapperConfiguration.CreateMapper();

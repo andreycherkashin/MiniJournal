@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
@@ -14,6 +12,9 @@ using NUnit.Framework;
 
 namespace Tests.Common.Domain.Comments
 {
+    /// <summary>
+    /// Тесты для <see cref="CommentDomainService"/>.
+    /// </summary>
     [TestFixture]
     public class CommentDomainServiceTests
     {
@@ -25,6 +26,9 @@ namespace Tests.Common.Domain.Comments
         // services under test
         private CommentDomainService service;
 
+        /// <summary>
+        /// Настройка тестового окружения.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
@@ -39,6 +43,10 @@ namespace Tests.Common.Domain.Comments
             this.service = this.fixture.Create<CommentDomainService>();
         }
 
+        /// <summary>
+        /// Комментарий должен быть добавлен в список комментариев статьи.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [Test]
         public async Task ShouldAddCommentToArticleCommentsCollection()
         {
@@ -53,6 +61,10 @@ namespace Tests.Common.Domain.Comments
             article.Comments.Should().Contain(comment);
         }
 
+        /// <summary>
+        /// Комментарий должен быть добавлен в репозиторий комментариев.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [Test]
         public async Task ShouldAddCommentToRepository()
         {
@@ -64,12 +76,31 @@ namespace Tests.Common.Domain.Comments
             await this.service.AddCommentAsync(article, comment);
 
             // Assert
-            Received.InOrder(async () =>
-            {
-                await this.repository.AddAsync(Arg.Is(article.Id), Arg.Is(comment));
-            });
+            Received.InOrder(async () => { await this.repository.AddAsync(Arg.Is(article.Id), Arg.Is(comment)); });
         }
 
+        /// <summary>
+        /// Комментарий должен удаляться из коллекции комментариев статьи.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        [Test]
+        public async Task ShouldDeleteCommentFromArticleCommentsCollection()
+        {
+            // Arrange
+            var article = this.fixture.Create<Article>();
+            Comment comment = article.Comments.First();
+
+            // Act
+            await this.service.DeleteCommentAsync(article, comment);
+
+            // Assert
+            article.Comments.Should().NotContain(comment);
+        }
+
+        /// <summary>
+        /// Комментарий должен быть удален из репозитория.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [Test]
         public async Task ShouldDeleteCommentFromRepository()
         {
@@ -81,28 +112,33 @@ namespace Tests.Common.Domain.Comments
             await this.service.DeleteCommentAsync(article, comment);
 
             // Assert
-            Received.InOrder(async () =>
-            {
-                await this.repository.DeleteAsync(Arg.Is(article.Id), Arg.Is(comment));
-            });
+            Received.InOrder(async () => { await this.repository.DeleteAsync(Arg.Is(article.Id), Arg.Is(comment)); });
         }
 
+
+        /// <summary>
+        /// Комментарий должен быть успешно найден и возвращен.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [Test]
-        public async Task ShouldDeleteCommentFromArticleCommentsCollection()
+        public async Task ShouldSuccessfullyReturnComment()
         {
-            // Arrange
+            // Arrange            
             var article = this.fixture.Create<Article>();
-            var comment = article.Comments.First();
+            Comment comment = article.Comments.First();
 
             // Act
-            await this.service.DeleteCommentAsync(article, comment);
+            Comment result = await this.service.GetCommentById(article, comment.Id);
 
             // Assert
-            article.Comments.Should().NotContain(comment);
+            result.Should().BeSameAs(comment);
         }
 
+        /// <summary>
+        /// Должно быть выброшено исключение <see cref="CommentNotFoundException"/>, если комментарий не найден.
+        /// </summary>
         [Test]
-        public void ShouldThrowArticleNotFoundExceptionIfArticleNotFound()
+        public void ShouldThrowCommentNotFoundException()
         {
             // Arrange            
             var article = this.fixture.Create<Article>();
@@ -112,20 +148,6 @@ namespace Tests.Common.Domain.Comments
             Func<Task<Comment>> act = async () => await this.service.GetCommentById(article, anotherCommentId);
 
             act.Should().Throw<CommentNotFoundException>();
-        }
-
-        [Test]
-        public async Task ShouldSuccessfullyReturnArticle()
-        {
-            // Arrange            
-            var article = this.fixture.Create<Article>();
-            var comment = article.Comments.First();
-
-            // Act
-            var result = await this.service.GetCommentById(article, comment.Id);
-
-            // Assert
-            result.Should().BeSameAs(comment);
         }
     }
 }

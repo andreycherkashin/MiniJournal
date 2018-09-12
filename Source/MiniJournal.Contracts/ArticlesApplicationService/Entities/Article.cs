@@ -2,35 +2,35 @@
 using System.Collections.Generic;
 using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
 
-namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites
+namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entities
 {
     /// <summary>
-    /// Статьи с комментариями
+    /// Статьи с комментариями.
     /// </summary>
     public class Article
     {
         /// <summary>
-        /// Уникальный идентификатор статьи
+        /// Gets or sets уникальный идентификатор статьи.
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Содержимое статьи
+        /// Gets or sets содержимое статьи.
         /// </summary>
         public string Text { get; set; }
 
         /// <summary>
-        /// Уникальный идентификатор картинки 
+        /// Gets or sets уникальный идентификатор картинки.
         /// </summary>
         public string ImageId { get; set; }
 
         /// <summary>
-        /// Пользователь, создавший статью.
+        /// Gets or sets пользователь, создавший статью.
         /// </summary>
         public User User { get; set; }
 
         /// <summary>
-        /// Список комментариев к статье.
+        /// Gets or sets список комментариев к статье.
         /// </summary>
         public List<Comment> Comments { get; set; }
     }

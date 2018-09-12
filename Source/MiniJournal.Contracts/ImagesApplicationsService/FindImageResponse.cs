@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infotecs.MiniJournal.Contracts.ImagesApplicationsService
 {
@@ -9,17 +7,24 @@ namespace Infotecs.MiniJournal.Contracts.ImagesApplicationsService
     /// </summary>
     public class FindImageResponse
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindImageResponse"/> class.
+        /// </summary>
         public FindImageResponse()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindImageResponse"/> class.
+        /// </summary>
+        /// <param name="image">Картинка.</param>
         public FindImageResponse(byte[] image)
         {
             this.Image = image;
         }
 
         /// <summary>
-        /// Картинка, если найдена. Null, если не найдена.
+        /// Gets or sets картинка, если найдена. Null, если не найдена.
         /// </summary>
         public byte[] Image { get; set; }
     }

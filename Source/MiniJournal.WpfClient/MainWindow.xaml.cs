@@ -6,10 +6,13 @@ using Microsoft.Win32;
 namespace Infotecs.MiniJournal.WpfClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml.
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             this.InitializeComponent();
@@ -17,10 +20,10 @@ namespace Infotecs.MiniJournal.WpfClient
 
         private void ArticleImageButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();                   
+            var fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() == true)
             {
-                var image = File.ReadAllBytes(fileDialog.FileName);
+                byte[] image = File.ReadAllBytes(fileDialog.FileName);
                 ((MainWindowViewModel)this.DataContext).ArticleImage = image;
             }
         }

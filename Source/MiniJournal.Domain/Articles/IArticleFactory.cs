@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Users;
 
@@ -12,7 +10,7 @@ namespace Infotecs.MiniJournal.Domain.Articles
     public interface IArticleFactory
     {
         /// <summary>
-        /// Создает статью. 
+        /// Создает статью.
         /// </summary>
         /// <param name="text">Содержимое статьи.</param>
         /// <param name="imageId">Идентификатор картинки.</param>

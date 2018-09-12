@@ -6,54 +6,53 @@ using Infotecs.MiniJournal.Domain.Users;
 namespace Infotecs.MiniJournal.Domain.Articles
 {
     /// <summary>
-    /// Статьи с комментариями
+    /// Статья с комментариями.
     /// </summary>
     public class Article
     {
-        protected Article()
-        {
-            
-        }
-
         /// <summary>
-        /// Создает статью.
+        /// Initializes a new instance of the <see cref="Article"/> class.
         /// </summary>
         /// <param name="user">Пользователь создавший статью.</param>
         /// <param name="text">Содержимое статьи.</param>
         /// <param name="comments">Комментарии, если есть.</param>
         public Article(User user, string text, List<Comment> comments = null)
         {
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));
-
             this.Text = text;
-            this.User = user;
+            this.User = user ?? throw new ArgumentNullException(nameof(user));
 
             this.Comments = comments ?? new List<Comment>();
         }
 
         /// <summary>
-        /// Уникальный идентификатор статьи
+        /// Initializes a new instance of the <see cref="Article"/> class.
+        /// </summary>
+        protected Article()
+        {
+        }
+
+        /// <summary>
+        /// Gets or sets уникальный идентификатор статьи.
         /// </summary>
         public virtual long Id { get; protected internal set; }
 
         /// <summary>
-        /// Содержимое статьи
+        /// Gets or sets содержимое статьи.
         /// </summary>
         public virtual string Text { get; set; }
 
         /// <summary>
-        /// Уникальный идентификатор картинки 
+        /// Gets or sets уникальный идентификатор картинки.
         /// </summary>
         public virtual string ImageId { get; protected internal set; }
 
         /// <summary>
-        /// Пользователь, создавший статью.
+        /// Gets or sets пользователь, создавший статью.
         /// </summary>
         public virtual User User { get; protected set; }
 
         /// <summary>
-        /// Список комментариев к статье.
+        /// Gets or sets список комментариев к статье.
         /// </summary>
         public virtual ICollection<Comment> Comments { get; protected set; }
     }

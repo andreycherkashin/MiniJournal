@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Domain.Articles.Exceptions;
-using Infotecs.MiniJournal.Domain.Comments;
 
 namespace Infotecs.MiniJournal.Domain.Articles
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     /// <summary>
     /// Класс для работы со статьей.
     /// </summary>
@@ -13,12 +12,16 @@ namespace Infotecs.MiniJournal.Domain.Articles
     {
         private readonly IArticleRepository articleRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArticleDomainService"/> class.
+        /// </summary>
+        /// <param name="articleRepository">Репозиторий статей.</param>
         public ArticleDomainService(IArticleRepository articleRepository)
         {
             this.articleRepository = articleRepository;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Создает статью.
         /// </summary>
@@ -26,12 +29,14 @@ namespace Infotecs.MiniJournal.Domain.Articles
         public async Task CreateArticleAsync(Article article)
         {
             if (article == null)
+            {
                 throw new ArgumentNullException(nameof(article));
+            }
 
             await this.articleRepository.AddAsync(article);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Удаляет статью.
         /// </summary>
@@ -39,12 +44,14 @@ namespace Infotecs.MiniJournal.Domain.Articles
         public async Task DeleteArticleAsync(Article article)
         {
             if (article == null)
+            {
                 throw new ArgumentNullException(nameof(article));
+            }
 
             await this.articleRepository.DeleteAsync(article);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         /// <summary>
         /// Возвращает статью по идентификатору.
         /// </summary>
@@ -55,7 +62,7 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// <returns>Найденную статью.</returns>
         public async Task<Article> GetArticleByIdAsync(long articleId)
         {
-            var article = await this.articleRepository.FindByIdAsync(articleId);
+            Article article = await this.articleRepository.FindByIdAsync(articleId);
 
             if (article == null)
             {

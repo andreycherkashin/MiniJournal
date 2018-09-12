@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <wpfClient:ByteToImageConverter x:Key="ByteToImageConverter" x:Name="ByteToImageConverter"/>
+        <wpfClient:ByteToImageConverter x:Key="ByteToImageConverter" x:Name="ByteToImageConverter" />
     </Window.Resources>
     <TabControl>
         <TabItem>
@@ -25,41 +25,44 @@
                         <ListView ItemsSource="{Binding Articles}" SelectedItem="{Binding SelectedArticle}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Text}"></GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Text}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
                     </StackPanel>
-                    <Grid Grid.Column="1" >
+                    <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition />
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel>
                             <Label FontSize="18">Article</Label>
                             <Border BorderThickness="0 1 0 0" BorderBrush="AntiqueWhite">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <Image Width="60" Height="60" Source="{Binding SelectedArticleImage, Converter={StaticResource ByteToImageConverter}}"></Image>
-                                    <TextBlock Grid.Column="1" Padding="10" Text="{Binding SelectedArticle.Text}" TextWrapping="Wrap"></TextBlock>
+                                    <Image Width="60" Height="60"
+                                           Source="{Binding SelectedArticleImage, Converter={StaticResource ByteToImageConverter}}" />
+                                    <TextBlock Grid.Column="1" Padding="10" Text="{Binding SelectedArticle.Text}"
+                                               TextWrapping="Wrap" />
                                 </Grid>
                             </Border>
                         </StackPanel>
                         <Label Grid.Row="1" FontSize="18">Comments</Label>
-                        <ListBox Grid.Row="2" ItemsSource="{Binding SelectedArticle.Comments}" HorizontalContentAlignment="Stretch">
+                        <ListBox Grid.Row="2" ItemsSource="{Binding SelectedArticle.Comments}"
+                                 HorizontalContentAlignment="Stretch">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border Margin="5" BorderBrush="DeepSkyBlue" CornerRadius="3" BorderThickness="1">
                                         <UniformGrid Rows="2">
                                             <Border Background="DeepSkyBlue">
-                                                <TextBlock Margin="5" Text="{Binding User.Name}"/>
+                                                <TextBlock Margin="5" Text="{Binding User.Name}" />
                                             </Border>
-                                            <TextBlock Margin="5" Text="{Binding Text}"/>
+                                            <TextBlock Margin="5" Text="{Binding Text}" />
                                         </UniformGrid>
                                     </Border>
                                 </DataTemplate>
@@ -72,14 +75,17 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0">Пользователь</Label>
-                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CommentUser}"></TextBox>
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CommentUser}" />
                             <Label Grid.Row="1" Grid.Column="0">Комментарий</Label>
-                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CommentText}"></TextBox>
-                            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding Path=AddCommentCommand}">Добавить</Button>
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CommentText}" />
+                            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                    Command="{Binding Path=AddCommentCommand}">
+                                Добавить
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -93,22 +99,23 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBox Margin="5" Grid.Row="0" Text="{Binding ArticleText}"/>
+                    <TextBox Margin="5" Grid.Row="0" Text="{Binding ArticleText}" />
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <Button Margin="5" Click="ArticleImageButton_Click" >Выбрать картинку</Button>
-                        <Image x:Name="ArticleImage"  Width="60" Height="60" Source="{Binding ArticleImage, Converter={StaticResource ByteToImageConverter}}"></Image>
+                        <Button Margin="5" Click="ArticleImageButton_Click">Выбрать картинку</Button>
+                        <Image x:Name="ArticleImage" Width="60" Height="60"
+                               Source="{Binding ArticleImage, Converter={StaticResource ByteToImageConverter}}" />
                     </StackPanel>
                     <Grid Margin="5" Grid.Row="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock>Пользователь:</TextBlock>
-                        <TextBox Grid.Column="1" Text="{Binding ArticleUser}"/>
+                        <TextBox Grid.Column="1" Text="{Binding ArticleUser}" />
                     </Grid>
                     <Button Margin="5" Grid.Row="3" Command="{Binding Path=AddArticleCommand}">Добавить статью</Button>
                 </Grid>

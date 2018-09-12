@@ -4,27 +4,25 @@ using Infotecs.MiniJournal.Domain.Comments;
 
 namespace Infotecs.MiniJournal.PostgreSql.NHibernate
 {
+    /// <inheritdoc cref="ICommentRepository" />
     internal class CommentRepository : BaseNHibernateRepository, ICommentRepository
     {
+        /// <inheritdoc cref="BaseNHibernateRepository"/>
         public CommentRepository(ISessionProvider sessionProvider)
             : base(sessionProvider)
         {
         }
 
-        /// <summary>
-        /// Добавляет комментарий.
-        /// </summary>
-        /// <param name="articleId">Идентификатор статьи.</param>
-        /// <param name="comment">Комментарий.</param>
+        /// <inheritdoc />
         public Task AddAsync(long articleId, Comment comment)
-            => this.Session.SaveAsync(comment);
+        {
+            return this.Session.SaveAsync(comment);
+        }
 
-        /// <summary>
-        /// Удаляет комментарий.
-        /// </summary>
-        /// <param name="articleId">Идентификатор статьи.</param>
-        /// <param name="comment">Комментарий.</param>
+        /// <inheritdoc />
         public Task DeleteAsync(long articleId, Comment comment)
-            => this.Session.DeleteAsync(comment);
+        {
+            return this.Session.DeleteAsync(comment);
+        }
     }
 }

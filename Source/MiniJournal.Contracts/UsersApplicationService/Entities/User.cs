@@ -8,12 +8,12 @@ namespace Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities
     public class User
     {
         /// <summary>
-        /// Идентификатор пользователя. 
+        /// Gets or sets идентификатор пользователя.
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Имя пользователя
+        /// Gets or sets имя пользователя.
         /// </summary>
         public string Name { get; set; }
     }

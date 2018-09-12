@@ -5,8 +5,10 @@ using NHibernate.Linq;
 
 namespace Infotecs.MiniJournal.PostgreSql.NHibernate
 {
+    /// <inheritdoc cref="IUserRepository" />
     internal class UserRepository : BaseNHibernateRepository, IUserRepository
     {
+        /// <inheritdoc cref="BaseNHibernateRepository" />
         public UserRepository(ISessionProvider sessionProvider)
             : base(sessionProvider)
         {
@@ -18,21 +20,20 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
         /// <param name="id">Идентификатор пользователя.</param>
         /// <returns>Пользователя, либо null, если не найден.</returns>
         public Task<User> FindByIdAsync(long id)
-            => this.Session.GetAsync<User>(id);
+        {
+            return this.Session.GetAsync<User>(id);
+        }
 
-        /// <summary>
-        /// Находит пользователя по имени.
-        /// </summary>
-        /// <param name="name">Имя пользователя.</param>
-        /// <returns>Пользователя, либо null, если не найден.</returns>
+        /// <inheritdoc />
         public Task<User> FindByNameAsync(string name)
-            => this.Session.Query<User>().FirstOrDefaultAsync(x => x.Name == name);
+        {
+            return this.Session.Query<User>().FirstOrDefaultAsync(x => x.Name == name);
+        }
 
-        /// <summary>
-        /// Добавляет пользователя.
-        /// </summary>
-        /// <param name="user">Пользователь.</param>
+        /// <inheritdoc />
         public Task AddAsync(User user)
-            => this.Session.SaveAsync(user);
+        {
+            return this.Session.SaveAsync(user);
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entites;
+using Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entities;
 
 namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
 {
@@ -11,7 +10,7 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
     public class GetArticlesResponse
     {
         /// <summary>
-        /// Список статей.
+        /// Gets or sets список статей.
         /// </summary>
         public List<Article> Articles { get; set; }
     }

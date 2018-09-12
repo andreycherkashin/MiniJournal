@@ -1,18 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac;
+using Infotecs.MiniJournal.RabbitMqClient;
 
 namespace Infotecs.MiniJournal.WpfClient
 {
+    /// <summary>
+    /// Класс для инициализации приложения.
+    /// </summary>
     public static class Boostraper
     {
         private static ILifetimeScope rootScope;
         private static MainWindowViewModel mainViewModel;
 
+        /// <summary>
+        /// Модель состояния корневого экрана приложения.
+        /// </summary>
         public static object RootVisual
         {
             get
@@ -27,21 +30,32 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
+        /// <summary>
+        /// Инициализировать приложение.
+        /// </summary>
         public static void Start()
         {
             var builder = new ContainerBuilder();
 
             builder.RegisterType<MainWindowViewModel>().AsSelf().SingleInstance();
-            builder.RegisterModule(new RabbitMqClient.RabbitMqClientModule(ConfigurationManager.AppSettings["RabbitMq"]));
-            
+            builder.RegisterModule(new RabbitMqClientModule(ConfigurationManager.AppSettings["RabbitMq"]));
+
             rootScope = builder.Build();
         }
 
+        /// <summary>
+        /// Возвращает реализацию запрошенного типа.
+        /// </summary>
+        /// <typeparam name="T">Тип.</typeparam>
+        /// <returns>Реализацию запрошенного типа.</returns>
         public static T Resolve<T>()
         {
             return rootScope.Resolve<T>();
         }
 
+        /// <summary>
+        /// Очищает ресурсы после остановки приложения.
+        /// </summary>
         public static void Stop()
         {
             rootScope.Dispose();

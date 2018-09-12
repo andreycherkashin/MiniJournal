@@ -1,6 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities" />
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd4"
+             namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities" />
   <xs:complexType name="GetUserByNameRequest">
     <xs:sequence>
       <xs:element minOccurs="0" name="UseName" nillable="true" type="xs:string" />
@@ -9,7 +13,9 @@
   <xs:element name="GetUserByNameRequest" nillable="true" type="tns:GetUserByNameRequest" />
   <xs:complexType name="GetUserByNameResponse">
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities" minOccurs="0" name="User" nillable="true" type="q1:User" />
+      <xs:element
+        xmlns:q1="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities"
+        minOccurs="0" name="User" nillable="true" type="q1:User" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetUserByNameResponse" nillable="true" type="tns:GetUserByNameResponse" />

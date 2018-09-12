@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infotecs.MiniJournal.Domain.Users
@@ -28,6 +26,7 @@ namespace Infotecs.MiniJournal.Domain.Users
         /// Добавляет пользователя.
         /// </summary>
         /// <param name="user">Пользователь.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         Task AddAsync(User user);
     }
 }

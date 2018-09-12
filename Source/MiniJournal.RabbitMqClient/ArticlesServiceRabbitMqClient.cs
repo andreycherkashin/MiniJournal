@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
 using Infotecs.MiniJournal.Contracts.UsersApplicationService;
@@ -8,58 +6,41 @@ using RawRabbit;
 
 namespace Infotecs.MiniJournal.RabbitMqClient
 {
+    /// <inheritdoc />
     public class ArticlesServiceRabbitMqClient : IArticlesServiceRabbitMqClient
     {
         private readonly IBusClient busClient;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArticlesServiceRabbitMqClient"/> class.
+        /// </summary>
+        /// <param name="busClient"><see cref="IBusClient"/>.</param>
         public ArticlesServiceRabbitMqClient(IBusClient busClient)
         {
             this.busClient = busClient;
         }
 
-        /// <summary>
-        /// Создать статью с указанным содержимым.
-        /// </summary>
-        /// <param name="request">Запрос создания статьи.</param>
+        /// <inheritdoc />
         public Task CreateArticleAsync(CreateArticleRequest request)
             => this.busClient.PublishAsync(request);
 
-        /// <summary>
-        /// Удаляет статью.
-        /// </summary>
-        /// <param name="request">Запрос удаления статьи.</param>
+        /// <inheritdoc />
         public Task DeleteArticleAsync(DeleteArticleRequest request)
             => this.busClient.PublishAsync(request);
 
-        /// <summary>
-        /// Добавляет комментарий к статье.
-        /// </summary>
-        /// <param name="request">Запрос добавления статьи.</param>        
+        /// <inheritdoc />
         public Task AddCommentAsync(AddCommentRequest request)
             => this.busClient.PublishAsync(request);
 
-        /// <summary>
-        /// Удаляет комментарий.
-        /// </summary>
-        /// <param name="request">Запрос удаления комментария.</param>        
+        /// <inheritdoc />
         public Task DeleteCommentAsync(DeleteCommentRequest request)
             => this.busClient.PublishAsync(request);
 
-        /// <summary>
-        /// Получить пользователя по имени.
-        /// <exception cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
-        /// Если пользователь с таким именем не найден будем выброшено исключение <see cref="Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException"/>. 
-        /// </exception>
-        /// </summary>
-        /// <param name="request">Имя пользователя.</param>
-        /// <returns>Найденный пользователь.</returns>
+        /// <inheritdoc />
         public Task<GetUserByNameResponse> GetUserByNameAsync(GetUserByNameRequest request)
             => this.busClient.RequestAsync<GetUserByNameRequest, GetUserByNameResponse>(request);
 
-        /// <summary>
-        /// Добавляет нового пользователя с указанным именем.
-        /// </summary>
-        /// <param name="request">Имя пользователя.</param>
+        /// <inheritdoc />
         public Task CreateNewUserAsync(CreateNewUserRequest request)
             => this.busClient.PublishAsync(request);
     }

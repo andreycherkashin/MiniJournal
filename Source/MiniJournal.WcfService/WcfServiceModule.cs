@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using Autofac;
-using Autofac.Integration.Wcf;
 using AutofacSerilogIntegration;
 using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql.NHibernate;
+using Infotecs.MiniJournal.WcfService.ErrorHandling;
 using Serilog;
 
 namespace Infotecs.MiniJournal.WcfService
 {
-    public class WcfServiceModule : Autofac.Module
+    /// <inheritdoc />
+    public class WcfServiceModule : Module
     {
+        /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
             this.RegisterWcfComponents(builder);
-            this.RegisterLogger(builder);    
+            this.RegisterLogger(builder);
             this.RegisterTypesAndModules(builder);
             this.RegisterSettings(builder);
         }
@@ -28,7 +27,7 @@ namespace Infotecs.MiniJournal.WcfService
         {
             builder.RegisterType<ArticlesWebService>().AsSelf().AsImplementedInterfaces();
 
-            builder.RegisterType<ErrorHandling.ErrorHandler>().AsImplementedInterfaces();
+            builder.RegisterType<ErrorHandler>().AsImplementedInterfaces();
         }
 
         private void RegisterSettings(ContainerBuilder builder)

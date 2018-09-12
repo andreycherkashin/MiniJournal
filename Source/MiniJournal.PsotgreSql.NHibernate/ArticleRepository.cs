@@ -7,8 +7,13 @@ using NHibernate.Linq;
 
 namespace Infotecs.MiniJournal.PostgreSql.NHibernate
 {
+    /// <inheritdoc cref="IArticleRepository"/>
     internal class ArticleRepository : BaseNHibernateRepository, IArticleRepository
-    {        
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArticleRepository"/> class.
+        /// </summary>
+        /// <param name="sessionProvider">Implementation of <see cref="ISessionProvider"/>.</param>
         public ArticleRepository(ISessionProvider sessionProvider)
             : base(sessionProvider)
         {
@@ -18,35 +23,30 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
             => this.Session.Query<Article>()
                 .Fetch(x => x.User)
                 .FetchMany(x => x.Comments)
-                    .ThenFetch(c => c.User);
+                .ThenFetch(c => c.User);
 
-        /// <summary>
-        /// Возвращает список имеющихся статей.
-        /// </summary>
-        /// <returns>Список статей.</returns>
+        /// <inheritdoc />
         public async Task<IEnumerable<Article>> GetArticlesAsync()
-            => await this.Articles.ToListAsync();
+        {
+            return await this.Articles.ToListAsync();
+        }
 
-        /// <summary>
-        /// Находит статью по идентификатору. Если статья не найдена, возвращается null.
-        /// </summary>
-        /// <param name="articleId">Идентификатор статьи.</param>
-        /// <returns>Статью, либо null, если не найдена.</returns>
+        /// <inheritdoc />
         public Task<Article> FindByIdAsync(long articleId)
-            => this.Session.GetAsync<Article>(articleId);
+        {
+            return this.Session.GetAsync<Article>(articleId);
+        }
 
-        /// <summary>
-        /// Удаляет статью.
-        /// </summary>
-        /// <param name="article">Статья.</param>
+        /// <inheritdoc />
         public Task DeleteAsync(Article article)
-            => this.Session.DeleteAsync(article);
+        {
+            return this.Session.DeleteAsync(article);
+        }
 
-        /// <summary>
-        /// Добавляет статью.
-        /// </summary>
-        /// <param name="article">Статья.</param>
+        /// <inheritdoc />
         public Task AddAsync(Article article)
-            => this.Session.SaveAsync(article);
+        {
+            return this.Session.SaveAsync(article);
+        }
     }
 }

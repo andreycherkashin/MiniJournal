@@ -11,7 +11,9 @@ namespace Infotecs.MiniJournal.Application
     {
         /// <summary>
         /// Находит картинку по идентификатору.
-        /// </summary>        
+        /// </summary>
+        /// <param name="request"><see cref="FindImageRequest"/>Объект запроса.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         Task<FindImageResponse> FindImageAsync(FindImageRequest request);
 
         /// <summary>

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
@@ -13,6 +10,9 @@ using NUnit.Framework;
 
 namespace Tests.Common.Domain.Articles
 {
+    /// <summary>
+    /// Тесты сервиса <see cref="ArticleDomainService"/>.
+    /// </summary>
     [TestFixture]
     public class ArticleDomainServiceTests
     {
@@ -20,22 +20,29 @@ namespace Tests.Common.Domain.Articles
 
         // frozen dependencies
         private IArticleRepository repository;
-        
+
         // services under test
         private ArticleDomainService service;
 
+        /// <summary>
+        /// Настройка тестового окружения.
+        /// </summary>
         [SetUp]
         public void SetUp()
-        {            
+        {
             this.fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
 
             // freeze dependencies
             this.repository = this.fixture.Freeze<IArticleRepository>();
-            
+
             // create services under test
             this.service = this.fixture.Create<ArticleDomainService>();
         }
 
+        /// <summary>
+        /// Статья должна быть добавлена в репозиторий.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [Test]
         public async Task ShouldAddArticleToRepository()
         {
@@ -44,30 +51,15 @@ namespace Tests.Common.Domain.Articles
 
             // Act
             await this.service.CreateArticleAsync(article);
-            
-            // Assert
-            Received.InOrder(async () =>
-            {
-                await this.repository.AddAsync(Arg.Is(article));
-            });
-        }
-
-        [Test]
-        public async Task ShouldDeleteArticleFromRepository()
-        {
-            // Arrange
-            var article = this.fixture.Create<Article>();
-
-            // Act
-            await this.service.DeleteArticleAsync(article);
 
             // Assert
-            Received.InOrder(async () =>
-            {
-                await this.repository.DeleteAsync(Arg.Is(article));
-            });
+            Received.InOrder(async () => { await this.repository.AddAsync(Arg.Is(article)); });
         }
 
+        /// <summary>
+        /// Метод репозитория должен быть вызван при поиске статьи.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [Test]
         public async Task ShouldCallRepositoryForArticle()
         {
@@ -79,12 +71,47 @@ namespace Tests.Common.Domain.Articles
             await this.service.GetArticleByIdAsync(article.Id);
 
             // Assert
-            Received.InOrder(async () =>
-            {
-                await this.repository.FindByIdAsync(Arg.Is(article.Id));
-            });
+            Received.InOrder(async () => { await this.repository.FindByIdAsync(Arg.Is(article.Id)); });
         }
 
+        /// <summary>
+        /// Статья должна удаляться через репозиторий.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        [Test]
+        public async Task ShouldDeleteArticleFromRepository()
+        {
+            // Arrange
+            var article = this.fixture.Create<Article>();
+
+            // Act
+            await this.service.DeleteArticleAsync(article);
+
+            // Assert
+            Received.InOrder(async () => { await this.repository.DeleteAsync(Arg.Is(article)); });
+        }
+
+        /// <summary>
+        /// Статья должна быть успешно найдена.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        [Test]
+        public async Task ShouldSuccessfullyReturnArticle()
+        {
+            // Arrange            
+            var article = this.fixture.Create<Article>();
+            this.repository.FindByIdAsync(Arg.Is(article.Id)).Returns(Task.FromResult(article));
+
+            // Act
+            Article result = await this.service.GetArticleByIdAsync(article.Id);
+
+            // Assert
+            result.Should().BeSameAs(article);
+        }
+
+        /// <summary>
+        /// Должно быть выброшено исключение <see cref="ArticleNotFoundException"/>, если статья не найдена.
+        /// </summary>
         [Test]
         public void ShouldThrowArticleNotFoundExceptionIfArticleNotFound()
         {
@@ -99,20 +126,6 @@ namespace Tests.Common.Domain.Articles
             Func<Task<Article>> act = async () => await this.service.GetArticleByIdAsync(anotherArticleId);
 
             act.Should().Throw<ArticleNotFoundException>();
-        }
-
-        [Test]
-        public async Task ShouldSuccessfullyReturnArticle()
-        {
-            // Arrange            
-            var article = this.fixture.Create<Article>();
-            this.repository.FindByIdAsync(Arg.Is(article.Id)).Returns(Task.FromResult(article));
-
-            // Act
-            var result = await this.service.GetArticleByIdAsync(article.Id);
-
-            // Assert
-            result.Should().BeSameAs(article);
         }
     }
 }
