@@ -9,7 +9,7 @@ namespace Infotecs.MiniJournal.Domain.Comments
     /// </summary>
     public class Comment
     {
-        protected Comment()
+        public Comment()
         {
         }
 

@@ -5,7 +5,7 @@ using AutofacSerilogIntegration;
 using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
-using Infotecs.MiniJournal.PsotgreSql.NHibernate;
+using Infotecs.MiniJournal.PostgreSql.NHibernate;
 using Infotecs.MiniJournal.WinService.RabbitMq;
 using RawRabbit.Common;
 using RawRabbit.Configuration;

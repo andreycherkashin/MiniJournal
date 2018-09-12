@@ -27,8 +27,8 @@ namespace Infotecs.MiniJournal.RabbitMqClient
         {
             var configuration = ConnectionStringParser.Parse(this.rabbitMqConnectionString);
 
-            configuration.PublishConfirmTimeout = TimeSpan.FromHours(1);
-            configuration.RequestTimeout = TimeSpan.FromHours(1);
+            // configuration.PublishConfirmTimeout = TimeSpan.FromHours(1);
+            // configuration.RequestTimeout = TimeSpan.FromHours(1);
 
             builder.RegisterRawRabbit(configuration);
 

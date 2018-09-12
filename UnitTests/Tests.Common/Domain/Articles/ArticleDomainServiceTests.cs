@@ -90,6 +90,7 @@ namespace Tests.Common.Domain.Articles
         {
             // Arrange            
             var article = this.fixture.Create<Article>();
+            this.repository.FindByIdAsync(Arg.Any<long>()).Returns(Task.FromResult<Article>(null));
             this.repository.FindByIdAsync(Arg.Is(article.Id)).Returns(Task.FromResult(article));
 
             var anotherArticleId = this.fixture.Create<long>();

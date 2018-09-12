@@ -29,6 +29,8 @@ namespace Tests.Common.Domain.Comments
         public void SetUp()
         {
             this.fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
+            this.fixture.Behaviors.Remove(new ThrowingRecursionBehavior());
+            this.fixture.Behaviors.Add(new OmitOnRecursionBehavior());
 
             // freeze dependencies
             this.repository = this.fixture.Freeze<ICommentRepository>();
