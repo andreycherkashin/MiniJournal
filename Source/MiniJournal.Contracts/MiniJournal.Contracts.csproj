@@ -13,15 +13,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>C:\Users\Cherkashin.And\source\repos\MiniJournal\Source\MiniJournal.Contracts\Infotecs.MiniJournal.Contracts.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Infotecs.MiniJournal.Contracts.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj" />
   </ItemGroup>
 </Project>

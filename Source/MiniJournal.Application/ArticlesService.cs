@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
-using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
+using Infotecs.MiniJournal.Contracts;
+using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService;
+using Infotecs.MiniJournal.Contracts.Events;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments;
 using Infotecs.MiniJournal.Domain.Users;
@@ -23,6 +25,7 @@ namespace Infotecs.MiniJournal.Application
         private readonly IImagesService imagesService;
         private readonly ILogger logger;
         private readonly IMapper mapper;
+        private readonly IEventPublisher evenPublisher;
         private readonly IUnitOfWork unitOfWork;
         private readonly IUserDomainService userService;
 
@@ -39,6 +42,7 @@ namespace Infotecs.MiniJournal.Application
         /// <param name="imagesService">Implementation of <see cref="IImagesService"/>.</param>
         /// <param name="logger">Implementation of <see cref="ILogger"/>.</param>
         /// <param name="mapper">Implementation of <see cref="IMapper"/>.</param>
+        /// <param name="evenPublisher"><see cref="IEventPublisher"/>.</param>
         public ArticlesService(
             IUnitOfWork unitOfWork,
             IArticleFactory articleFactory,
@@ -49,7 +53,8 @@ namespace Infotecs.MiniJournal.Application
             IUserDomainService userService,
             IImagesService imagesService,
             ILogger logger,
-            IMapper mapper)
+            IMapper mapper,
+            IEventPublisher evenPublisher)
         {
             this.unitOfWork = unitOfWork;
             this.articleFactory = articleFactory;
@@ -61,6 +66,7 @@ namespace Infotecs.MiniJournal.Application
             this.imagesService = imagesService;
             this.logger = logger;
             this.mapper = mapper;
+            this.evenPublisher = evenPublisher;
         }
 
         /// <inheritdoc />
@@ -75,8 +81,21 @@ namespace Infotecs.MiniJournal.Application
 
             return new GetArticlesResponse
             {
-                Articles = this.mapper.Map<List<Contracts.ArticlesApplicationService.Entities.Article>>(articles)
+                Articles = this.mapper.Map<List<Contracts.Commands.ArticlesApplicationService.Entities.Article>>(articles)
             };
+        }
+
+        /// <inheritdoc />
+        public async Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            var article = await this.articleRepository.FindByIdAsync(request.ArticleId);
+
+            return new GetArticleResponse(this.mapper.Map<Contracts.Commands.ArticlesApplicationService.Entities.Article>(article));
         }
 
         /// <inheritdoc />
@@ -94,6 +113,7 @@ namespace Infotecs.MiniJournal.Application
             await this.articleService.CreateArticleAsync(article);
 
             await this.unitOfWork.SaveChangesAsync();
+            await this.evenPublisher.PublishAsync(new ArticleCreatedEvent(article.Id));
 
             this.logger.Verbose("user {UserId} created new article: {ArticleText}", request.UserId, article.Text.Truncate(30, true));
 
@@ -112,6 +132,7 @@ namespace Infotecs.MiniJournal.Application
             await this.articleService.DeleteArticleAsync(article);
 
             await this.unitOfWork.SaveChangesAsync();
+            await this.evenPublisher.PublishAsync(new ArticleDeletedEvent(article.Id));
 
             this.logger.Verbose("article {ArticleId} was deleted", request.ArticleId);
 
@@ -133,6 +154,7 @@ namespace Infotecs.MiniJournal.Application
             await this.commentService.AddCommentAsync(article, comment);
 
             await this.unitOfWork.SaveChangesAsync();
+            await this.evenPublisher.PublishAsync(new CommentAddedEvent(article.Id, comment.Id));
 
             this.logger.Verbose("new comment added to article {ArticleId}, comment text: {CommentText}", request.ArticleId, comment.Text.Truncate(30, true));
 
@@ -151,6 +173,7 @@ namespace Infotecs.MiniJournal.Application
             Comment comment = await this.commentService.GetCommentById(article, request.CommentId);
 
             await this.commentService.DeleteCommentAsync(article, comment);
+            await this.evenPublisher.PublishAsync(new CommentDeletedEvent(article.Id, comment.Id));
 
             await this.unitOfWork.SaveChangesAsync();
 

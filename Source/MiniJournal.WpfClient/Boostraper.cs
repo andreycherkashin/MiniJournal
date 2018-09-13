@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using Autofac;
-using Infotecs.MiniJournal.RabbitMqClient;
+using Infotecs.MiniJournal.RabbitMqPublisher;
 
 namespace Infotecs.MiniJournal.WpfClient
 {
@@ -38,7 +38,8 @@ namespace Infotecs.MiniJournal.WpfClient
             var builder = new ContainerBuilder();
 
             builder.RegisterType<MainWindowViewModel>().AsSelf().SingleInstance();
-            builder.RegisterModule(new RabbitMqClientModule(ConfigurationManager.AppSettings["RabbitMq"]));
+            builder.RegisterType<MessageBusListener>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterModule(new RabbitMqPublisherModule(ConfigurationManager.AppSettings["RabbitMq"]));
 
             rootScope = builder.Build();
         }

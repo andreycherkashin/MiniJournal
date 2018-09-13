@@ -103,6 +103,9 @@
     <None Include="Connected Services\ArticlesServiceReference\Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.FindImageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ArticlesServiceReference\Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ArticlesServiceReference\Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

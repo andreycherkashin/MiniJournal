@@ -15,7 +15,7 @@ namespace Infotecs.MiniJournal.Domain.Articles
         /// <summary>
         /// Initializes a new instance of the <see cref="ArticleDomainService"/> class.
         /// </summary>
-        /// <param name="articleRepository">Репозиторий статей.</param>
+        /// <param name="articleRepository"><see cref="IArticleRepository"/>.</param>
         public ArticleDomainService(IArticleRepository articleRepository)
         {
             this.articleRepository = articleRepository;

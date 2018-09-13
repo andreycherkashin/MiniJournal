@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Management.Automation;
 using Autofac;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
-using Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities;
-using Infotecs.MiniJournal.RabbitMqClient;
+using Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference;
 
 namespace MiniJournal.PowerShellCmdlet
 {
@@ -11,7 +9,7 @@ namespace MiniJournal.PowerShellCmdlet
     [Cmdlet(VerbsCommon.Add, "Comment")]
     public class AddComment : PSCmdlet
     {
-        private IContainer rootScope;
+        private ArticlesWebServiceClient client;
 
         /// <summary>
         /// Текст комментария.
@@ -37,30 +35,26 @@ namespace MiniJournal.PowerShellCmdlet
         /// <summary>
         /// Строка подключения к брокеру сообщений RabbitMq.
         /// </summary>
-        [Parameter(Position = 4, Mandatory = false, HelpMessage = "Enter user name")]
-        public string RabbitMqConnectionString { get; set; }
+        [Parameter(Position = 3, Mandatory = false, HelpMessage = "Enter articles web service Url")]
+        public string ServiceUrl { get; set; }
 
         /// <inheritdoc />
         protected override void BeginProcessing()
         {
-            this.rootScope = Helpers.CreateContainer(this.RabbitMqConnectionString);
+            this.client = Helpers.CreateWcfServiceClient(this.ServiceUrl);
         }
 
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            using (ILifetimeScope scope = this.rootScope.BeginLifetimeScope())
-            {
-                var client = scope.Resolve<IArticlesServiceRabbitMqClient>();
-                User user = client.GetUser(this.User);
-                client.AddCommentAsync(new AddCommentRequest(user.Id, this.Article, this.Text)).Wait();
-            }
+            var user = this.client.GetUser(this.User);
+            this.client.AddComment(new AddCommentRequest { ArticleId = this.Article, UserId = user.Id, Text = this.Text});
         }
 
         /// <inheritdoc />
         protected override void EndProcessing()
         {
-            this.rootScope.Dispose();
+            this.client.Close();
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticlesRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticlesRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class GetArticlesRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -45,8 +45,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticlesResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticlesResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class GetArticlesResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -91,8 +91,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService.Entites")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService.Entities")]
     [System.SerializableAttribute()]
     public partial class Article : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -201,8 +201,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
-        "cationService.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.U" +
+        "sersApplicationService.Entities")]
     [System.SerializableAttribute()]
     public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -263,8 +263,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Comment", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService.Entites")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Comment", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService.Entities")]
     [System.SerializableAttribute()]
     public partial class Comment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -341,8 +341,100 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateArticleRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticleRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
+    [System.SerializableAttribute()]
+    public partial class GetArticleRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ArticleIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ArticleId {
+            get {
+                return this.ArticleIdField;
+            }
+            set {
+                if ((this.ArticleIdField.Equals(value) != true)) {
+                    this.ArticleIdField = value;
+                    this.RaisePropertyChanged("ArticleId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetArticleResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
+    [System.SerializableAttribute()]
+    public partial class GetArticleResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article ArticleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.Article Article {
+            get {
+                return this.ArticleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ArticleField, value) != true)) {
+                    this.ArticleField = value;
+                    this.RaisePropertyChanged("Article");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateArticleRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class CreateArticleRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -419,8 +511,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateArticleResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateArticleResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class CreateArticleResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -465,8 +557,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteArticleRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteArticleRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class DeleteArticleRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -511,8 +603,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteArticleResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteArticleResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class DeleteArticleResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -557,8 +649,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddCommentRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCommentRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class AddCommentRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -635,8 +727,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddCommentResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCommentResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class AddCommentResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -681,8 +773,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteCommentRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteCommentRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class DeleteCommentRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -743,8 +835,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteCommentResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesAp" +
-        "plicationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteCommentResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.A" +
+        "rticlesApplicationService")]
     [System.SerializableAttribute()]
     public partial class DeleteCommentResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -789,8 +881,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FindImageRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesAppl" +
-        "icationsService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FindImageRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.I" +
+        "magesApplicationsService")]
     [System.SerializableAttribute()]
     public partial class FindImageRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -835,8 +927,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FindImageResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesAppl" +
-        "icationsService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FindImageResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.I" +
+        "magesApplicationsService")]
     [System.SerializableAttribute()]
     public partial class FindImageResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -881,8 +973,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserByNameRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
-        "cationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserByNameRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.U" +
+        "sersApplicationService")]
     [System.SerializableAttribute()]
     public partial class GetUserByNameRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -890,7 +982,7 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UseNameField;
+        private string UserNameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -903,14 +995,14 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UseName {
+        public string UserName {
             get {
-                return this.UseNameField;
+                return this.UserNameField;
             }
             set {
-                if ((object.ReferenceEquals(this.UseNameField, value) != true)) {
-                    this.UseNameField = value;
-                    this.RaisePropertyChanged("UseName");
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
                 }
             }
         }
@@ -927,8 +1019,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserByNameResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
-        "cationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetUserByNameResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.U" +
+        "sersApplicationService")]
     [System.SerializableAttribute()]
     public partial class GetUserByNameResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -973,8 +1065,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateNewUserRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
-        "cationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateNewUserRequest", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.U" +
+        "sersApplicationService")]
     [System.SerializableAttribute()]
     public partial class CreateNewUserRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1019,8 +1111,8 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateNewUserResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersAppli" +
-        "cationService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateNewUserResponse", Namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.U" +
+        "sersApplicationService")]
     [System.SerializableAttribute()]
     public partial class CreateNewUserResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1072,6 +1164,12 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetArticles", ReplyAction="http://tempuri.org/IArticlesWebService/GetArticlesResponse")]
         System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesResponse> GetArticlesAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetArticle", ReplyAction="http://tempuri.org/IArticlesWebService/GetArticleResponse")]
+        Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleResponse GetArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/GetArticle", ReplyAction="http://tempuri.org/IArticlesWebService/GetArticleResponse")]
+        System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleResponse> GetArticleAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticlesWebService/CreateArticle", ReplyAction="http://tempuri.org/IArticlesWebService/CreateArticleResponse")]
         Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleResponse CreateArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleRequest request);
@@ -1149,6 +1247,14 @@ namespace Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference {
         
         public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesResponse> GetArticlesAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticlesRequest request) {
             return base.Channel.GetArticlesAsync(request);
+        }
+        
+        public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleResponse GetArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleRequest request) {
+            return base.Channel.GetArticle(request);
+        }
+        
+        public System.Threading.Tasks.Task<Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleResponse> GetArticleAsync(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.GetArticleRequest request) {
+            return base.Channel.GetArticleAsync(request);
         }
         
         public Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleResponse CreateArticle(Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference.CreateArticleRequest request) {

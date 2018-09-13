@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
-using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
-using Infotecs.MiniJournal.Contracts.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService;
+using Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService;
 
 namespace Infotecs.MiniJournal.WcfService
 {
@@ -20,6 +20,14 @@ namespace Infotecs.MiniJournal.WcfService
         /// <param name="request">Объект запроса.</param>
         [OperationContract]
         Task<GetArticlesResponse> GetArticlesAsync(GetArticlesRequest request);
+
+        /// <summary>
+        /// Возвращает одну статью.
+        /// </summary>
+        /// <param name="request">Объект запроса.</param>
+        /// <returns>Запрошенную статей.</returns>     
+        [OperationContract]
+        Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request);
 
         /// <summary>
         /// Создать статью с указанным содержимым.

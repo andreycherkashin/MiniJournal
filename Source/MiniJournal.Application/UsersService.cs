@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using Infotecs.MiniJournal.Contracts.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts;
+using Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts.Events;
 using Infotecs.MiniJournal.Domain.Users;
 
 namespace Infotecs.MiniJournal.Application
@@ -13,6 +15,7 @@ namespace Infotecs.MiniJournal.Application
     {
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IEventPublisher evenPublisher;
         private readonly IUserFactory userFactory;
         private readonly IUserDomainService userService;
 
@@ -23,16 +26,19 @@ namespace Infotecs.MiniJournal.Application
         /// <param name="userFactory"><see cref="IUserFactory"/>IUserFactory.</param>
         /// <param name="mapper"><see cref="IMapper"/>Mapper.</param>
         /// <param name="unitOfWork"><see cref="IUnitOfWork"/>Unit of work.</param>
+        /// <param name="evenPublisher"><see cref="IEventPublisher"/>.</param>
         public UsersService(
             IUserDomainService userService,
             IUserFactory userFactory,
             IMapper mapper,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IEventPublisher evenPublisher)
         {
             this.userService = userService;
             this.userFactory = userFactory;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
+            this.evenPublisher = evenPublisher;
         }
 
         /// <summary>
@@ -53,7 +59,7 @@ namespace Infotecs.MiniJournal.Application
 
             User user = await this.userService.GetUserByNameAsync(request.UserName);
 
-            return new GetUserByNameResponse(this.mapper.Map<Contracts.UsersApplicationService.Entities.User>(user));
+            return new GetUserByNameResponse(this.mapper.Map<Contracts.Commands.UsersApplicationService.Entities.User>(user));
         }
 
         /// <summary>
@@ -73,6 +79,7 @@ namespace Infotecs.MiniJournal.Application
             await this.userService.CreateUserAsync(user);
 
             await this.unitOfWork.SaveChangesAsync();
+            await this.evenPublisher.PublishAsync(new UserCreatedEvent(user.Id, user.Name));
 
             return new CreateNewUserResponse(true);
         }

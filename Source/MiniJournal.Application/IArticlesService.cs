@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
 
 namespace Infotecs.MiniJournal.Application
 {
@@ -15,6 +15,13 @@ namespace Infotecs.MiniJournal.Application
         /// <param name="request">Запрос списка статей.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         Task<GetArticlesResponse> GetArticlesAsync(GetArticlesRequest request);
+
+        /// <summary>
+        /// Возвращает статью.
+        /// </summary>
+        /// <param name="request"><see cref="GetArticleRequest"/>.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request);
 
         /// <summary>
         /// Создать статью с указанным содержимым.
@@ -36,7 +43,6 @@ namespace Infotecs.MiniJournal.Application
         /// <param name="request">Запрос добавления статьи.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         Task<AddCommentResponse> AddCommentAsync(AddCommentRequest request);
-
 
         /// <summary>
         /// Удаляет комментарий.

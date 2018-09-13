@@ -39,14 +39,18 @@ namespace Infotecs.MiniJournal.WpfClient
                 eventArgs.Handled = true;
                 MessageBox.Show(eventArgs.Exception.ToString(), "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             };
+
+            this.ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
 
         /// <summary>Raises the <see cref="E:System.Windows.Application.Startup"/> event.</summary>
         /// <param name="e">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
         protected override void OnStartup(StartupEventArgs e)
         {
-            Boostraper.Start();
+            base.OnStartup(e);
 
+            Boostraper.Start();
+            
             var window = new MainWindow();
 
             window.Closed += (sender, args) => Boostraper.Stop();

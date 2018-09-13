@@ -3,9 +3,9 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Application;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
-using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
-using Infotecs.MiniJournal.Contracts.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService;
+using Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService;
 
 namespace Infotecs.MiniJournal.WcfService
 {
@@ -36,50 +36,38 @@ namespace Infotecs.MiniJournal.WcfService
 
         /// <inheritdoc />
         public Task<GetArticlesResponse> GetArticlesAsync(GetArticlesRequest request)
-        {
-            return this.articlesService.GetArticlesAsync(request);
-        }
+            => this.articlesService.GetArticlesAsync(request);
+
+        /// <inheritdoc />
+        public Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request)
+            => this.articlesService.GetArticleAsync(request);
 
         /// <inheritdoc />
         public Task<CreateArticleResponse> CreateArticleAsync(CreateArticleRequest request)
-        {
-            return this.articlesService.CreateArticleAsync(request);
-        }
+            => this.articlesService.CreateArticleAsync(request);
 
         /// <inheritdoc />
         public Task<DeleteArticleResponse> DeleteArticleAsync(DeleteArticleRequest request)
-        {
-            return this.articlesService.DeleteArticleAsync(request);
-        }
+            => this.articlesService.DeleteArticleAsync(request);
 
         /// <inheritdoc />
         public Task<AddCommentResponse> AddCommentAsync(AddCommentRequest request)
-        {
-            return this.articlesService.AddCommentAsync(request);
-        }
+            => this.articlesService.AddCommentAsync(request);
 
         /// <inheritdoc />
         public Task<DeleteCommentResponse> DeleteCommentAsync(DeleteCommentRequest request)
-        {
-            return this.articlesService.DeleteCommentAsync(request);
-        }
+            => this.articlesService.DeleteCommentAsync(request);
 
         /// <inheritdoc />
         public Task<FindImageResponse> FindImageAsync(FindImageRequest request)
-        {
-            return this.imagesService.FindImageAsync(request);
-        }
+            => this.imagesService.FindImageAsync(request);
 
         /// <inheritdoc />
         public Task<GetUserByNameResponse> GetUserByNameAsync(GetUserByNameRequest request)
-        {
-            return this.usersService.GetUserByNameAsync(request);
-        }
+            => this.usersService.GetUserByNameAsync(request);
 
         /// <inheritdoc />
         public Task<CreateNewUserResponse> CreateNewUserAsync(CreateNewUserRequest request)
-        {
-            return this.usersService.CreateNewUserAsync(request);
-        }
+            => this.usersService.CreateNewUserAsync(request);
     }
 }

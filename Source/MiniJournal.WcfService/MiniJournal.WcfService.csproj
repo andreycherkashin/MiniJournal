@@ -114,6 +114,10 @@
       <Project>{0EBD9AE1-581C-4000-92B2-549592B1B98D}</Project>
       <Name>MiniJournal.PostgreSql.NHibernate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MiniJournal.RabbitMqPublisher\MiniJournal.RabbitMqPublisher.csproj">
+      <Project>{19cc668a-7b8f-4f22-8674-6fb0a425e076}</Project>
+      <Name>MiniJournal.RabbitMqPublisher</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">

@@ -17,7 +17,7 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate.Mappings
             this.Map(x => x.Text, "text");
 
             this.References(x => x.User);
-            this.HasMany(x => x.Comments).Cascade.Delete();
+            this.HasMany(x => x.Comments).Inverse().ForeignKeyCascadeOnDelete();
         }
     }
 }

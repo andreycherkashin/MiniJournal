@@ -21,6 +21,7 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
 
         private IQueryable<Article> Articles
             => this.Session.Query<Article>()
+                .OrderBy(x => x.Id)
                 .Fetch(x => x.User)
                 .FetchMany(x => x.Comments)
                 .ThenFetch(c => c.User);

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Management.Automation;
 using Autofac;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
-using Infotecs.MiniJournal.RabbitMqClient;
+using Infotecs.MiniJournal.Contracts;
+using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
 
 namespace MiniJournal.PowerShellCmdlet
 {
@@ -36,8 +36,8 @@ namespace MiniJournal.PowerShellCmdlet
         {
             using (ILifetimeScope scope = this.rootScope.BeginLifetimeScope())
             {
-                var client = scope.Resolve<IArticlesServiceRabbitMqClient>();
-                client.DeleteArticleAsync(new DeleteArticleRequest(this.Article)).Wait();
+                var commandDispatcher = scope.Resolve<ICommandDispatcher>();
+                commandDispatcher.DispatchAsync(new DeleteArticleRequest(this.Article)).Wait();
             }
         }
 

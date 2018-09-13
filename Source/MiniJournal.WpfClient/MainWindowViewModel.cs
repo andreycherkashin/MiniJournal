@@ -3,19 +3,16 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.ServiceModel;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
-using Infotecs.MiniJournal.RabbitMqClient;
+using Infotecs.MiniJournal.Contracts;
+using Infotecs.MiniJournal.Contracts.Events;
 using Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference;
-using Infotecs.MiniJournal.WpfClient.Properties;
-using RawRabbit.Exceptions;
-using Serilog;
-using AddCommentRequest = Infotecs.MiniJournal.Contracts.ArticlesApplicationService.AddCommentRequest;
-using CreateArticleRequest = Infotecs.MiniJournal.Contracts.ArticlesApplicationService.CreateArticleRequest;
-using CreateNewUserRequest = Infotecs.MiniJournal.Contracts.UsersApplicationService.CreateNewUserRequest;
-using GetUserByNameRequest = Infotecs.MiniJournal.Contracts.UsersApplicationService.GetUserByNameRequest;
-using GetUserByNameResponse = Infotecs.MiniJournal.Contracts.UsersApplicationService.GetUserByNameResponse;
-using User = Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities.User;
+using AddCommentRequest = Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.AddCommentRequest;
+using CreateArticleRequest = Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.CreateArticleRequest;
+using CreateNewUserRequest = Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService.CreateNewUserRequest;
 
 namespace Infotecs.MiniJournal.WpfClient
 {
@@ -24,7 +21,8 @@ namespace Infotecs.MiniJournal.WpfClient
     /// </summary>
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private readonly IArticlesServiceRabbitMqClient articlesServiceRabbitMqClient;
+        private readonly ICommandDispatcher commandDispatcher;
+        private readonly IMessageBusListener messageBusListener;
         private ICommand addArticleCommand;
         private ICommand addCommentCommand;
         private byte[] articleImage;
@@ -40,10 +38,19 @@ namespace Infotecs.MiniJournal.WpfClient
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
         /// </summary>
-        /// <param name="articlesServiceRabbitMqClient">Класс длы размещения зада в очереди.</param>
-        public MainWindowViewModel(IArticlesServiceRabbitMqClient articlesServiceRabbitMqClient)
+        /// <param name="commandDispatcher">Класс длы размещения задач в очереди.</param>
+        /// <param name="messageBusListener"><see cref="IMessageBusListener"/>.</param>
+        public MainWindowViewModel(ICommandDispatcher commandDispatcher, IMessageBusListener messageBusListener)
         {
-            this.articlesServiceRabbitMqClient = articlesServiceRabbitMqClient;
+            this.commandDispatcher = commandDispatcher;
+            this.messageBusListener = messageBusListener;
+
+            this.messageBusListener.Subscribe<ArticleCreatedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
+            this.messageBusListener.Subscribe<ArticleDeletedEvent>(@event => Task.Run(() => Application.Current.Dispatcher.Invoke(() => this.Articles.Remove(this.Articles.FirstOrDefault(x => x.Id == @event.ArticleId)))));
+            this.messageBusListener.Subscribe<CommentAddedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
+            this.messageBusListener.Subscribe<CommentDeletedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
+
+            Task.Run(this.LoadArticles);
         }
 
         /// <inheritdoc />
@@ -257,13 +264,25 @@ namespace Infotecs.MiniJournal.WpfClient
             this.CommentUser = null;
             this.CommentText = null;
 
-            User user = await this.GetUser(userName);
+            async Task CreateAddCommentCommand(long userId)
+            {
+                await this.commandDispatcher.DispatchAsync(new AddCommentRequest(userId, articleId, text));
+            }
 
-            await this.articlesServiceRabbitMqClient.AddCommentAsync(new AddCommentRequest(user.Id, articleId, text));
+            var user = await this.GetUser(userName);
+            if (user == null)
+            {               
+                this.messageBusListener.SubscribeOnce<UserCreatedEvent>(@event => @event.UserName == userName, @event => CreateAddCommentCommand(@event.UserId));
+                await this.commandDispatcher.DispatchAsync(new CreateNewUserRequest(userName));
+            }
+            else
+            {
+                await CreateAddCommentCommand(user.Id);
+            }
         }
 
         private async Task AddArticle()
-        {
+        {            
             string userName = this.ArticleUser;
             string text = this.ArticleText;
             byte[] image = this.ArticleImage;
@@ -272,33 +291,61 @@ namespace Infotecs.MiniJournal.WpfClient
             this.ArticleText = null;
             this.ArticleImage = null;
 
-            User user = await this.GetUser(userName);
+            async Task CreateAddArticleCommand(long userId)
+            {
+                await this.commandDispatcher.DispatchAsync(new CreateArticleRequest(text, image, userId));
+            }
 
-            await this.articlesServiceRabbitMqClient.CreateArticleAsync(new CreateArticleRequest(text, image, user.Id));
+            var user = await this.GetUser(userName);
+            if (user == null)
+            {
+                this.messageBusListener.SubscribeOnce<UserCreatedEvent>(@event => @event.UserName == userName, @event => CreateAddArticleCommand(@event.UserId));
+                await this.commandDispatcher.DispatchAsync(new CreateNewUserRequest(userName));
+            }
+            else
+            {
+                await CreateAddArticleCommand(user.Id);
+            }
         }
 
         private async Task<User> GetUser(string userName)
         {
-            User user;
-            try
+            using (var serviceClient = new ArticlesWebServiceClient())
             {
-                GetUserByNameResponse response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new GetUserByNameRequest(userName));
-                user = response.User;
+                User user;
+                try
+                {
+                    GetUserByNameResponse response =
+                        await serviceClient.GetUserByNameAsync(new GetUserByNameRequest { UserName = userName });
+
+                    user = response.User;
+                }
+                catch (FaultException<ExceptionDetail> ex) when (ex.Message == "User not found.")
+                {
+                    return null;
+                }
+
+                return user;
             }
-            catch (MessageHandlerException ex) when (ex.InnerMessage == "User not found.")
+        }
+
+        private async Task RetrieveArticle(long articleId)
+        {
+            Article previouslySelectedArticle = this.SelectedArticle;
+
+            using (var serviceClient = new ArticlesWebServiceClient())
             {
-                Log.Information(ex, "creating new user");
+                var response = await serviceClient.GetArticleAsync(new GetArticleRequest { ArticleId = articleId });
+                var oldArticle = this.Articles.FirstOrDefault(x => x.Id == response.Article.Id);
+                if (oldArticle != null)
+                {
+                    Application.Current.Dispatcher.Invoke(() => this.Articles.Remove(oldArticle));
+                }
 
-                await this.articlesServiceRabbitMqClient.CreateNewUserAsync(new CreateNewUserRequest(userName));
-
-                // ждем секунду чтобы создался пользователь
-                await Task.Delay(1000);
-
-                GetUserByNameResponse response = await this.articlesServiceRabbitMqClient.GetUserByNameAsync(new GetUserByNameRequest(userName));
-                user = response.User;
+                Application.Current.Dispatcher.Invoke(() => this.Articles.Add(response.Article));
             }
 
-            return user;
+            Application.Current.Dispatcher.Invoke(() => this.SelectedArticle = this.Articles.FirstOrDefault(x => x.Id == previouslySelectedArticle?.Id));
         }
     }
 }

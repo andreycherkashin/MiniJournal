@@ -66,6 +66,8 @@
     </ApplicationDefinition>
     <Compile Include="Boostraper.cs" />
     <Compile Include="ByteToImageConverter.cs" />
+    <Compile Include="IMessageBusListener.cs" />
+    <Compile Include="MessageBusListener.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -112,9 +114,9 @@
       <Project>{083F751B-526E-4708-8744-6B8D33D299FA}</Project>
       <Name>MiniJournal.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniJournal.RabbitMqClient\MiniJournal.RabbitMqClient.csproj">
-      <Project>{c4d72edc-8c2b-431e-b267-34184bd46fd1}</Project>
-      <Name>MiniJournal.RabbitMqClient</Name>
+    <ProjectReference Include="..\MiniJournal.RabbitMqPublisher\MiniJournal.RabbitMqPublisher.csproj">
+      <Project>{19cc668a-7b8f-4f22-8674-6fb0a425e076}</Project>
+      <Name>MiniJournal.RabbitMqPublisher</Name>
     </ProjectReference>
     <ProjectReference Include="..\MiniJournal.WcfServiceClient\MiniJournal.WcfServiceClient.csproj">
       <Project>{7f37dd18-2738-40d6-ac70-d03e142c81f3}</Project>

@@ -6,6 +6,7 @@ using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql.NHibernate;
+using Infotecs.MiniJournal.RabbitMqPublisher;
 using Infotecs.MiniJournal.WcfService.ErrorHandling;
 using Serilog;
 
@@ -51,6 +52,7 @@ namespace Infotecs.MiniJournal.WcfService
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<NHibernateModule>();
             builder.RegisterModule<DiskStorageModule>();
+            builder.RegisterModule(new RabbitMqPublisherModule(ConfigurationManager.AppSettings["RabbitMq"]));
         }
     }
 }

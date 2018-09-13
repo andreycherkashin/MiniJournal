@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
+using Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService;
 
 namespace Infotecs.MiniJournal.Application
 {

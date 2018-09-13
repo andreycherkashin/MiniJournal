@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Autofac;
 using Infotecs.MiniJournal.Application;
-using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
-using Infotecs.MiniJournal.Contracts.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService;
 using RawRabbit;
 
 namespace Infotecs.MiniJournal.WinService.RabbitMq

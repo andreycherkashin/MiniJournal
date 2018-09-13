@@ -6,6 +6,7 @@ using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql.NHibernate;
+using Infotecs.MiniJournal.RabbitMqPublisher;
 using Infotecs.MiniJournal.WinService.RabbitMq;
 using RawRabbit.DependencyInjection.Autofac;
 using RawRabbit.Logging;
@@ -60,6 +61,7 @@ namespace Infotecs.MiniJournal.WinService
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<NHibernateModule>();
             builder.RegisterModule<DiskStorageModule>();
+            builder.RegisterModule(new RabbitMqPublisherModule(ConfigurationManager.AppSettings["RabbitMq"]));
         }
     }
 }
