@@ -32,6 +32,7 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
 
         /// <inheritdoc />
         public void SubscribeToEvent<TEvent>(Func<TEvent, Task> eventHandler)
+            where TEvent : IEvent
         {
             this.busClient.SubscribeAsync<TEvent>((message, context) => eventHandler(message));
         }
