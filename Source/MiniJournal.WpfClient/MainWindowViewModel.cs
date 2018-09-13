@@ -6,13 +6,12 @@ using System.Runtime.CompilerServices;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using Infotecs.MiniJournal.Contracts;
-using Infotecs.MiniJournal.Contracts.Events;
+using Infotecs.MiniJournal.Events;
+using Infotecs.MiniJournal.Events.Commands;
+using Infotecs.MiniJournal.Events.Events;
 using Infotecs.MiniJournal.WcfServiceClient.ArticlesServiceReference;
-using AddCommentRequest = Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.AddCommentRequest;
-using CreateArticleRequest = Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.CreateArticleRequest;
-using CreateNewUserRequest = Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService.CreateNewUserRequest;
+using ICommand = System.Windows.Input.ICommand;
 
 namespace Infotecs.MiniJournal.WpfClient
 {
@@ -46,7 +45,7 @@ namespace Infotecs.MiniJournal.WpfClient
             this.messageBusListener = messageBusListener;
 
             this.messageBusListener.Subscribe<ArticleCreatedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
-            this.messageBusListener.Subscribe<ArticleDeletedEvent>(@event => Task.Run(() => Application.Current.Dispatcher.Invoke(() => this.Articles.Remove(this.Articles.FirstOrDefault(x => x.Id == @event.ArticleId)))));
+            this.messageBusListener.Subscribe<ArticleDeletedEvent>(@event => Task.Run(() => this.Articles.Remove(this.Articles.FirstOrDefault(x => x.Id == @event.ArticleId))));
             this.messageBusListener.Subscribe<CommentAddedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
             this.messageBusListener.Subscribe<CommentDeletedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
 
@@ -266,14 +265,14 @@ namespace Infotecs.MiniJournal.WpfClient
 
             async Task CreateAddCommentCommand(long userId)
             {
-                await this.commandDispatcher.DispatchAsync(new AddCommentRequest(userId, articleId, text));
+                await this.commandDispatcher.DispatchAsync(new AddCommentCommand(userId, articleId, text));
             }
 
             var user = await this.GetUser(userName);
             if (user == null)
             {               
                 this.messageBusListener.SubscribeOnce<UserCreatedEvent>(@event => @event.UserName == userName, @event => CreateAddCommentCommand(@event.UserId));
-                await this.commandDispatcher.DispatchAsync(new CreateNewUserRequest(userName));
+                await this.commandDispatcher.DispatchAsync(new CreateNewUserCommand(userName));
             }
             else
             {
@@ -293,14 +292,14 @@ namespace Infotecs.MiniJournal.WpfClient
 
             async Task CreateAddArticleCommand(long userId)
             {
-                await this.commandDispatcher.DispatchAsync(new CreateArticleRequest(text, image, userId));
+                await this.commandDispatcher.DispatchAsync(new CreateArticleCommand(text, image, userId));
             }
 
             var user = await this.GetUser(userName);
             if (user == null)
             {
                 this.messageBusListener.SubscribeOnce<UserCreatedEvent>(@event => @event.UserName == userName, @event => CreateAddArticleCommand(@event.UserId));
-                await this.commandDispatcher.DispatchAsync(new CreateNewUserRequest(userName));
+                await this.commandDispatcher.DispatchAsync(new CreateNewUserCommand(userName));
             }
             else
             {
@@ -339,13 +338,13 @@ namespace Infotecs.MiniJournal.WpfClient
                 var oldArticle = this.Articles.FirstOrDefault(x => x.Id == response.Article.Id);
                 if (oldArticle != null)
                 {
-                    Application.Current.Dispatcher.Invoke(() => this.Articles.Remove(oldArticle));
+                    this.Articles.Remove(oldArticle);
                 }
 
-                Application.Current.Dispatcher.Invoke(() => this.Articles.Add(response.Article));
+                this.Articles.Add(response.Article);
             }
 
-            Application.Current.Dispatcher.Invoke(() => this.SelectedArticle = this.Articles.FirstOrDefault(x => x.Id == previouslySelectedArticle?.Id));
+            this.SelectedArticle = this.Articles.FirstOrDefault(x => x.Id == previouslySelectedArticle?.Id);
         }
     }
 }

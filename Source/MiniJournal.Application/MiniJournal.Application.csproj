@@ -28,5 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MiniJournal.Contracts\MiniJournal.Contracts.csproj" />
     <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj" />
+    <ProjectReference Include="..\MiniJournal.Events\MiniJournal.Events.csproj" />
   </ItemGroup>
 </Project>

@@ -29,6 +29,6 @@
     </PackageReference>
   </ItemGroup>
  <ItemGroup>
-   <ProjectReference Include="..\MiniJournal.Application\MiniJournal.Application.csproj" />
+   <ProjectReference Include="..\MiniJournal.Events\MiniJournal.Events.csproj" />
  </ItemGroup>
 </Project>

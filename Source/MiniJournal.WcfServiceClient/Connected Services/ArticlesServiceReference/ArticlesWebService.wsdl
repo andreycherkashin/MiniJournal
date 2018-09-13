@@ -4,11 +4,11 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" />
-      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.Entities" />
-      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService.Entities" />
-      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService" />
-      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService" />
+      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" />
+      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entities" />
+      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService.Entities" />
+      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesApplicationsService" />
+      <xsd:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IArticlesWebService_GetArticles_InputMessage">

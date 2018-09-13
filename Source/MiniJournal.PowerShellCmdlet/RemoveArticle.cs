@@ -2,7 +2,9 @@
 using System.Management.Automation;
 using Autofac;
 using Infotecs.MiniJournal.Contracts;
-using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
+using Infotecs.MiniJournal.Events;
+using Infotecs.MiniJournal.Events.Commands;
 
 namespace MiniJournal.PowerShellCmdlet
 {
@@ -37,7 +39,7 @@ namespace MiniJournal.PowerShellCmdlet
             using (ILifetimeScope scope = this.rootScope.BeginLifetimeScope())
             {
                 var commandDispatcher = scope.Resolve<ICommandDispatcher>();
-                commandDispatcher.DispatchAsync(new DeleteArticleRequest(this.Article)).Wait();
+                commandDispatcher.DispatchAsync(new DeleteArticleCommand(this.Article)).Wait();
             }
         }
 

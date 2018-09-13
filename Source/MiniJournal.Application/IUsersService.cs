@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService;
 
 namespace Infotecs.MiniJournal.Application
 {

@@ -1,5 +1,4 @@
 ﻿using System;
-using Infotecs.MiniJournal.WinService.RabbitMq;
 using Topshelf;
 
 namespace Infotecs.MiniJournal.WinService
@@ -7,15 +6,15 @@ namespace Infotecs.MiniJournal.WinService
     /// <inheritdoc/>
     public class WindowsService : ServiceControl
     {
-        private readonly RabbitMqListener rabbitMqListener;
+        private readonly CommandsDispatcher commandsDispatcher;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsService"/> class.
         /// </summary>
-        /// <param name="rabbitMqListener">Слушатель очереди.</param>
-        public WindowsService(RabbitMqListener rabbitMqListener)
+        /// <param name="commandsDispatcher">Слушатель очереди.</param>
+        public WindowsService(CommandsDispatcher commandsDispatcher)
         {
-            this.rabbitMqListener = rabbitMqListener;
+            this.commandsDispatcher = commandsDispatcher;
         }
 
         /// <summary>
@@ -25,7 +24,7 @@ namespace Infotecs.MiniJournal.WinService
         /// <returns>Успешно ли запущена служба.</returns>
         public bool Start(HostControl hostControl)
         {
-            this.rabbitMqListener.Start();
+            this.commandsDispatcher.Start();
 
             return true;
         }
@@ -37,7 +36,7 @@ namespace Infotecs.MiniJournal.WinService
         /// <returns>Успешно ли остановлена служба.</returns>
         public bool Stop(HostControl hostControl)
         {
-            this.rabbitMqListener.Stop();
+            this.commandsDispatcher.Stop();
 
             return true;
         }

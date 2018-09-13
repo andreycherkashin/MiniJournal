@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Infotecs.MiniJournal.Contracts;
-using Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService;
-using Infotecs.MiniJournal.Contracts.Events;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService;
 using Infotecs.MiniJournal.Domain.Users;
+using Infotecs.MiniJournal.Events;
+using Infotecs.MiniJournal.Events.Events;
 
 namespace Infotecs.MiniJournal.Application
 {
@@ -59,7 +60,7 @@ namespace Infotecs.MiniJournal.Application
 
             User user = await this.userService.GetUserByNameAsync(request.UserName);
 
-            return new GetUserByNameResponse(this.mapper.Map<Contracts.Commands.UsersApplicationService.Entities.User>(user));
+            return new GetUserByNameResponse(this.mapper.Map<Contracts.UsersApplicationService.Entities.User>(user));
         }
 
         /// <summary>

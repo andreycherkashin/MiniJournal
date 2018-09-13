@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
-using Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService;
-using Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService;
+using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
+using Infotecs.MiniJournal.Contracts.UsersApplicationService;
 
 namespace Infotecs.MiniJournal.WcfService
 {

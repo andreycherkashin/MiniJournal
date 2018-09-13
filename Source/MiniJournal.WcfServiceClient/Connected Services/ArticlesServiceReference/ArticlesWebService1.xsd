@@ -1,131 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" />
-  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService" />
-  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService" />
+  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" />
+  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesApplicationsService" />
+  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" />
   <xs:element name="GetArticles">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q1:GetArticlesRequest" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q1:GetArticlesRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetArticlesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="GetArticlesResult" nillable="true" type="q2:GetArticlesResponse" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="GetArticlesResult" nillable="true" type="q2:GetArticlesResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetArticle">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q3:GetArticleRequest" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q3:GetArticleRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetArticleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="GetArticleResult" nillable="true" type="q4:GetArticleResponse" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="GetArticleResult" nillable="true" type="q4:GetArticleResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateArticle">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q5:CreateArticleRequest" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q5:CreateArticleRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateArticleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="CreateArticleResult" nillable="true" type="q6:CreateArticleResponse" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="CreateArticleResult" nillable="true" type="q6:CreateArticleResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteArticle">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q7:DeleteArticleRequest" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q7:DeleteArticleRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteArticleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="DeleteArticleResult" nillable="true" type="q8:DeleteArticleResponse" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="DeleteArticleResult" nillable="true" type="q8:DeleteArticleResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddComment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q9:AddCommentRequest" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q9:AddCommentRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddCommentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="AddCommentResult" nillable="true" type="q10:AddCommentResponse" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="AddCommentResult" nillable="true" type="q10:AddCommentResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteComment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q11:DeleteCommentRequest" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="request" nillable="true" type="q11:DeleteCommentRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteCommentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" minOccurs="0" name="DeleteCommentResult" nillable="true" type="q12:DeleteCommentResponse" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" minOccurs="0" name="DeleteCommentResult" nillable="true" type="q12:DeleteCommentResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FindImage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService" minOccurs="0" name="request" nillable="true" type="q13:FindImageRequest" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesApplicationsService" minOccurs="0" name="request" nillable="true" type="q13:FindImageRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FindImageResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService" minOccurs="0" name="FindImageResult" nillable="true" type="q14:FindImageResponse" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ImagesApplicationsService" minOccurs="0" name="FindImageResult" nillable="true" type="q14:FindImageResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserByName">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService" minOccurs="0" name="request" nillable="true" type="q15:GetUserByNameRequest" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" minOccurs="0" name="request" nillable="true" type="q15:GetUserByNameRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService" minOccurs="0" name="GetUserByNameResult" nillable="true" type="q16:GetUserByNameResponse" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" minOccurs="0" name="GetUserByNameResult" nillable="true" type="q16:GetUserByNameResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService" minOccurs="0" name="request" nillable="true" type="q17:CreateNewUserRequest" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" minOccurs="0" name="request" nillable="true" type="q17:CreateNewUserRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.UsersApplicationService" minOccurs="0" name="CreateNewUserResult" nillable="true" type="q18:CreateNewUserResponse" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.UsersApplicationService" minOccurs="0" name="CreateNewUserResult" nillable="true" type="q18:CreateNewUserResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Infotecs.MiniJournal.Application;
-using Infotecs.MiniJournal.Contracts;
-using Infotecs.MiniJournal.Contracts.Events;
+using Infotecs.MiniJournal.Events;
+using Infotecs.MiniJournal.Events.Events;
 using RawRabbit;
 
 namespace Infotecs.MiniJournal.RabbitMqPublisher

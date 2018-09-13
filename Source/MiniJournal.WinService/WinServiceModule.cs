@@ -7,7 +7,6 @@ using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql.NHibernate;
 using Infotecs.MiniJournal.RabbitMqPublisher;
-using Infotecs.MiniJournal.WinService.RabbitMq;
 using RawRabbit.DependencyInjection.Autofac;
 using RawRabbit.Logging;
 using Serilog;
@@ -31,7 +30,7 @@ namespace Infotecs.MiniJournal.WinService
         private static void RegisterWinServiceComponents(ContainerBuilder builder)
         {
             builder.RegisterType<WindowsService>().AsSelf().SingleInstance();
-            builder.RegisterType<RabbitMqListener>().AsSelf().SingleInstance();
+            builder.RegisterType<CommandsDispatcher>().AsSelf().SingleInstance();
         }
 
         private static void RegisterSettings(ContainerBuilder builder)
@@ -61,7 +60,7 @@ namespace Infotecs.MiniJournal.WinService
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<NHibernateModule>();
             builder.RegisterModule<DiskStorageModule>();
-            builder.RegisterModule(new RabbitMqPublisherModule(ConfigurationManager.AppSettings["RabbitMq"]));
+            builder.RegisterModule(new RabbitMqModule(ConfigurationManager.AppSettings["RabbitMq"]));
         }
     }
 }

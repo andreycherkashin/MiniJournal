@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Infotecs.MiniJournal.Contracts;
-using Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService;
-using Infotecs.MiniJournal.Contracts.Commands.ImagesApplicationsService;
-using Infotecs.MiniJournal.Contracts.Events;
+using Infotecs.MiniJournal.Contracts.ArticlesApplicationService;
+using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
 using Infotecs.MiniJournal.Domain.Articles;
 using Infotecs.MiniJournal.Domain.Comments;
 using Infotecs.MiniJournal.Domain.Users;
+using Infotecs.MiniJournal.Events;
+using Infotecs.MiniJournal.Events.Events;
 using Microsoft.Toolkit.Extensions;
 using Serilog;
 
@@ -81,7 +82,7 @@ namespace Infotecs.MiniJournal.Application
 
             return new GetArticlesResponse
             {
-                Articles = this.mapper.Map<List<Contracts.Commands.ArticlesApplicationService.Entities.Article>>(articles)
+                Articles = this.mapper.Map<List<Contracts.ArticlesApplicationService.Entities.Article>>(articles)
             };
         }
 
@@ -95,7 +96,7 @@ namespace Infotecs.MiniJournal.Application
 
             var article = await this.articleRepository.FindByIdAsync(request.ArticleId);
 
-            return new GetArticleResponse(this.mapper.Map<Contracts.Commands.ArticlesApplicationService.Entities.Article>(article));
+            return new GetArticleResponse(this.mapper.Map<Contracts.ArticlesApplicationService.Entities.Article>(article));
         }
 
         /// <inheritdoc />

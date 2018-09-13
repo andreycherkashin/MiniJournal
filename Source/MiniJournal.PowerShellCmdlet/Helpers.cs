@@ -33,14 +33,14 @@ namespace MiniJournal.PowerShellCmdlet
         public static IContainer CreateContainer(string rabbitMqConnectionString)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new RabbitMqPublisherModule(rabbitMqConnectionString ?? "guest:guest@localhost:5672/"));
+            builder.RegisterModule(new RabbitMqModule(rabbitMqConnectionString ?? "guest:guest@localhost:5672/"));
             return builder.Build();
         }
 
         /// <summary>
         /// Возвращает пользователя. 
         /// </summary>
-        /// <param name="client"><see cref="ICommandDispatcher"/>.</param>
+        /// <param name="client"><see cref="ArticlesWebServiceClient"/>.</param>
         /// <param name="userName">Имя пользователя.</param>
         /// <returns>Пользователь.</returns>
         public static User GetUser(this ArticlesWebServiceClient client, string userName)

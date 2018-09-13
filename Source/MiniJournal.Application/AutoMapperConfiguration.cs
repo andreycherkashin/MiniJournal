@@ -20,9 +20,9 @@ namespace Infotecs.MiniJournal.Application
         {
             this.mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Article, Contracts.Commands.ArticlesApplicationService.Entities.Article>();
-                cfg.CreateMap<Comment, Contracts.Commands.ArticlesApplicationService.Entities.Comment>();
-                cfg.CreateMap<User, Contracts.Commands.UsersApplicationService.Entities.User>();
+                cfg.CreateMap<Article, Contracts.ArticlesApplicationService.Entities.Article>();
+                cfg.CreateMap<Comment, Contracts.ArticlesApplicationService.Entities.Comment>();
+                cfg.CreateMap<User, Contracts.UsersApplicationService.Entities.User>();
             });
 
             this.mapperConfiguration.AssertConfigurationIsValid();

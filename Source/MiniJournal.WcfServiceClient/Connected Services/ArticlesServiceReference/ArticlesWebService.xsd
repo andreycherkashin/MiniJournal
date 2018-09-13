@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.Entities" />
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:61060/ArticlesWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entities" />
   <xs:complexType name="GetArticlesRequest">
     <xs:sequence />
   </xs:complexType>
   <xs:element name="GetArticlesRequest" nillable="true" type="tns:GetArticlesRequest" />
   <xs:complexType name="GetArticlesResponse">
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.Entities" minOccurs="0" name="Articles" nillable="true" type="q1:ArrayOfArticle" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entities" minOccurs="0" name="Articles" nillable="true" type="q1:ArrayOfArticle" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetArticlesResponse" nillable="true" type="tns:GetArticlesResponse" />
@@ -19,7 +19,7 @@
   <xs:element name="GetArticleRequest" nillable="true" type="tns:GetArticleRequest" />
   <xs:complexType name="GetArticleResponse">
     <xs:sequence>
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.Commands.ArticlesApplicationService.Entities" minOccurs="0" name="Article" nillable="true" type="q2:Article" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Infotecs.MiniJournal.Contracts.ArticlesApplicationService.Entities" minOccurs="0" name="Article" nillable="true" type="q2:Article" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetArticleResponse" nillable="true" type="tns:GetArticleResponse" />

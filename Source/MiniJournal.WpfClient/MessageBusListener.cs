@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Infotecs.MiniJournal.Contracts.Events;
-using RawRabbit;
+using Infotecs.MiniJournal.Events;
+using Infotecs.MiniJournal.Events.Events;
 
 namespace Infotecs.MiniJournal.WpfClient
 {
@@ -14,20 +14,20 @@ namespace Infotecs.MiniJournal.WpfClient
     public class MessageBusListener : IMessageBusListener, IDisposable
     {
         private readonly ConcurrentDictionary<Type, List<Subscriber>> subscribers = new ConcurrentDictionary<Type, List<Subscriber>>();
-        private readonly IBusClient busClient;
+        private readonly IMessageBus messageBus;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBusListener"/> class.
         /// </summary>
-        /// <param name="busClient"><see cref="IBusClient"/>.</param>
-        public MessageBusListener(IBusClient busClient)
+        /// <param name="messageBus"><see cref="IMessageBus"/>.</param>
+        public MessageBusListener(IMessageBus messageBus)
         {
-            busClient.SubscribeAsync<UserCreatedEvent>((@event, context) => this.OnEventReceived(@event));
-            busClient.SubscribeAsync<ArticleCreatedEvent>((@event, context) => this.OnEventReceived(@event));
-            busClient.SubscribeAsync<ArticleDeletedEvent>((@event, context) => this.OnEventReceived(@event));
-            busClient.SubscribeAsync<CommentAddedEvent>((@event, context) => this.OnEventReceived(@event));
-            busClient.SubscribeAsync<CommentDeletedEvent>((@event, context) => this.OnEventReceived(@event));
-            this.busClient = busClient;
+            messageBus.SubscribeToEvent<UserCreatedEvent>(this.OnEventReceived);
+            messageBus.SubscribeToEvent<ArticleCreatedEvent>(this.OnEventReceived);
+            messageBus.SubscribeToEvent<ArticleDeletedEvent>(this.OnEventReceived);
+            messageBus.SubscribeToEvent<CommentAddedEvent>(this.OnEventReceived);
+            messageBus.SubscribeToEvent<CommentDeletedEvent>(this.OnEventReceived);
+            this.messageBus = messageBus;
         }
 
         /// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Infotecs.MiniJournal.WpfClient
         /// <inheritdoc />
         public void Dispose()
         {
-            this.busClient.ShutdownAsync(TimeSpan.FromSeconds(1)).Wait(TimeSpan.FromSeconds(1));
+            this.messageBus.Dispose();
         }
 
         private async Task OnEventReceived<T>(T @event)
@@ -79,7 +79,7 @@ namespace Infotecs.MiniJournal.WpfClient
 
                 try
                 {
-                    await action(@event);
+                    await Application.Current.Dispatcher.InvokeAsync(async () => await action(@event));
                     subscriber.Triggered = true;
                 }
                 catch (Exception e)

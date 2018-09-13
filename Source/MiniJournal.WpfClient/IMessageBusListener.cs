@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infotecs.MiniJournal.Contracts.Events;
+using Infotecs.MiniJournal.Events.Events;
 
 namespace Infotecs.MiniJournal.WpfClient
 {

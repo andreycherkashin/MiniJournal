@@ -114,6 +114,10 @@
       <Project>{083F751B-526E-4708-8744-6B8D33D299FA}</Project>
       <Name>MiniJournal.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MiniJournal.Events\MiniJournal.Events.csproj">
+      <Project>{9ad4e8e4-98cb-46b8-ad68-32a45c767cbe}</Project>
+      <Name>MiniJournal.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MiniJournal.RabbitMqPublisher\MiniJournal.RabbitMqPublisher.csproj">
       <Project>{19cc668a-7b8f-4f22-8674-6fb0a425e076}</Project>
       <Name>MiniJournal.RabbitMqPublisher</Name>

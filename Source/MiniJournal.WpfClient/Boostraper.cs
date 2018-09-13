@@ -39,7 +39,7 @@ namespace Infotecs.MiniJournal.WpfClient
 
             builder.RegisterType<MainWindowViewModel>().AsSelf().SingleInstance();
             builder.RegisterType<MessageBusListener>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterModule(new RabbitMqPublisherModule(ConfigurationManager.AppSettings["RabbitMq"]));
+            builder.RegisterModule(new RabbitMqModule(ConfigurationManager.AppSettings["RabbitMq"]));
 
             rootScope = builder.Build();
         }

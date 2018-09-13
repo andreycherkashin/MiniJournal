@@ -52,7 +52,7 @@ namespace Infotecs.MiniJournal.WcfService
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<NHibernateModule>();
             builder.RegisterModule<DiskStorageModule>();
-            builder.RegisterModule(new RabbitMqPublisherModule(ConfigurationManager.AppSettings["RabbitMq"]));
+            builder.RegisterModule(new RabbitMqModule(ConfigurationManager.AppSettings["RabbitMq"]));
         }
     }
 }
