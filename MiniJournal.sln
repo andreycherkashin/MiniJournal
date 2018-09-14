@@ -36,6 +36,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniJournal.RabbitMqPublish
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniJournal.Events", "Source\MiniJournal.Events\MiniJournal.Events.csproj", "{9AD4E8E4-98CB-46B8-AD68-32A45C767CBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.WebApp", "Source\MiniJournal.WebApp\MiniJournal.WebApp.csproj", "{B15084C8-AB1F-45C4-A26F-09B5C651354C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,10 @@ Global
 		{9AD4E8E4-98CB-46B8-AD68-32A45C767CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AD4E8E4-98CB-46B8-AD68-32A45C767CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AD4E8E4-98CB-46B8-AD68-32A45C767CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B15084C8-AB1F-45C4-A26F-09B5C651354C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B15084C8-AB1F-45C4-A26F-09B5C651354C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B15084C8-AB1F-45C4-A26F-09B5C651354C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B15084C8-AB1F-45C4-A26F-09B5C651354C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,29 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Infotecs.MiniJournal.Domain</AssemblyName>
-    <RootNamespace>Infotecs.MiniJournal.Domain</RootNamespace>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Infotecs.MiniJournal.WebApp</AssemblyName>
+    <RootNamespace>Infotecs.MiniJournal.WebApp</RootNamespace>
     <CodeAnalysisRuleSet>..\..\infotecs.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <OutputPath></OutputPath>
-    <DocumentationFile>bin\Debug\Infotecs.MiniJournal.Domain.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Infotecs.MiniJournal.WebApp.xml</DocumentationFile>
+    <OutputPath />
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <OutputPath></OutputPath>
-    <DocumentationFile>bin\Release\Infotecs.MiniJournal.Domain.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Infotecs.MiniJournal.WebApp.xml</DocumentationFile>
+    <OutputPath>..\..\Out\Release\WebApp</OutputPath>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Serilog" Version="2.7.1" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta009">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
 </Project>

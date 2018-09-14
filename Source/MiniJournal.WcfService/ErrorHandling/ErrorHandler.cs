@@ -32,7 +32,7 @@ namespace Infotecs.MiniJournal.WcfService.ErrorHandling
         /// <inheritdoc />
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
         {
-            //this.logger.Error(error, "[ProvideFault] an error occured while processing request");
+            this.logger.Error(error, "[ProvideFault] an error occured while processing request");
         }
         
         /// <inheritdoc />
