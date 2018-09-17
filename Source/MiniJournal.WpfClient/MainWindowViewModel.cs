@@ -272,6 +272,7 @@ namespace Infotecs.MiniJournal.WpfClient
             if (user == null)
             {               
                 this.messageBusListener.SubscribeOnce<UserCreatedEvent>(@event => @event.UserName == userName, @event => CreateAddCommentCommand(@event.UserId));
+
                 await this.commandDispatcher.DispatchAsync(new CreateNewUserCommand(userName));
             }
             else
