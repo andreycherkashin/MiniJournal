@@ -21,12 +21,7 @@ namespace Infotecs.MiniJournal.WpfClient
         /// </summary>
         /// <param name="messageBus"><see cref="IMessageBus"/>.</param>
         public MessageBusListener(IMessageBus messageBus)
-        {
-            messageBus.SubscribeToEvent<UserCreatedEvent>(this.OnEventReceived);
-            messageBus.SubscribeToEvent<ArticleCreatedEvent>(this.OnEventReceived);
-            messageBus.SubscribeToEvent<ArticleDeletedEvent>(this.OnEventReceived);
-            messageBus.SubscribeToEvent<CommentAddedEvent>(this.OnEventReceived);
-            messageBus.SubscribeToEvent<CommentDeletedEvent>(this.OnEventReceived);
+        {            
             this.messageBus = messageBus;
         }
 
@@ -34,19 +29,19 @@ namespace Infotecs.MiniJournal.WpfClient
         public void Subscribe<T>(Func<T, Task> eventHandler) where T : IEvent
         {
             Func<T, bool> eventFilter = _ => true;
-            this.AddSubscriber(typeof(T), eventFilter, eventHandler, false);
+            this.AddSubscriber<T>(eventFilter, eventHandler, false);
         }
 
         /// <inheritdoc />
         public void Subscribe<T>(Func<T, bool> eventFilter, Func<T, Task> eventHandler) where T : IEvent
         {
-            this.AddSubscriber(typeof(T), eventFilter, eventHandler, false);
+            this.AddSubscriber<T>(eventFilter, eventHandler, false);
         }
 
         /// <inheritdoc />
         public void SubscribeOnce<T>(Func<T, bool> eventFilter, Func<T, Task> eventHandler) where T : IEvent
         {
-            this.AddSubscriber(typeof(T), eventFilter, eventHandler, true);
+            this.AddSubscriber<T>(eventFilter, eventHandler, true);
         }
 
         /// <inheritdoc />
@@ -64,10 +59,10 @@ namespace Infotecs.MiniJournal.WpfClient
 
             foreach (var subscriber in eventSubscribers)
             {
-                var eventMatcher = (Func<T, bool>)subscriber.EventMatcher;
+                var eventFilter = (Func<T, bool>)subscriber.EventFilter;
                 var action = (Func<T, Task>)subscriber.Action;
 
-                if (!eventMatcher(@event))
+                if (!eventFilter(@event))
                 {
                     continue;
                 }
@@ -79,7 +74,7 @@ namespace Infotecs.MiniJournal.WpfClient
 
                 try
                 {
-                    await Application.Current.Dispatcher.InvokeAsync(async () => await action(@event));
+                    await Application.Current.Dispatcher.InvokeAsync(() => action(@event));
                     subscriber.Triggered = true;
                 }
                 catch (Exception e)
@@ -89,12 +84,14 @@ namespace Infotecs.MiniJournal.WpfClient
             }
         }
 
-        private void AddSubscriber(Type eventType, Delegate eventMatcher, Delegate action, bool once)
-        {
-            if (!this.subscribers.TryGetValue(eventType, out var eventSubscribers))
+        private void AddSubscriber<TEvent>(Delegate eventMatcher, Delegate action, bool once)
+            where TEvent : IEvent
+        {            
+            if (!this.subscribers.TryGetValue(typeof(TEvent), out var eventSubscribers))
             {
                 eventSubscribers = new List<Subscriber>();
-                this.subscribers[eventType] = eventSubscribers;
+                this.messageBus.SubscribeToEventForNotifications<TEvent>(this.OnEventReceived);
+                this.subscribers[typeof(TEvent)] = eventSubscribers;                
             }
 
             lock (eventSubscribers)
@@ -106,14 +103,14 @@ namespace Infotecs.MiniJournal.WpfClient
 
         private class Subscriber
         {
-            public Subscriber(Delegate eventMatcher, Delegate action, bool once)
+            public Subscriber(Delegate eventFilter, Delegate action, bool once)
             {
-                this.EventMatcher = eventMatcher;
+                this.EventFilter = eventFilter;
                 this.Action = action;
                 this.Once = once;
             }
 
-            public Delegate EventMatcher { get; }
+            public Delegate EventFilter { get; }
             public Delegate Action { get; }
             public bool Once { get; }
             public bool Triggered { get; set; }

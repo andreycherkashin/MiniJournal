@@ -27,6 +27,13 @@ namespace Infotecs.MiniJournal.Events
         void SubscribeToEvent<TEvent>(Func<TEvent, Task> eventHandler) where TEvent : IEvent;
 
         /// <summary>
+        /// Подписывает на события.
+        /// </summary>
+        /// <typeparam name="TEvent">Тип события.</typeparam>
+        /// <param name="eventHandler">Обработчик события.</param>
+        void SubscribeToEventForNotifications<TEvent>(Func<TEvent, Task> eventHandler) where TEvent : IEvent;
+
+        /// <summary>
         /// Подписывает на команды.
         /// </summary>
         /// <typeparam name="TCommand">Тип команды.</typeparam>
@@ -39,5 +46,12 @@ namespace Infotecs.MiniJournal.Events
         /// <typeparam name="TEvent">Тип события.</typeparam>
         /// <param name="eventHandler">Обработчик события.</param>
         void SubscribeToEvent<TEvent>(IEventHandler<TEvent> eventHandler) where TEvent : IEvent;
+
+        /// <summary>
+        /// Подписывает на события.
+        /// </summary>
+        /// <typeparam name="TEvent">Тип события.</typeparam>
+        /// <param name="eventHandler">Обработчик события.</param>
+        void SubscribeToEventForNotifications<TEvent>(IEventHandler<TEvent> eventHandler) where TEvent : IEvent;
     }
 }

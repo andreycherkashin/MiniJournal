@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Infotecs.MiniJournal.Events;
 using Infotecs.MiniJournal.Events.Commands;
 using RawRabbit;
+using RawRabbit.Configuration.Exchange;
 
 namespace Infotecs.MiniJournal.RabbitMqPublisher
 {

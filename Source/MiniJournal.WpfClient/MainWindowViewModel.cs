@@ -45,9 +45,13 @@ namespace Infotecs.MiniJournal.WpfClient
             this.messageBusListener = messageBusListener;
 
             this.messageBusListener.Subscribe<ArticleCreatedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
-            this.messageBusListener.Subscribe<ArticleDeletedEvent>(@event => Task.Run(() => this.Articles.Remove(this.Articles.FirstOrDefault(x => x.Id == @event.ArticleId))));
             this.messageBusListener.Subscribe<CommentAddedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
             this.messageBusListener.Subscribe<CommentDeletedEvent>(@event => this.RetrieveArticle(@event.ArticleId));
+            this.messageBusListener.Subscribe<ArticleDeletedEvent>(@event =>
+            {
+                this.Articles.Remove(this.Articles.FirstOrDefault(x => x.Id == @event.ArticleId));
+                return Task.CompletedTask;
+            });
 
             Task.Run(this.LoadArticles);
         }

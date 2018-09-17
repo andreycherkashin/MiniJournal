@@ -34,7 +34,7 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
             builder.RegisterType<RawRabbit.Logging.Serilog.LoggerFactory>().As<ILoggerFactory>().SingleInstance();
             builder.RegisterType<EventPublisher>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<CommandDispatcher>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<RabbitMqMessageBus>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<RabbitMqListener>().AsImplementedInterfaces().SingleInstance();
         }
     }
 }
