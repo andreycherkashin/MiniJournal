@@ -5,6 +5,7 @@
     <AssemblyName>Infotecs.MiniJournal.WebApp</AssemblyName>
     <RootNamespace>Infotecs.MiniJournal.WebApp</RootNamespace>
     <CodeAnalysisRuleSet>..\..\infotecs.ruleset</CodeAnalysisRuleSet>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
