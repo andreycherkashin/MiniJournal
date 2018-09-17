@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.Contracts.ImagesApplicationsService;
+using Nelibur.Sword.Extensions;
 
 namespace Infotecs.MiniJournal.DiskStorage
 {
@@ -23,20 +24,14 @@ namespace Infotecs.MiniJournal.DiskStorage
         /// <inheritdoc />
         public Task<FindImageResponse> FindImageAsync(FindImageRequest request)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            byte[] image = null;
-
-            string fullImagePath = Path.Combine(this.imagesStoragePath, request.ImageId);
-            if (File.Exists(request.ImageId))
-            {
-                image = File.ReadAllBytes(fullImagePath);
-            }
-
-            return Task.FromResult(new FindImageResponse(image));
+            return request
+                .ToOption()
+                .Map(req => Path.Combine(this.imagesStoragePath, req.ImageId))
+                .Where(File.Exists)
+                .Map(File.ReadAllBytes)
+                .Map(FindImageResponse.Create)
+                .Map(Task.FromResult)
+                .Value;            
         }
 
         /// <inheritdoc />

@@ -27,5 +27,13 @@ namespace Infotecs.MiniJournal.Contracts.ImagesApplicationsService
         /// Gets or sets картинка, если найдена. Null, если не найдена.
         /// </summary>
         public byte[] Image { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindImageResponse"/> class.
+        /// </summary>
+        /// <param name="image">Картинка.</param>
+        /// <returns>A new instance of the <see cref="FindImageResponse"/> class.</returns>
+        public static FindImageResponse Create(byte[] image)
+            => new FindImageResponse(image);
     }
 }
