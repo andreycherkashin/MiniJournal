@@ -33,7 +33,7 @@ namespace MiniJournal.PowerShellCmdlet
         public static IContainer CreateContainer(string rabbitMqConnectionString)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new RabbitMqModule(rabbitMqConnectionString ?? "guest:guest@localhost:5672/"));
+            builder.RegisterModule(new RabbitMqModule(rabbitMqConnectionString ?? "amqp://guest:guest@localhost:5672/"));
             return builder.Build();
         }
 

@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Events.Commands;
 using Infotecs.MiniJournal.Events.Events;
-using RawRabbit;
-using RawRabbit.Configuration.Exchange;
 
 namespace Infotecs.MiniJournal.RabbitMqPublisher
 {
@@ -16,13 +14,13 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
     {
         private static readonly string uniqueClientId = Guid.NewGuid().ToString("N");
 
-        private readonly IBusClient busClient;
+        private readonly IRabbitMessageBus busClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RabbitMqListener"/> class.
         /// </summary>
-        /// <param name="busClient"><see cref="IBusClient"/>.</param>
-        public RabbitMqListener(IBusClient busClient)
+        /// <param name="busClient"><see cref="IRabbitMessageBus"/>.</param>
+        public RabbitMqListener(IRabbitMessageBus busClient)
         {
             this.busClient = busClient;
         }
@@ -31,21 +29,7 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
         public void SubscribeToCommand<TCommand>(Func<TCommand, Task> commandHandler)
             where TCommand : ICommand
         {
-            this.busClient.SubscribeAsync<TCommand>((message, context) => commandHandler(message));
-
-            //this.busClient.SubscribeAsync<TCommand>((message, context) => commandHandler(message),
-            //    configuration: configuration =>
-            //    {
-            //        configuration
-            //            .WithQueue(queue =>
-            //            {
-            //                queue
-            //                    .WithName(RabbitMqConfiguration.GetQueueNameForCommand<TCommand>())
-            //                    .WithNameSuffix(string.Empty);
-            //            })
-            //            .WithExchange(exchange => exchange.WithName(RabbitMqConfiguration.GetExchangeNameForCommand<TCommand>()))
-            //            .WithRoutingKey(RabbitMqConfiguration.GetBindingKeyForCommand<TCommand>());
-            //    });
+            this.busClient.SubscribeAsync<TCommand>(message => commandHandler(message), persistant: true);
         }
 
         /// <inheritdoc />
@@ -86,21 +70,13 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
         /// <inheritdoc />
         public void Dispose()
         {
-            this.busClient.ShutdownAsync();
+            this.busClient.Dispose();
         }
 
         private void SubscribeToEvent<TEvent>(Func<TEvent, Task> eventHandler, bool forNotifications)
             where TEvent : IEvent
         {
-            this.busClient.SubscribeAsync<TEvent>((message, context) => eventHandler(message), cfg =>
-            {
-                if (forNotifications)
-                {
-                    cfg
-                        .WithSubscriberId($"{Assembly.GetEntryAssembly().GetName().Name}.{uniqueClientId}")
-                        .WithQueue(queue => queue.WithAutoDelete());
-                }
-            });
+            this.busClient.SubscribeAsync<TEvent>(message => eventHandler(message), !forNotifications);
         }
     }
 }

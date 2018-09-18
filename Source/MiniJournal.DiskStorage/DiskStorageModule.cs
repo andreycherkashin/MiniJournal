@@ -21,7 +21,7 @@ namespace Infotecs.MiniJournal.DiskStorage
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .Register(context => new ImagesService(context.ResolveNamed<string>(this.imageStoragePath)))
+                .Register(context => new ImagesService(this.imageStoragePath))
                 .AsImplementedInterfaces();
         }
     }

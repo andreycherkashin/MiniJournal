@@ -10,6 +10,13 @@ namespace Infotecs.MiniJournal.Contracts.ArticlesApplicationService
         /// <summary>
         /// Initializes a new instance of the <see cref="GetArticleRequest"/> class.
         /// </summary>
+        public GetArticleRequest()
+        {            
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetArticleRequest"/> class.
+        /// </summary>
         /// <param name="articleId">Идентификатор статьи.</param>
         public GetArticleRequest(long articleId)
         {

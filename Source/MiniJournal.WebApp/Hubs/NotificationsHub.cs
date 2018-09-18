@@ -16,13 +16,11 @@ namespace Infotecs.MiniJournal.WebApp.Hubs
         /// <summary>
         /// Рассылает оповещение клиентам.
         /// </summary>
-        /// <typeparam name="TEvent">Тип события.</typeparam>
         /// <param name="event">Событие.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        public async Task Notify<TEvent>(TEvent @event) 
-            where TEvent : IEvent
+        public async Task Notify(object @event)
         {
-            await this.Clients.All.SendAsync(typeof(TEvent).Name, @event);
-        }
+            await this.Clients.All.SendAsync(@event.GetType().Name, @event);
+        }        
     }
 }

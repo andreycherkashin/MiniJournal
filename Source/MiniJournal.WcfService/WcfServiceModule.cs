@@ -21,7 +21,6 @@ namespace Infotecs.MiniJournal.WcfService
             this.RegisterWcfComponents(builder);
             this.RegisterLogger(builder);
             this.RegisterTypesAndModules(builder);
-            this.RegisterSettings(builder);
         }
 
         private void RegisterWcfComponents(ContainerBuilder builder)
@@ -29,12 +28,6 @@ namespace Infotecs.MiniJournal.WcfService
             builder.RegisterType<ArticlesWebService>().AsSelf().AsImplementedInterfaces();
 
             builder.RegisterType<ErrorHandler>().AsImplementedInterfaces();
-        }
-
-        private void RegisterSettings(ContainerBuilder builder)
-        {
-            builder.Register(context => ConfigurationManager.AppSettings["PostgresConnectionString"]).Named<string>("PostgresConnectionString");
-            builder.Register(context => ConfigurationManager.AppSettings["ImagesStoragePath"]).Named<string>("ImagesStoragePath");
         }
 
         private void RegisterLogger(ContainerBuilder builder)

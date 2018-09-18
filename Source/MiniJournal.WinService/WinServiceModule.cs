@@ -7,10 +7,7 @@ using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
 using Infotecs.MiniJournal.PostgreSql.NHibernate;
 using Infotecs.MiniJournal.RabbitMqPublisher;
-using RawRabbit.DependencyInjection.Autofac;
-using RawRabbit.Logging;
 using Serilog;
-using LoggerFactory = RawRabbit.Logging.Serilog.LoggerFactory;
 
 namespace Infotecs.MiniJournal.WinService
 {
@@ -24,7 +21,6 @@ namespace Infotecs.MiniJournal.WinService
             RegisterLogger(builder);
             RegisterTypesAndModules(builder);
             RegisterSettings(builder);
-            RegisterRabbitMq(builder);
         }
 
         private static void RegisterWinServiceComponents(ContainerBuilder builder)
@@ -37,12 +33,6 @@ namespace Infotecs.MiniJournal.WinService
         {
             builder.Register(context => ConfigurationManager.AppSettings["PostgresConnectionString"]).Named<string>("PostgresConnectionString");
             builder.Register(context => ConfigurationManager.AppSettings["ImagesStoragePath"]).Named<string>("ImagesStoragePath");
-        }
-
-        private static void RegisterRabbitMq(ContainerBuilder builder)
-        {
-            builder.RegisterRawRabbit(ConfigurationManager.AppSettings["RabbitMqConnectionString"]);
-            builder.RegisterType<LoggerFactory>().As<ILoggerFactory>().SingleInstance();
         }
 
         private static void RegisterLogger(ContainerBuilder builder)

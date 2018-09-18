@@ -4,21 +4,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Infotecs.MiniJournal.Events;
 using Infotecs.MiniJournal.Events.Events;
-using RawRabbit;
-using RawRabbit.Configuration.Exchange;
 
 namespace Infotecs.MiniJournal.RabbitMqPublisher
 {
     /// <inheritdoc />
     public class EventPublisher : IEventPublisher
     {
-        private readonly IBusClient busClient;
+        private readonly IRabbitMessageBus busClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventPublisher"/> class.
         /// </summary>
-        /// <param name="busClient"><see cref="IBusClient"/>.</param>
-        public EventPublisher(IBusClient busClient)
+        /// <param name="busClient"><see cref="IRabbitMessageBus"/>.</param>
+        public EventPublisher(IRabbitMessageBus busClient)
         {
             this.busClient = busClient;
         }

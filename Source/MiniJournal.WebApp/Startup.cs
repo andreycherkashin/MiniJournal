@@ -51,6 +51,7 @@ namespace Infotecs.MiniJournal.WebApp
             services.AddSignalR();
 
             services.AddHostedService<HostedServices.MessageBusListener>();
+            services.AddSingleton<NotificationsHub>();
 
             var builder = new ContainerBuilder();
 

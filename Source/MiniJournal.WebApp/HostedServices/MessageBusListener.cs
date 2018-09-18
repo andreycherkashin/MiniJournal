@@ -49,7 +49,7 @@ namespace Infotecs.MiniJournal.WebApp.HostedServices
         private async Task SendNotification<TEvent>(TEvent @event) 
             where TEvent : IEvent
         {
-            await this.notificationsHub.Notify<TEvent>(@event);
+            await this.notificationsHub.Notify(@event);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
                 .AsImplementedInterfaces();
 
             builder
-                .Register(context => new SessionProvider(this.CreateSessionFactory(context)))
+                .Register(context => new SessionProvider(this.CreateSessionFactory()))
                 .AsSelf()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
@@ -41,11 +41,11 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
                 .InstancePerLifetimeScope();
         }
 
-        private ISessionFactory CreateSessionFactory(IComponentContext context)
+        private ISessionFactory CreateSessionFactory()
         {
             return Fluently.Configure()
                 .Database(
-                    PostgreSQLConfiguration.PostgreSQL81.ConnectionString(context.ResolveNamed<string>(this.postgresConnectionString))
+                    PostgreSQLConfiguration.PostgreSQL81.ConnectionString(this.postgresConnectionString)
                 )
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<ArticleMap>())
                 .BuildSessionFactory();
