@@ -35,13 +35,13 @@ namespace Infotecs.MiniJournal.WinService
 
         private static void RegisterSettings(ContainerBuilder builder)
         {
-            builder.Register(context => ConfigurationManager.AppSettings["ConnectionString"]).Named<string>("ConnectionString");
+            builder.Register(context => ConfigurationManager.AppSettings["PostgresConnectionString"]).Named<string>("PostgresConnectionString");
             builder.Register(context => ConfigurationManager.AppSettings["ImagesStoragePath"]).Named<string>("ImagesStoragePath");
         }
 
         private static void RegisterRabbitMq(ContainerBuilder builder)
         {
-            builder.RegisterRawRabbit(ConfigurationManager.AppSettings["RabbitMq"]);
+            builder.RegisterRawRabbit(ConfigurationManager.AppSettings["RabbitMqConnectionString"]);
             builder.RegisterType<LoggerFactory>().As<ILoggerFactory>().SingleInstance();
         }
 
@@ -58,9 +58,9 @@ namespace Infotecs.MiniJournal.WinService
         {
             builder.RegisterModule<ApplicationModule>();
             builder.RegisterModule<DomainModule>();
-            builder.RegisterModule<NHibernateModule>();
-            builder.RegisterModule<DiskStorageModule>();
-            builder.RegisterModule(new RabbitMqModule(ConfigurationManager.AppSettings["RabbitMq"]));
+            builder.RegisterModule(new DiskStorageModule(ConfigurationManager.AppSettings["ImagesStoragePath"]));
+            builder.RegisterModule(new NHibernateModule(ConfigurationManager.AppSettings["PostgresConnectionString"]));
+            builder.RegisterModule(new RabbitMqModule(ConfigurationManager.AppSettings["RabbitMqConnectionString"]));
         }
     }
 }

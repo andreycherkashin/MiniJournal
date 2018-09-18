@@ -10,6 +10,17 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
     /// <inheritdoc />
     public class NHibernateModule : Module
     {
+        private readonly string postgresConnectionString;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NHibernateModule"/> class.
+        /// </summary>
+        /// <param name="postgresConnectionString">Строка соединения для Postgres.</param>
+        public NHibernateModule(string postgresConnectionString)
+        {
+            this.postgresConnectionString = postgresConnectionString;
+        }
+
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
@@ -19,7 +30,7 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
                 .AsImplementedInterfaces();
 
             builder
-                .Register(context => new SessionProvider(CreateSessionFactory(context)))
+                .Register(context => new SessionProvider(this.CreateSessionFactory(context)))
                 .AsSelf()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
@@ -30,11 +41,11 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
                 .InstancePerLifetimeScope();
         }
 
-        private static ISessionFactory CreateSessionFactory(IComponentContext context)
+        private ISessionFactory CreateSessionFactory(IComponentContext context)
         {
             return Fluently.Configure()
                 .Database(
-                    PostgreSQLConfiguration.PostgreSQL81.ConnectionString(context.ResolveNamed<string>("ConnectionString"))
+                    PostgreSQLConfiguration.PostgreSQL81.ConnectionString(context.ResolveNamed<string>(this.postgresConnectionString))
                 )
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<ArticleMap>())
                 .BuildSessionFactory();

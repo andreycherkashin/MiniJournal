@@ -27,11 +27,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta009">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniJournal.Application\MiniJournal.Application.csproj" />
+    <ProjectReference Include="..\MiniJournal.DiskStorage\MiniJournal.DiskStorage.csproj" />
+    <ProjectReference Include="..\MiniJournal.Domain\MiniJournal.Domain.csproj" />
+    <ProjectReference Include="..\MiniJournal.Events\MiniJournal.Events.csproj" />
+    <ProjectReference Include="..\MiniJournal.PsotgreSql.NHibernate\MiniJournal.PostgreSql.NHibernate.csproj" />
+    <ProjectReference Include="..\MiniJournal.RabbitMqPublisher\MiniJournal.RabbitMqPublisher.csproj" />
   </ItemGroup>
 
 </Project>

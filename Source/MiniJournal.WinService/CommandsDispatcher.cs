@@ -49,7 +49,7 @@ namespace Infotecs.MiniJournal.WinService
             this.messageBus.SubscribeToCommand<DeleteArticleCommand>(command
                 => this.UsingAsync<IArticlesService>(service => service.DeleteArticleAsync(this.Map<DeleteArticleRequest>(command))));
 
-            this.messageBus.SubscribeToCommand<CreateNewUserCommand>(command
+            this.messageBus.SubscribeToCommand<CreateUserCommand>(command
                 => this.UsingAsync<IUsersService>(service => service.CreateNewUserAsync(this.Map<CreateNewUserRequest>(command))));
         }
 
@@ -93,7 +93,7 @@ namespace Infotecs.MiniJournal.WinService
                     cfg.CreateMap<DeleteCommentCommand, DeleteCommentRequest>();
                     cfg.CreateMap<CreateArticleCommand, CreateArticleRequest>();
                     cfg.CreateMap<DeleteArticleCommand, DeleteArticleRequest>();
-                    cfg.CreateMap<CreateNewUserCommand, CreateNewUserRequest>();
+                    cfg.CreateMap<CreateUserCommand, CreateNewUserRequest>();
                 });
 
                 this.commandMapperConfiguration.AssertConfigurationIsValid();

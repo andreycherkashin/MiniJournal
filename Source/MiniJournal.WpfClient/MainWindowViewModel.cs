@@ -277,7 +277,7 @@ namespace Infotecs.MiniJournal.WpfClient
             {               
                 this.messageBusListener.SubscribeOnce<UserCreatedEvent>(@event => @event.UserName == userName, @event => CreateAddCommentCommand(@event.UserId));
 
-                await this.commandDispatcher.DispatchAsync(new CreateNewUserCommand(userName));
+                await this.commandDispatcher.DispatchAsync(new CreateUserCommand(userName));
             }
             else
             {
@@ -304,7 +304,7 @@ namespace Infotecs.MiniJournal.WpfClient
             if (user == null)
             {
                 this.messageBusListener.SubscribeOnce<UserCreatedEvent>(@event => @event.UserName == userName, @event => CreateAddArticleCommand(@event.UserId));
-                await this.commandDispatcher.DispatchAsync(new CreateNewUserCommand(userName));
+                await this.commandDispatcher.DispatchAsync(new CreateUserCommand(userName));
             }
             else
             {

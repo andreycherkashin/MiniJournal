@@ -17,15 +17,15 @@ namespace Infotecs.MiniJournal.Contracts.UsersApplicationService
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateNewUserResponse"/> class.
         /// </summary>
-        /// <param name="success">Результат операции.</param>
-        public CreateNewUserResponse(bool success)
+        /// <param name="userId">Идентификатор созданного пользователя.</param>
+        public CreateNewUserResponse(long userId)
         {
-            this.Success = success;
+            this.UserId = userId;
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether успешно ли выполнена операция.
+        /// Идентификатор созданного пользователя.
         /// </summary>
-        public bool Success { get; set; }
+        public long UserId { get; set; }
     }
 }

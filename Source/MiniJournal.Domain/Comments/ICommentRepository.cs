@@ -9,6 +9,13 @@ namespace Infotecs.MiniJournal.Domain.Comments
     public interface ICommentRepository
     {
         /// <summary>
+        /// Находит комментарий по идентификатору. Если комментарий не найден, возвращается null.
+        /// </summary>
+        /// <param name="commentId">Идентификатор комментария.</param>
+        /// <returns>Комментарий, либо null, если не найден.</returns>
+        Task<Comment> FindByIdAsync(long commentId);
+
+        /// <summary>
         /// Добавляет комментарий.
         /// </summary>
         /// <param name="articleId">Идентификатор статьи.</param>

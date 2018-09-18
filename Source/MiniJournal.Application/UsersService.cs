@@ -82,7 +82,7 @@ namespace Infotecs.MiniJournal.Application
             await this.unitOfWork.SaveChangesAsync();
             await this.evenPublisher.PublishAsync(new UserCreatedEvent(user.Id, user.Name));
 
-            return new CreateNewUserResponse(true);
+            return new CreateNewUserResponse(user.Id);
         }
     }
 }

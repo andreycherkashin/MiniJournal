@@ -24,16 +24,29 @@ namespace Infotecs.MiniJournal.Application
         Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request);
 
         /// <summary>
+        /// Возвращает статью.
+        /// </summary>
+        /// <param name="request"><see cref="GetCommentRequest"/>.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        Task<GetCommentResponse> GetCommentAsync(GetCommentRequest request);
+
+        /// <summary>
         /// Создать статью с указанным содержимым.
         /// </summary>
         /// <param name="request">Запрос создания статьи.</param>
+        /// <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+        /// Если пользователь не найден.
+        /// </exception>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         Task<CreateArticleResponse> CreateArticleAsync(CreateArticleRequest request);
 
         /// <summary>
         /// Удаляет статью.
-        /// </summary>
+        /// </summary>        
         /// <param name="request">Запрос удаления статьи.</param>
+        /// <exception cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException">
+        /// Если статья не найдена.
+        /// </exception>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         Task<DeleteArticleResponse> DeleteArticleAsync(DeleteArticleRequest request);
 
@@ -41,6 +54,12 @@ namespace Infotecs.MiniJournal.Application
         /// Добавляет комментарий к статье.
         /// </summary>
         /// <param name="request">Запрос добавления статьи.</param>
+        /// <exception cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException">
+        /// Если статья не найдена.
+        /// </exception>
+        /// <exception cref="T:Infotecs.MiniJournal.Domain.Users.Exceptions.UserNotFoundException">
+        /// Если пользователь не найден.
+        /// </exception>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         Task<AddCommentResponse> AddCommentAsync(AddCommentRequest request);
 
@@ -48,6 +67,12 @@ namespace Infotecs.MiniJournal.Application
         /// Удаляет комментарий.
         /// </summary>
         /// <param name="request">Запрос удаления комментария.</param>
+        /// <exception cref="T:Infotecs.MiniJournal.Domain.Articles.Exceptions.ArticleNotFoundException">
+        /// Если статья не найдена.
+        /// </exception>
+        /// <exception cref="T:Infotecs.MiniJournal.Domain.Comments.Exceptions.CommentNotFoundException">
+        /// Если комментарий не найден.
+        /// </exception>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         Task<DeleteCommentResponse> DeleteCommentAsync(DeleteCommentRequest request);
     }

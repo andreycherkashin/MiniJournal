@@ -14,6 +14,12 @@ namespace Infotecs.MiniJournal.PostgreSql.NHibernate
         }
 
         /// <inheritdoc />
+        public Task<Comment> FindByIdAsync(long commentId)
+        {
+            return this.Session.GetAsync<Comment>(commentId);
+        }
+
+        /// <inheritdoc />
         public Task AddAsync(long articleId, Comment comment)
         {
             return this.Session.SaveAsync(comment);

@@ -17,6 +17,7 @@
     <DocumentationFile>bin\Release\Infotecs.MiniJournal.PostgreSql.NHibernate.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="FluentNHibernate" Version="2.1.2" />
     <PackageReference Include="NHibernate" Version="5.1.3" />
     <PackageReference Include="Npgsql" Version="4.0.3" />

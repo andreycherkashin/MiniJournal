@@ -27,6 +27,7 @@ namespace Infotecs.MiniJournal.Application
         private readonly ILogger logger;
         private readonly IMapper mapper;
         private readonly IEventPublisher evenPublisher;
+        private readonly ICommentRepository commentRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly IUserDomainService userService;
 
@@ -44,6 +45,7 @@ namespace Infotecs.MiniJournal.Application
         /// <param name="logger">Implementation of <see cref="ILogger"/>.</param>
         /// <param name="mapper">Implementation of <see cref="IMapper"/>.</param>
         /// <param name="evenPublisher"><see cref="IEventPublisher"/>.</param>
+        /// <param name="commentRepository"><see cref="ICommentRepository"/>.</param>
         public ArticlesService(
             IUnitOfWork unitOfWork,
             IArticleFactory articleFactory,
@@ -55,7 +57,8 @@ namespace Infotecs.MiniJournal.Application
             IImagesService imagesService,
             ILogger logger,
             IMapper mapper,
-            IEventPublisher evenPublisher)
+            IEventPublisher evenPublisher,
+            ICommentRepository commentRepository)
         {
             this.unitOfWork = unitOfWork;
             this.articleFactory = articleFactory;
@@ -68,6 +71,7 @@ namespace Infotecs.MiniJournal.Application
             this.logger = logger;
             this.mapper = mapper;
             this.evenPublisher = evenPublisher;
+            this.commentRepository = commentRepository;
         }
 
         /// <inheritdoc />
@@ -97,6 +101,19 @@ namespace Infotecs.MiniJournal.Application
             var article = await this.articleRepository.FindByIdAsync(request.ArticleId);
 
             return new GetArticleResponse(this.mapper.Map<Contracts.ArticlesApplicationService.Entities.Article>(article));
+        }
+
+        /// <inheritdoc />
+        public async Task<GetCommentResponse> GetCommentAsync(GetCommentRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            var comment = await this.commentRepository.FindByIdAsync(request.CommentId);
+
+            return new GetCommentResponse(this.mapper.Map<Contracts.ArticlesApplicationService.Entities.Comment>(comment));
         }
 
         /// <inheritdoc />
