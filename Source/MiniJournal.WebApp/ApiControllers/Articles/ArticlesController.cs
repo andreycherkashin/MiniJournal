@@ -49,7 +49,7 @@ namespace Infotecs.MiniJournal.WebApp.ApiControllers.Articles
         /// </summary>
         /// <param name="id">.</param>
         /// <returns>.</returns>
-        [HttpGet("{id:long}", Name = "Get")]
+        [HttpGet("{id:long}")]
         public async Task<IActionResult> GetAsync(long id)
         {
             GetArticleResponse response = await this.articlesService.GetArticleAsync(new GetArticleRequest(id));

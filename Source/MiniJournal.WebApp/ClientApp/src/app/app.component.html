@@ -1,7 +1,13 @@
-<div [fxLayout]="column">
-  <div [fxFlex]="15"></div>
-  <div [fxFlex]="70">
-    <h2>{{title}}</h2>    
+<div fxFlex="row" class="container">
+  <div fxFlex="15" fxFlex.sm="0" fxFlex.xl="20"></div>
+  <div fxFlex="70" fxFlex.sm="100" fxFlex.xl="60">
+    <mat-toolbar>
+      <a mat-button routerLink="/articles">Статьи</a>
+      <a mat-button routerLink="/article">Новая статья</a>
+    </mat-toolbar>
+    <h1>{{title}}</h1>
+    <router-outlet></router-outlet>
+    <app-messages></app-messages>
   </div>
-  <div [fxFlex]="15"></div>
+  <div fxFlex="15" fxFlex.sm="0" fxFlex.xl="20"></div>
 </div>

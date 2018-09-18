@@ -1,3 +1,14 @@
-<p>
-  new-article works!
-</p>
+<mat-card>
+  <mat-card-title>Новая статья</mat-card-title>
+  <form [formGroup]="articleForm" (ngSubmit)="submit()">
+    <mat-form-field class="full-width">
+      <input formControlName="userName" matInput placeholder="User name" type="text">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <textarea formControlName="articleText" matInput placeholder="Article text"></textarea>
+    </mat-form-field>
+
+    <button mat-flat-button type="submit" [disabled]="!articleForm.valid">Create</button>
+  </form>
+</mat-card>

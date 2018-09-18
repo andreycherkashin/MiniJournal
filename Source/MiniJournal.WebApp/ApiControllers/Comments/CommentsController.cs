@@ -13,7 +13,7 @@ namespace Infotecs.MiniJournal.WebApp.ApiControllers.Comments
     /// <summary>
     /// Контроллер комментариев.
     /// </summary>
-    [Route("api/articles/{articleId:long}/[controller]")]
+    [Route("api/Articles/{articleId:long}/[controller]")]
     [ApiController]
     public class CommentsController : ControllerBase
     {
@@ -59,10 +59,10 @@ namespace Infotecs.MiniJournal.WebApp.ApiControllers.Comments
         /// <param name="articleId">Идентификатор статьи.</param>
         /// <param name="id">Идентификатор комментария.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpGet("{id:long}", Name = "Get")]
+        [HttpGet("{id:long}")]
         public async Task<IActionResult> GetAsync(long articleId, long id)
         {
-            GetCommentResponse response = await this.articlesService.GetCommentAsync(new GetCommentRequest());
+            GetCommentResponse response = await this.articlesService.GetCommentAsync(new GetCommentRequest(id));
             Comment comment = response?.Comment;
 
             if (comment == null)

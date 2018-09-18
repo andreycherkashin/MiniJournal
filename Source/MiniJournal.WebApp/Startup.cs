@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutofacSerilogIntegration;
 using Infotecs.MiniJournal.Application;
 using Infotecs.MiniJournal.DiskStorage;
 using Infotecs.MiniJournal.Domain;
@@ -61,6 +62,7 @@ namespace Infotecs.MiniJournal.WebApp
             builder.RegisterModule(new DiskStorageModule(this.configuration["ImagesStoragePath"]));
             builder.RegisterModule(new NHibernateModule(this.configuration.GetConnectionString("Postgres")));
             builder.RegisterModule(new RabbitMqModule(this.configuration.GetConnectionString("RabbitMq")));
+            builder.RegisterLogger();
 
             return new AutofacServiceProvider(builder.Build());
         }
