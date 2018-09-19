@@ -72,14 +72,18 @@ namespace Infotecs.MiniJournal.WebApp.ApiControllers.Articles
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] CreateArticle request)
         {
-            GetUserByNameResponse userResponse = await this.usersService.GetUserByNameAsync(new GetUserByNameRequest(request.UserName));
-            long userId = userResponse?.User?.Id ?? 0;
-
-            if (userId == 0)
+            
+            long userId;
+            try
+            {
+                GetUserByNameResponse userResponse = await this.usersService.GetUserByNameAsync(new GetUserByNameRequest(request.UserName));
+                userId = userResponse.User.Id;
+            }
+            catch (Domain.Users.Exceptions.UserNotFoundException)
             {
                 CreateNewUserResponse createUserResponse = await this.usersService.CreateNewUserAsync(new CreateNewUserRequest(request.UserName));
                 userId = createUserResponse.UserId;
-            }
+            }            
 
             try
             {

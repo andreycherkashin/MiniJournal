@@ -41,22 +41,24 @@ export class ArticleService {
     );
   }
 
-  deleteArticle(articleId: number): void {
+  deleteArticle(id: number): Observable<any> {
+    const url = `${articlesUrl}/${id}`;
+    return this.http.delete(url, httpOptions).pipe(
+      tap(() => this.log(`deleted article`)),
+      catchError(this.handleError('deleteArticle'))
+    );
   }
 
-  createArticle(text: string, user: string): void {
+  createArticle(text: string, user: string): Observable<any> {
     const article = {
       text: text,
       userName: user
     };
 
-    const url = `https://localhost:5001/${articlesUrl}`;
-
-    this.http.post(articlesUrl, article, httpOptions).pipe(
+    return this.http.post(articlesUrl, article, httpOptions).pipe(
       tap(() => this.log(`added article`)),
       catchError(this.handleError('createArticle'))
-    )
-      .subscribe(response => this.log(`add article response: ${response}`));
+    );
   }
 
   getComments(articleId: number): Observable<Comment[]> {
@@ -75,10 +77,27 @@ export class ArticleService {
     );
   }
 
-  addComment(articleId: number, user: string, commentText: string): void {
+  addComment(articleId: number, user: string, commentText: string): Observable<any> {
+    const comment = {
+      text: commentText,
+      userName: user
+    };
+
+    const url = `${articlesUrl}/${articleId}/${commentsUrl}`;
+
+    return this.http.post(url, comment, httpOptions).pipe(
+      tap(() => this.log(`added comment`)),
+      catchError(this.handleError('addComment'))
+    );
   }
 
-  deleteComment(articleId: number, commentId: number): void {
+  deleteComment(articleId: number, commentId: number): Observable<any> {
+    const url = `${articlesUrl}/${articleId}/${commentsUrl}/${commentId}`;
+
+    return this.http.delete(url, httpOptions).pipe(
+      tap(() => this.log(`deleted comment`)),
+      catchError(this.handleError('deleteComment'))
+    );
   }
 
   /**

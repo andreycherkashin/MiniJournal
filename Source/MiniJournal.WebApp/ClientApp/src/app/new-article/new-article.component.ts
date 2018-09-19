@@ -26,8 +26,8 @@ export class NewArticleComponent implements OnInit {
     if (this.articleForm.valid) {
       const user = this.articleForm.value.userName;
       const text = this.articleForm.value.articleText;
-      this.articlesService.createArticle(text, user);
-      this.resetForm();
+      this.articlesService.createArticle(text, user)
+        .subscribe(_ => this.resetForm());
     }
   }
 
