@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from "./app-material.module";
-import { FlexLayoutModule, BREAKPOINT } from "@angular/flex-layout";
+import { AppMaterialModule } from './app-material.module';
+import { FlexLayoutModule, BREAKPOINT } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 

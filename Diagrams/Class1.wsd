@@ -1,0 +1,210 @@
+@startuml
+
+Title "Диаграмма классов"
+
+package "Domain Model" {
+  interface IArticleDomainService {
+    CreateArticle(Article)
+    DeleteArticle(Article)
+    GetArticleById(articleId)
+  }
+  class ArticleDomainService {
+    -articleRepository:IArticleRepository
+    +CreateArticle(Article)
+    +DeleteArticle(Article)
+    +GetArticleById(articleId) : Article
+  }
+
+  interface ICommentDomainService {
+    AddComment(Article, Comment)
+    DeleteComment(Article, Comment)
+    GetCommentById(Article, commentId) : Comment
+  }
+  class CommentDomainService {
+    -commentRepository : ICommentRepository
+    +AddComment(Article, Comment)
+    +DeleteComment(Article, Comment)
+    +GetCommentById(Article, commentId) : Comment
+  }
+
+  interface IArticleFactory {
+    Create(string articleText, User):Article
+  }
+  class ArticleFactory {
+    +Create(string articleText, User) : Article
+  }
+
+  interface ICommentFactory {
+    Create(string commentText, Article, User) : Comment
+  }
+  class CommentFactory {
+    +Create(string commentText, Article, User) : Comment
+  }
+
+  interface IArticleRepository {
+    GetArticlesAsync() : IEnumerable<Article>
+    FindByIdAsync(articleId) : Article
+    DeleteAsync(Article)
+    AddAsync(Article)
+  }
+
+  interface ICommentRepository {
+    FindByIdAsync(commentId): Comment
+    AddAsync(articleId, Comment)
+    DeleteAsync(articleId, Comment)
+  }
+
+  IArticleDomainService <|-- ArticleDomainService
+  ICommentDomainService <|-- CommentDomainService
+  IArticleFactory <|-- ArticleFactory
+  ICommentFactory <|-- CommentFactory
+  ArticleDomainService ..> IArticleRepository
+  CommentDomainService ..> ICommentRepository
+}
+
+package "Events" {
+  interface ICommandDispatcher {
+    DispatchCommand(command)
+  }
+  interface IEventPublisher {
+    PublishEvent(event)
+  }
+  interface IMessageBus {
+    SubscribeToCommand()
+    SubscribeToEvent()
+    SubscribeToEventForNotifications()
+  }
+
+
+}
+
+package "Application Services" {
+  interface IArticlesService {
+    GetArticles(GetArticlesRequset) : GetArticlesResponse
+    GetArticle()
+    GetComment()
+    CreateArticle(CreateArticleRequest) : CreateArticleResponse
+    DeleteArticle()
+    AddComment()
+    DeleteComment()
+  }
+  class ArticlesService {
+    -articleService : IArticleDomainService
+    -commentService : ICommentDomainService
+    -articleFactory : IArticleFactory
+    -commentFactory : ICommentFactory
+    -commentRepository : ICommentRepository
+    -articleRepository : IArticleRepository
+    -eventPublisher : IEventPublisher
+    +GetArticles(GetArticlesRequset) : GetArticlesResponse
+    +GetArticle(...) : ..
+    +GetComment(...) : ..
+    +CreateArticle(CreateArticleRequest) : CreateArticleResponse
+    +DeleteArticle(...) : ...
+    +AddComment(...) : ...
+    +DeleteComment(...) : ...
+  }
+
+  IArticlesService <|-- ArticlesService
+  ArticlesService ..> IArticleDomainService
+  ArticlesService ..> ICommentDomainService
+  ArticlesService ..> IArticleFactory
+  ArticlesService ..> ICommentFactory
+  ArticlesService ..> IArticleRepository
+  ArticlesService ..> ICommentRepository
+  ArticlesService ..> IEventPublisher
+}
+
+package "Postgres.NHibernate" {
+  class CommentRepository {
+    +FindByIdAsync(commentId) : Comment
+    +AddAsync(articleId, Comment)
+    +DeleteAsync(articleId, Comment)
+  }
+
+  class ArticleRepository {
+    +GetArticlesAsync() : IEnumerable<Article>
+    +FindByIdAsync(articleId) : Article
+    +DeleteAsync(Article)
+    +AddAsync(Article)
+  }
+
+  IArticleRepository <|-- ArticleRepository
+  ICommentRepository <|-- CommentRepository
+}
+
+package "RabbitMq" {
+  class EventPublisher {
+    +PublishEvent(event)
+  }
+  class CommandDispatcher {
+    +DispatchCommand(command)
+  }
+  class RabbitMqListener {
+    +SubscribeToCommand()
+    +SubscribeToEvent()
+    +SubscribeToEventForNotifications()
+  }
+  interface IRabbitMessageBus {
+    Publish(message)
+    Subscribe<TEvent>(handler)
+  }
+  class RabbitMessageBus {
+    -connection : RabbitMQ.Client.IConnection
+    +Publish(message)
+    +Subscribe<TEvent>(handler)
+  }
+
+  IEventPublisher <|-- EventPublisher
+  ICommandDispatcher <|-- CommandDispatcher
+  IMessageBus <|-- RabbitMqListener
+  IRabbitMessageBus <|-- RabbitMessageBus
+  EventPublisher ..> IRabbitMessageBus
+  CommandDispatcher ..> IRabbitMessageBus
+  RabbitMqListener ..> IRabbitMessageBus
+}
+
+package "Web Api" {
+  together {
+    class ArticlesController {
+      -articlesService : IArticlesService
+      +Get() : IEnumerable<Article>
+      +Get(articleId) : Article
+      +Post(CreateArticleDto)
+      +Delete(articleId)
+    }
+    class CommentsController {
+      -articlesService : IArticlesService
+      +Get(articleId) : IEnumerable<Comment>
+      +Get(articleId, commentId) : Comment
+      +Post(articleId, CreateCommenteDto)
+      +Delete(articleId, commentId)
+    }
+  }
+  class "NotificationsHub (SignalR)" {
+    +NotifyAllClients(event)
+  }
+  class MessageBusListener {
+    -notificationsHub : NotificationsHub
+    -messageBus : IMessageBus
+  }
+
+  CommentsController .down.> IArticlesService
+  ArticlesController .down.> IArticlesService
+  MessageBusListener ..> IMessageBus
+  MessageBusListener .up.> "NotificationsHub (SignalR)"
+  ArticlesController ..> ICommandDispatcher
+}
+
+package "Windows Service" {
+  class ServiceInstance {
+    -messageBus : IMessageBus
+    -articlesService : IArticlesService
+    -DispatchCommand()
+  }
+
+  ServiceInstance .down.> IMessageBus
+  ServiceInstance .up.> IArticlesService
+}
+
+@enduml

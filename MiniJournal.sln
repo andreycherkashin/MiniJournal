@@ -36,7 +36,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniJournal.RabbitMqPublish
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniJournal.Events", "Source\MiniJournal.Events\MiniJournal.Events.csproj", "{9AD4E8E4-98CB-46B8-AD68-32A45C767CBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniJournal.WebApp", "Source\MiniJournal.WebApp\MiniJournal.WebApp.csproj", "{B15084C8-AB1F-45C4-A26F-09B5C651354C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniJournal.WebApp", "Source\MiniJournal.WebApp\MiniJournal.WebApp.csproj", "{B15084C8-AB1F-45C4-A26F-09B5C651354C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{F5893520-CF3F-409F-B7B0-BB8932B65FEE}"
+	ProjectSection(SolutionItems) = preProject
+		Diagrams\Component.1.wsd = Diagrams\Component.1.wsd
+		Diagrams\Sequence.CreateArticle.wsd = Diagrams\Sequence.CreateArticle.wsd
+		Diagrams\Sequence.DeleteArticle.wsd = Diagrams\Sequence.DeleteArticle.wsd
+		Diagrams\out\Component.1\Диаграмма компонентов MiniJournal.png = Diagrams\out\Component.1\Диаграмма компонентов MiniJournal.png
+		Diagrams\out\Sequence.CreateArticle\Создание статьи.png = Diagrams\out\Sequence.CreateArticle\Создание статьи.png
+		Diagrams\out\Sequence.DeleteArticle\Удаление статьи.png = Diagrams\out\Sequence.DeleteArticle\Удаление статьи.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

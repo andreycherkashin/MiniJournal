@@ -1,8 +1,3 @@
-export {
-  ILiteEvent,
-  LiteEvent
-};
-
 interface ILiteEvent<T> {
   on(handler: (data?: T) => void): void;
   off(handler: (data?: T) => void): void;
@@ -27,3 +22,8 @@ class LiteEvent<T> implements ILiteEvent<T> {
     return this;
   }
 }
+
+export {
+  ILiteEvent,
+  LiteEvent
+};

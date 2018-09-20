@@ -35,31 +35,32 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
         public Task PublishAsync<TMessage>(TMessage message)
         {
             string exchangeName = this.GetExchangeName<TMessage>();
-            IModel exchangeChannel = this.GetExchangeChannel(exchangeName);
+            IModel channel = this.GetExchangeChannel(exchangeName);
             string routingKey = this.GetRoutingKey<TMessage>();
 
-            IBasicProperties messageProperties = exchangeChannel.CreateBasicProperties();
+            IBasicProperties messageProperties = channel.CreateBasicProperties();
             messageProperties.Persistent = true;
 
-            lock (exchangeChannel)
+            lock (channel)
             {
-                exchangeChannel.ConfirmSelect();
+                DeclareExchange(exchangeName, channel);
+                channel.ConfirmSelect();
 
                 string json = JsonConvert.SerializeObject(message);
                 byte[] body = System.Text.Encoding.UTF8.GetBytes(json);
 
-                exchangeChannel.BasicPublish(exchangeName, routingKey, true, messageProperties, body);
-                exchangeChannel.WaitForConfirmsOrDie();
+                channel.BasicPublish(exchangeName, routingKey, true, messageProperties, body);
+                channel.WaitForConfirmsOrDie();
             }
 
             return Task.CompletedTask;
         }
 
         /// <inheritdoc cref="IRabbitMessageBus" />
-        public Task SubscribeAsync<TMessage>(Action<TMessage> handler, bool persistant)
+        public Task SubscribeAsync<TMessage>(Action<TMessage> handler, bool persistent)
         {
-            EventingBasicConsumer queueConsumer = this.GetQueueConsumer<TMessage>(persistant);
-            string queueName = this.GetQueueName<TMessage>(persistant);
+            EventingBasicConsumer queueConsumer = this.GetQueueConsumer<TMessage>(persistent);
+            string queueName = this.GetQueueName<TMessage>(persistent);
             IModel queueChannel = this.GetQueueChannel(queueName);
 
             queueConsumer.Received += (ch, ea) =>
@@ -109,10 +110,15 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
             this.connection = null;
         }
 
-        private EventingBasicConsumer GetQueueConsumer<TMessage>(bool persistant)
+        private static void DeclareExchange(string exchangeName, IModel channel)
         {
-            string queueName = this.GetQueueName<TMessage>(persistant);
-            return this.GetFromDictionaryThreadSafe(this.queueConsumers, queueName, () => this.CreateConsumer<TMessage>(persistant));
+            channel.ExchangeDeclare(exchangeName, ExchangeType.Topic, true, false);
+        }
+
+        private EventingBasicConsumer GetQueueConsumer<TMessage>(bool persistent)
+        {
+            string queueName = this.GetQueueName<TMessage>(persistent);
+            return this.GetFromDictionaryThreadSafe(this.queueConsumers, queueName, () => this.CreateConsumer<TMessage>(persistent));
         }
 
         private IModel GetExchangeChannel(string exchangeName)
@@ -125,9 +131,9 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
             return this.GetFromDictionaryThreadSafe(this.queueChannels, queueName, () => this.connection.CreateModel());
         }
 
-        private EventingBasicConsumer CreateConsumer<TMessage>(bool persistant)
+        private EventingBasicConsumer CreateConsumer<TMessage>(bool persistent)
         {
-            string queueName = this.GetQueueName<TMessage>(persistant);
+            string queueName = this.GetQueueName<TMessage>(persistent);
             string exchangeName = this.GetExchangeName<TMessage>();
             string routingKey = this.GetRoutingKey<TMessage>();
 
@@ -135,8 +141,8 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
 
             lock (channel)
             {
-                channel.ExchangeDeclare(exchangeName, ExchangeType.Topic, true, false);
-                channel.QueueDeclare(queueName, true, false, !persistant);
+                DeclareExchange(exchangeName, channel);
+                channel.QueueDeclare(queueName, true, false, !persistent);
                 channel.QueueBind(queueName, exchangeName, routingKey);
 
                 var consumer = new EventingBasicConsumer(channel);
@@ -158,12 +164,12 @@ namespace Infotecs.MiniJournal.RabbitMqPublisher
             return typeof(TMessage).Namespace;
         }
 
-        private string GetQueueName<TMessage>(bool persistant)
+        private string GetQueueName<TMessage>(bool persistent)
         {
             string applicationName = System.Reflection.Assembly.GetEntryAssembly().GetName().Name;
             string queueName = $"{typeof(TMessage).FullName}.{applicationName}";
 
-            if (persistant)
+            if (persistent)
             {
                 return queueName;
             }

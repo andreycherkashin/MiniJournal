@@ -1,0 +1,68 @@
+@startuml
+
+title "Удаление статьи"
+
+actor "User" as user
+boundary "Angular SPA" as spa
+boundary ".Net Core API" as api
+participant "Application Service" as app
+participant "Domain Service" as domain
+participant "NHibernate" as rep
+database "PostgreSQL DB" as db
+entity "Rabbit MQ" as mq
+
+activate spa
+activate api
+activate mq
+
+user -> spa : Нажимает кнопку "Удалить"
+activate spa
+
+spa -> api : DELETE /article/id
+activate api
+
+
+api -> app : Делегирует удаление статьи
+activate app
+
+app -> domain : Переводит DTO в доменную сущность
+activate domain
+
+domain -> rep : Удаляет из репозитория
+activate rep
+
+rep -> db : Удаляет из БД
+activate db
+
+db --> rep : Ок
+deactivate db
+
+rep --> domain : Ок
+deactivate rep
+
+domain --> app : Ок
+deactivate domain
+
+app -\\ mq : "Event: Cтатья удалена"
+
+app --> api : Ок
+
+deactivate app
+
+api --> spa : 204 NoContent
+deactivate api
+
+mq -\\ api : "Event: Cтатья удалена"
+deactivate spa
+
+
+api -\\ spa : "Event: Cтатья удалена"
+activate spa
+
+spa -> spa : Удалить статью
+activate spa
+deactivate spa
+deactivate spa
+
+
+@enduml

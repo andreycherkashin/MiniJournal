@@ -1,0 +1,92 @@
+@startuml
+
+title "Диаграмма компонентов MiniJournal"
+
+package "Domain Services" {
+  IArticleDomainService -- [Article Domain Service]
+  ICommentDomainService -- [Comment Domain Service]
+  IUserDomainService -- [User Domain Service]
+  [Article Domain Service] ..> IArticleRepository
+  [Comment Domain Service] ..> ICommentRepository
+  [User Domain Service] ..> IUserRepository
+}
+
+ package "Events" {
+  () IPublisher
+  () ISubscriber
+}
+
+package "Npgsql" {
+  INpgsqlDbConnection -- [Npgsq Connection]
+}
+
+package "Postgres.NHibernate" {
+  IArticleRepository -- [Article Repository]
+  ICommentRepository -- [Comment Repository]
+  IUserRepository -- [User Repository]
+  [User Repository] ..> INpgsqlDbConnection
+  [Comment Repository] ..> INpgsqlDbConnection
+  [Article Repository] ..> INpgsqlDbConnection
+}
+
+package "RabbitMq" {
+  IPublisher -- [RabbitMqMessageBus]
+  ISubscriber -- [RabbitMqMessageBus]
+}
+
+package "Application Services" {
+  IArticlesService -- [Articles Application Service]
+  IUsersService -- [Users Application Service]
+  [Articles Application Service] ..> IArticleDomainService
+  [Articles Application Service] ..> ICommentDomainService
+  [Articles Application Service] .> IImagesService
+  [Articles Application Service] .> IPublisher
+  [Users Application Service] ..> IUserDomainService
+}
+
+package "Disk Storage" {
+  IImagesService -- [Images Service]
+}
+
+package "Wcf Service" {
+  SoapApi -- [Soap Wcf Service]
+  [Soap Wcf Service] ..> IArticlesService
+  [Soap Wcf Service] ..> IUsersService
+}
+
+package "Web Api" {
+  RestApi -- [Articles Controller]
+  RestApi -- [Comments Controller]
+  RestApi -- [Notifications Hub (SignalR)]
+  [Articles Controller] ..> IArticlesService
+  [Comments Controller] -- IArticlesService
+  [Notifications Hub (SignalR)] ..> ISubscriber
+}
+
+package "Win Service" {
+  [Windows Service] ..> IArticlesService
+  [Windows Service] ..> ISubscriber
+}
+
+package "Wcf Service Proxy Client" {
+  ISoapApi -- [Soap Wcf Service Proxy Client]
+  [Soap Wcf Service Proxy Client] ..> SoapApi
+}
+
+package "PowerShell Comandlet" {
+  [Comandlet] ..> ISoapApi
+  [Comandlet] ..> IPublisher
+}
+
+package "Wpf Application" {
+  [Main Window] ..> ISoapApi
+  [Main Window] ..> IPublisher
+  [Main Window] ..> ISubscriber
+}
+
+package "Angular Spa" {
+  [SPA] ..> RestApi
+}
+
+
+@enduml

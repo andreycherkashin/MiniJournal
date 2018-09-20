@@ -1,0 +1,94 @@
+@startuml
+
+title "Создание статьи"
+
+actor "User" as user
+boundary "Angular SPA" as spa
+boundary ".Net Core API" as api
+participant "Application Service" as app
+participant "Domain Service" as domain
+participant "NHibernate" as rep
+database "PostgreSQL DB" as db
+entity "Rabbit MQ" as mq
+
+activate spa
+activate api
+activate mq
+
+user -> spa : Вводит имя пользователя
+user -> spa : Вводит текст статьи
+user -> spa : Нажимает кнопку "Создать"
+activate spa
+
+spa -> api : POST /article
+activate api
+
+
+api -> app : Делегирует создание статьи
+activate app
+
+app -> domain : Переводит DTO в доменную сущность
+activate domain
+
+domain -> rep : Добавляет в репозиторий
+activate rep
+
+rep -> db : Сохраняет в БД
+activate db
+
+db --> rep : ID статьи
+deactivate db
+
+rep --> domain : Ок
+deactivate rep
+
+domain --> app : Ок
+deactivate domain
+
+app -\\ mq : "Event: Новая статья создана"
+
+app --> api : Ок
+
+deactivate app
+
+api --> spa : 204 NoContent
+deactivate api
+
+mq -\\ api : "Event: Новая статья создана"
+deactivate spa
+
+
+api -\\ spa : "Event: Новая статья создана"
+activate spa
+
+spa -> api : GET /article/id
+activate api
+
+api -> app : Зарос статьи
+activate app
+
+app -> rep : Запрос статьи
+activate rep
+
+rep -> db : Выборка статьи
+activate db
+
+db --> rep : Статья
+deactivate db
+
+rep --> app : Статья
+deactivate rep
+
+app --> api : Статья
+deactivate app
+
+api --> spa: Статья
+deactivate api
+
+spa -> spa : Отрисовать новую статью
+activate spa
+deactivate spa
+deactivate spa
+
+
+@enduml
