@@ -40,9 +40,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniJournal.WebApp", "Sourc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{F5893520-CF3F-409F-B7B0-BB8932B65FEE}"
 	ProjectSection(SolutionItems) = preProject
+		Diagrams\Class1.wsd = Diagrams\Class1.wsd
 		Diagrams\Component.1.wsd = Diagrams\Component.1.wsd
 		Diagrams\Sequence.CreateArticle.wsd = Diagrams\Sequence.CreateArticle.wsd
 		Diagrams\Sequence.DeleteArticle.wsd = Diagrams\Sequence.DeleteArticle.wsd
+		Diagrams\out\Class1\Диаграмма классов.png = Diagrams\out\Class1\Диаграмма классов.png
 		Diagrams\out\Component.1\Диаграмма компонентов MiniJournal.png = Diagrams\out\Component.1\Диаграмма компонентов MiniJournal.png
 		Diagrams\out\Sequence.CreateArticle\Создание статьи.png = Diagrams\out\Sequence.CreateArticle\Создание статьи.png
 		Diagrams\out\Sequence.DeleteArticle\Удаление статьи.png = Diagrams\out\Sequence.DeleteArticle\Удаление статьи.png
